@@ -51,8 +51,8 @@
 ;; 字体配置
 ;; (set-default-font "SauceCodePro Nerd Font 16")
 ;; (set-default-font "Inziu Iosevka Slab SC 16")
-;;(set-default-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
-(set-frame-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
+(set-default-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
+;; (set-frame-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
 
 ;; set the default frame size
 (setq default-frame-alist

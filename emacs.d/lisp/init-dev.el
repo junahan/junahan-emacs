@@ -209,6 +209,7 @@
 ;; (add-hook 'prog-mode-hook 'aggressive-indent-mode)
 (add-hook 'prog-mode-hook 'ycmd-mode)
 (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
+
 (provide 'init-dev)
 
 ;;; init-dev.el ends here

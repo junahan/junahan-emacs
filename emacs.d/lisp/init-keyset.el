@@ -1,13 +1,13 @@
-
-;;; Code
-
+;;; package --- init-keyset
+;;; commentary:
+;;; code:
 
 (defun format-buffer ()
-    "格式化"
-    (interactive)
-    ;; C-x h and C-M-\
-    (indent-region (point-min) (point-max) nil)
-    )
+  "格式化"
+  (interactive)
+  ;; C-x h and C-M-\
+  (indent-region (point-min) (point-max) nil)
+  )
 
 (defun key-set ()
     "设置快捷键"
@@ -130,6 +130,6 @@
 
 (key-set)
 
-(provide 'keyset)
+(provide 'init-keyset)
 
-;;; keyset.el ends here
+;;; init-keyset.el ends here

@@ -29,7 +29,7 @@
 (depends-on "init-open-recentf")
 
 ;; 高亮当前行和列
-(depends-on "crosshairs")
+;; (depends-on "crosshairs")
 
 ;; 按键提示
 (depends-on "which-key")
@@ -46,7 +46,7 @@
 (depends-on "bm")
 
 ;; 目录增强
-(depends-on "dired+")
+;; (depends-on "dired+")
 (depends-on "direx")
 
 ;; 打开外部应用

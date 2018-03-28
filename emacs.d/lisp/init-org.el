@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package 'org)
+(require 'org)
 
 ;; org-mode 文本内语法高亮
 (setq org-src-fontify-natively t)
@@ -11,7 +11,7 @@
 (setq org-agenda-files '("~/JumpingEagle-misc" ))
 
 ;; org-agenda key binding
-(global-set-key (kbd "C-c a") 'org-agenda)
+;; (global-set-key (kbd "C-c a") 'org-agenda)
 
 (defun my-image-mode()
   (imagex-auto-adjust-mode 1)

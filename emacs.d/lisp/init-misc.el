@@ -1,4 +1,4 @@
-;;; Pacakage -- init-custom
+;;; Pacakage -- init-misc
 ;;; Commentary:
 ;;; Code:
 
@@ -43,7 +43,7 @@
 ;; (init-open-recentf)
 (require 'dashboard)
 (dashboard-setup-startup-hook)
-(setq dashboard-banner-logo-title "Cross Emacs")
+(setq dashboard-banner-logo-title "GNU Emacs")
 (setq dashboard-setup-startup-banner 'logo)
 
 (setq dashboard-items '((recents . 5)
@@ -61,6 +61,6 @@
 
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
-(provide 'init-custom)
+(provide 'init-misc)
 
-;;; init-custom.el ends here
+;;; init-misc.el ends here
