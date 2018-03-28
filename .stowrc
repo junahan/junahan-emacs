@@ -1,0 +1,9 @@
+--ignore=deploy.sh
+--ignore=test-startup.sh
+--ignore=README.md
+--ignore=.stowrc
+--ignore=.git
+--ignore=.gitignore
+--ignore=.DS_Store
+--ignore=emacs.d
+
