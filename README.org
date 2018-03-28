@@ -1,0 +1,11 @@
+#+AUTHOR: Junahan
+#+EMAIL: junahan@outlook
+#+DATE: 2018-3-27
+
+* My Emacs Config
+My emacs configuration - initial copy from - https://github.com/cnsworder/crossemacs
+
+* Reference
+- crossemacs [[https://github.com/cnsworder/crossemacs]]
+- purcell [[https://github.com/purcell/emacs.d]]
+
