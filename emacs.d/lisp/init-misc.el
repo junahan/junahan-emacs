@@ -41,15 +41,16 @@
 
 ;;(setq init-open-recentf-interface 'swiper)
 ;; (init-open-recentf)
+
 (require 'dashboard)
 (dashboard-setup-startup-hook)
-(setq dashboard-banner-logo-title "GNU Emacs")
-(setq dashboard-setup-startup-banner 'logo)
+;; (setq dashboard-banner-logo-title "GNU Emacs")
+(setq dashboard-setup-startup-banner 1)
 
 (setq dashboard-items '((recents . 5)
-                           (bookmarks . 5)
-                           (projects . 5)
-                           (agenda . 5)))
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5)))
 (page-break-lines-mode)
 
 (require 'neotree)

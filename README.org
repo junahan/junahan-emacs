@@ -2,10 +2,55 @@
 #+EMAIL: junahan@outlook
 #+DATE: 2018-3-27
 
-* My Emacs Config
-My emacs configuration - initial copy from - https://github.com/cnsworder/crossemacs
+* Junanhan的Emacs配置
+我的Emacs配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅了很多朋友开放的Emacs配置，详情请看参考文献小节。
 
-* Reference
+我的主要需求是使用Org-mode，Python，C/C++开发环境。
+
+/特别提醒，本Emacs配置仅在如下环境测试：/
+#+BEGIN_SRC 
+OS: Darwin ... Darwin Kernel Version 17.4.0
+Emacs: GNU Emacs 25.3.1
+#+END_SRC
+
+* TODO 支持列表 /持续更新.../
+1. 包管理 - 使用Cask + pallet 管理Emacs包
+2. Org-mode - 
+3. Python 开发环境 -  支持IPython Notebook
+4. Theme - 
+5. Dashboard - 
+
+* 使用方法
+** 安装
+#+BEGIN_SRC 
+# Clone 项目
+ git clone https://github.com/junahan/junahan-emacs.git
+
+# 使用cask安装依赖包
+ cd junahan-emacs
+ cask install
+
+# 也可以运行测试脚本 - test-startup.sh来安装依赖包
+ ./test-startup.sh
+#+END_SRC
+
+** 测试
+通过运行项目目录中的脚本test-startup.sh运行测试，测试使用项目目录作为HOME目录运行测试脚本，测试脚本会自动运行cask安装必要的依赖包。
+#+BEGIN_SRC 
+$ ./test-startup.sh
+#+END_SRC
+
+** 部署
+通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。
+#+BEGIN_SRC 
+$ ./deploy.sh
+#+END_SRC
+
+** TODO 定制
+
+* 参考文献
 - crossemacs [[https://github.com/cnsworder/crossemacs]]
 - purcell [[https://github.com/purcell/emacs.d]]
+- Emacs: 最好的Python编辑器 [[https://segmentfault.com/a/1190000004165173]]
+- Emacs IPython Notebook [[https://tkf.github.io/emacs-ipython-notebook/]]
 

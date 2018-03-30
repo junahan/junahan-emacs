@@ -40,7 +40,6 @@
 (require 'init-cask)
 (require 'init-utils)
 (require 'init-env)
-;;(require 'init-helm)
 (require 'init-dev)
 (require 'init-theme)
 (require 'init-org)

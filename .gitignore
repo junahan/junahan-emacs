@@ -9,6 +9,7 @@ custom.el
 CVS
 .svn
 *~
+*.html
 .cvsignore
 .*.lock
 tramp
