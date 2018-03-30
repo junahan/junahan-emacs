@@ -2,7 +2,7 @@
 #+EMAIL: junahan@outlook
 #+DATE: 2018-3-27
 
-* Junanhan的Emacs配置
+* Junahan的Emacs配置
 我的Emacs配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅了很多朋友开放的Emacs配置，详情请看参考文献小节。
 
 我的主要需求是使用Org-mode，Python，C/C++开发环境。
@@ -13,12 +13,13 @@ OS: Darwin ... Darwin Kernel Version 17.4.0
 Emacs: GNU Emacs 25.3.1
 #+END_SRC
 
-* TODO 支持列表 /持续更新.../
+* TODO 支持列表
 1. 包管理 - 使用Cask + pallet 管理Emacs包
 2. Org-mode - 
 3. Python 开发环境 -  支持IPython Notebook
 4. Theme - 
 5. Dashboard - 
+/未完待续.../
 
 * 使用方法
 ** 安装
@@ -47,6 +48,7 @@ $ ./deploy.sh
 #+END_SRC
 
 ** TODO 定制
+/未完待续.../
 
 * 参考文献
 - crossemacs [[https://github.com/cnsworder/crossemacs]]
