@@ -25,26 +25,28 @@ Emacs: GNU Emacs 25.3.1
 ** 安装
 #+BEGIN_SRC 
 # Clone 项目
- git clone https://github.com/junahan/junahan-emacs.git
+git clone https://github.com/junahan/junahan-emacs.git
 
 # 使用cask安装依赖包
- cd junahan-emacs
- cask install
+cd junahan-emacs
+cask install
 
 # 也可以运行测试脚本 - test-startup.sh来安装依赖包
- ./test-startup.sh
+./test-startup.sh
 #+END_SRC
 
 ** 测试
 通过运行项目目录中的脚本test-startup.sh运行测试，测试使用项目目录作为HOME目录运行测试脚本，测试脚本会自动运行cask安装必要的依赖包。
 #+BEGIN_SRC 
-$ ./test-startup.sh
+# Emacs debug-init模式运行测试
+./test-startup.sh
 #+END_SRC
 
 ** 部署
-通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。
+通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。为了确保EMacs能够正确的从 ~/.emacs.d 目录启动，该脚本备份你的 ~/.emacs 文件为 ~/.emacs.backup
 #+BEGIN_SRC 
-$ ./deploy.sh
+# 使用stow安装至 ～/.emacs.d 目录
+./deploy.sh
 #+END_SRC
 
 ** TODO 定制

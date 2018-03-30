@@ -27,15 +27,6 @@ ${EMACS:=emacs} -nw --batch \
                               (load-path (delq default-directory load-path)))
                            (load-file user-init-file)
                            (run-hooks (quote after-init-hook)))'
-#if [ -d ../.emacs.d ]; then
-# rm ../.emacs.d
-# fi
-echo "Test startup successful"
 
-if [ -d .bash_history ]; then
-    rm -rf .bash_history
-fi
-if [ -d .bash_sessions ]; then
-    rm -rf .bash_sessions
-fi 
+echo "Test startup successful"
 

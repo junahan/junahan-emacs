@@ -6,4 +6,6 @@
 --ignore=.gitignore
 --ignore=.DS_Store
 --ignore=emacs.d
+--ignore=.bash_history
+--ignore=.bash_sessions
 

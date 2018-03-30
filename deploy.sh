@@ -1,4 +1,10 @@
 #!/bin/sh -e
+
+# backup the .emacs file
+if [ -d ~/.emacs ]; then
+    mv ~/.emacs ~/.emacs.backup
+fi 
+
 # install cask
 if ! which cask &> /dev/null; then
     if which brew &> /dev/null; then
@@ -25,9 +31,3 @@ cd ~/.emacs.d
 cask install
 echo "Cask installed package..."
 
-if [ -d .bash_history ]; then
-    rm -rf .bash_history
-fi
-if [ -d .bash_sessions ]; then
-    rm -rf .bash_sessions
-fi 
