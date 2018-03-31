@@ -170,7 +170,7 @@
 
 ;;(global-aggressive-indent-mode 1)
 (add-hook 'prog-mode-hook 'ycmd-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'python-mode)
+;;(add-to-list 'aggressive-indent-excluded-modes 'python-mode)
 
 (provide 'init-dev)
 

@@ -28,8 +28,11 @@
 (setq org-src-fontify-natively t)
 (setq org-support-shift-select t)
 
-(setq org-directory "~/org")
+;; define the refile targets
+(defvar org-agenda-dir "")
+(setq-default org-agenda-dir "~/org")
 (setq org-default-notes-file "~/org/refile.org")
+(setq org-agenda-files (list org-agenda-dir))
 
 ;;; Capturing
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -39,8 +42,6 @@
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
         ))
-
-
 
 ;; for image-model
 (eval-after-load 'image '(require 'image+))
@@ -53,7 +54,7 @@
   (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
   (when *is-a-mac*
     (define-key org-mode-map (kbd "M-h") nil)
-    (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
+    ))
 
 (after-load 'org
   (org-babel-do-load-languages
