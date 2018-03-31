@@ -165,12 +165,10 @@
           'c++-mode)
 
 (add-hook 'c++-mode-hook
-    (lambda ()
-        (setq flycheck-clang-language-standard "c++11")))
+          (lambda ()
+            (setq flycheck-clang-language-standard "c++11")))
 
-
-(global-aggressive-indent-mode 1)
-;; (add-hook 'prog-mode-hook 'aggressive-indent-mode)
+;;(global-aggressive-indent-mode 1)
 (add-hook 'prog-mode-hook 'ycmd-mode)
 (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
 
