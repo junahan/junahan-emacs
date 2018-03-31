@@ -1,7 +1,8 @@
 ;;; package -- init
 ;;; Commentary:
 ;;; Code:
-;;{{VERSION}}
+
+;; Most config copy from https://github.com/purcell/emacs.d project.
 
 ;; -*- lexical-binding: t -*-
 (setq debug-on-error t)
@@ -24,11 +25,11 @@
 ;;----------------------------------------------------------------------------
 ;; Adjust garbage collection thresholds during startup, and thereafter
 ;;----------------------------------------------------------------------------
-;; (let ((normal-gc-cons-threshold (* 20 1024 1024))
-;; (init-gc-cons-threshold (* 128 1024 1024)))
-;; (setq gc-cons-threshold init-gc-cons-threshold)
-;; (add-hook 'after-init-hook
-;; (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+;;(let ((normal-gc-cons-threshold (* 20 1024 1024))
+;;      (init-gc-cons-threshold (* 128 1024 1024)))
+;;  (setq gc-cons-threshold init-gc-cons-threshold)
+;;  (add-hook 'after-init-hook
+;;            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config
@@ -41,6 +42,7 @@
 (require 'init-utils)
 (require 'init-env)
 (require 'init-dev)
+(require 'init-python)
 (require 'init-theme)
 (require 'init-org)
 (require 'init-keyset)

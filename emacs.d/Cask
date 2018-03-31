@@ -32,6 +32,8 @@
 (depends-on "dumb-jump")
 (depends-on "editorconfig")
 (depends-on "elpy")
+(depends-on "py-autopep8")
+(depends-on "ein")
 (depends-on "emmet-mode")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")

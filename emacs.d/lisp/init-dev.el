@@ -41,11 +41,12 @@
     (git-gutter:linum-setup))
 
 (use-package xcscope
-    :config
-    (cscope-minor-mode t))
+  :config
+  (cscope-minor-mode t))
+
 (use-package ggtags
-    :config
-    (ggtags-mode t))
+  :config
+  (ggtags-mode t))
 
 (use-package flycheck
     :config
@@ -104,17 +105,15 @@
                   company-dabbrev))))
 
 (use-package company-go
-    :config
-    (add-hook 'go-mode-hook
-        (add-to-list 'company-backends 'company-go)))
+  :config
+  (add-hook 'go-mode-hook
+            (add-to-list 'company-backends 'company-go)))
 
 ;;(require 'cedet)
 ;;(load-file "/usr/share/emacs/24.3/lisp/cedet/cedet.elc")
 ;;(require 'ecb)
 ;;(require 'eassist)
 ;;(require 'auto-complete)
-
-
 
 ;;(setq auto-mode-alist
 ;;      (append
@@ -124,7 +123,7 @@
 ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (use-package js2-mode
-    :mode "\\.js\\'")
+  :mode "\\.js\\'")
 
 (use-package web-mode
     :mode ("\\.html\\'" . web-mode))
@@ -135,67 +134,32 @@
 (add-hook 'web-mode-hook 'prettier-js-mode)
 
 (use-package emmet-mode
-    :bind
-    ("C-c m e" . emmet-mode)
-    :config
-    (emmet-mode t))
+  :bind
+  ("C-c m e" . emmet-mode)
+  :config
+  (emmet-mode t))
 
 ;; (add-hook  'markdown-mode-hook
 ;;    (lambda ()
 ;;      (global-set-key (kbd "C-c p") 'markdown-preview)))
 ;;
 
-(defun *init-python* ()
-
-    "Init python."
-
-    (interactive )
-    (anaconda-mode t)
-    (hs-minor-mode t)
-    (elpy-mode t)
-    (elpy-enable)
-    (elpy-use-ipython)
-    (aggressive-indent-mode nil)
-    (setq company-backends '(elpy-company-backend
-                                company-ycmd
-                                (company-keywords
-                                    company-files
-                                    company-gtags
-                                    company-etags
-                                    company-yasnippet
-                                    company-abbrev
-                                    company-dabbrev)
-                                company-bbdb
-                                company-nxml
-                                company-css
-                                company-files
-                                (company-dabbrev-code
-                                    company-gtags
-                                    company-etags
-                                    company-keywords)
-                                company-oddmuse
-                                company-dabbrev)))
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (interactive "")
-            (*init-python*)))
 
 (add-hook 'c-mode-common-hook
-    (lambda ()
-        (interactive "")
-        (require 'google-c-style)
-        (require 'flycheck-google-cpplint)
-        (ycmd-mode t)
-        (flycheck-add-next-checker 'c/c++-clang
-            'c/c++-googlelint '(append ))
-        (google-set-c-style)
-        (google-make-newline-indent)
-        (setq c-default-style "K&R")
-        (setq c-basic-offset 4)
-        (add-to-list 'company-backends '(company-clang
-                                            company-c-headers
-                                            company-cmake))))
+          (lambda ()
+            (interactive "")
+            (require 'google-c-style)
+            (require 'flycheck-google-cpplint)
+            (ycmd-mode t)
+            (flycheck-add-next-checker 'c/c++-clang
+                                       'c/c++-googlelint '(append ))
+            (google-set-c-style)
+            (google-make-newline-indent)
+            (setq c-default-style "K&R")
+            (setq c-basic-offset 4)
+            (add-to-list 'company-backends '(company-clang
+                                             company-c-headers
+                                             company-cmake))))
 
 (add-hook 'c-mode-hook
           'c++-mode)

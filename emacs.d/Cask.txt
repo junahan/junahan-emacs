@@ -119,8 +119,10 @@
 (depends-on "projectile")
 
 ;; python
-(depends-on "elpy")
 (depends-on "anaconda-mode")
+(depends-on "elpy")
+(depends-on "py-autopep8")
+(depends-on "ein")
 
 ;; web
 (depends-on "js2-mode")
@@ -133,3 +135,6 @@
 ;; go
 (depends-on "go-mode")
 (depends-on "company-go")
+
+;; mac
+(depends-on "grab-mac-link")
