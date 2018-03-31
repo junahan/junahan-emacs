@@ -7,18 +7,19 @@
 
 我的主要需求是使用Org-mode，Python，C/C++开发环境。
 
-/特别提醒，本Emacs配置仅在如下环境测试：/
-#+BEGIN_SRC 
-OS: Darwin ... Darwin Kernel Version 17.4.0
-Emacs: GNU Emacs 25.3.1
-#+END_SRC
+/特别提醒，本Emacs配置仅在如下环境测试/
+#+BEGIN_EXAMPLE
+ OS: Darwin ... Darwin Kernel Version 17.4.0
+ Emacs: GNU Emacs 25.3.1
+#+END_EXAMPLE
 
 * TODO 支持列表
 1. 包管理 - 使用Cask + pallet 管理Emacs包
 2. Org-mode - 
-3. Python 开发环境 -  支持IPython Notebook
+3. Python 开发环境 -  使用elpy + ein (Emacs IPython Notebook)
 4. Theme - 
 5. Dashboard - 
+
 /未完待续.../
 
 * 使用方法
@@ -57,4 +58,6 @@ cask install
 - purcell [[https://github.com/purcell/emacs.d]]
 - Emacs: 最好的Python编辑器 [[https://segmentfault.com/a/1190000004165173]]
 - Emacs IPython Notebook [[https://tkf.github.io/emacs-ipython-notebook/]]
+- elpy - https://elpy.readthedocs.io/en/latest/introduction.html
+- eio - https://tkf.github.io/emacs-ipython-notebook/
 
