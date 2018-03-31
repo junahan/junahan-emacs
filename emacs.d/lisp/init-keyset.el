@@ -21,10 +21,12 @@
         (setq mac-control-modifier 'control)
         (setq mac-option-modifier 'meta)))
 
-  ;;避免输入法切换冲突
+  ;; 避免输入法切换冲突
   (global-unset-key (kbd "C-SPC"))
-
-  ;;快捷键设置
+  ;; binding set-mark-command
+  (global-set-key (kbd "C-x C-m") 'set-mark-command)
+  
+  ;; 快捷键设置
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
   (global-set-key (kbd "C-x C-b") 'ibuffer)
