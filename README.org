@@ -5,7 +5,7 @@
 * Junahan的Emacs配置
 我的Emacs配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅了很多朋友开放的Emacs配置，详情请看参考文献小节。
 
-我的主要需求是使用Org-mode，Python，C/C++开发环境。
+我的主要需求是使用Org-mode，Python，C/C++以及 Java 开发环境。
 
 /特别提醒，本Emacs配置仅在如下环境测试/
 #+BEGIN_EXAMPLE
@@ -14,13 +14,27 @@
 #+END_EXAMPLE
 
 * TODO 支持列表
-1. 包管理 - 使用Cask + pallet 管理Emacs包
-2. Org-mode - 
-3. Python 开发环境 -  使用elpy + ein (Emacs IPython Notebook)
-4. Theme - 
-5. Dashboard - 
+1. 包管理 - init-cask.el，使用Cask + pallet 管理Emacs包
+2. Org-mode - init-org.el， 
+3. Python 开发环境 -  init-python.el，使用elpy + ein (Emacs IPython Notebook)
+4. Auto-company - 使用 Company 和 ycmd 进行自动补全，对于python，则使用 elpy
+7. Theme - 
+9. Dashboard - 
 
-/未完待续.../
+/TODO .../
+
+** Auto-company
+- company-dabbrev: 将当前打开的所有 buffer 中的关键字作为补全显示(默认不使用 scratch buffer)。
+- company-files: 补全路径。
+- company-ispell: 英文输入提示。
+- company-ycmd: c/c++ 代码补全。
+# - company-anaconda: python代码补全。
+- elpy-company-backend: python代码补全后端。
+
+/如果在补全过程中取消了补全, 也可以使用命令再次开启补全。例如 company-files 补全方式就可以使用 company-files 函数开启。/
+
+** ORG mode
+/TODO .../
 
 * 使用方法
 ** 安装
@@ -44,7 +58,7 @@ cask install
 #+END_SRC
 
 ** 部署
-通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。为了确保EMacs能够正确的从 ~/.emacs.d 目录启动，该脚本备份你的 ~/.emacs 文件为 ~/.emacs.backup
+通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。为了确保Emacs能够正确的从 ~/.emacs.d 目录启动，该脚本备份你的 ~/.emacs 文件为 ~/.emacs.backup
 #+BEGIN_SRC 
 # 使用stow安装至 ～/.emacs.d 目录
 ./deploy.sh
@@ -54,10 +68,11 @@ cask install
 /未完待续.../
 
 * 参考文献
-- crossemacs [[https://github.com/cnsworder/crossemacs]]
-- purcell [[https://github.com/purcell/emacs.d]]
-- Emacs: 最好的Python编辑器 [[https://segmentfault.com/a/1190000004165173]]
-- Emacs IPython Notebook [[https://tkf.github.io/emacs-ipython-notebook/]]
-- elpy - https://elpy.readthedocs.io/en/latest/introduction.html
-- eio - https://tkf.github.io/emacs-ipython-notebook/
+- crossemacs, [[https://github.com/cnsworder/crossemacs]]
+- purcell, [[https://github.com/purcell/emacs.d]]
+- Emacs: 最好的Python编辑器, [[https://segmentfault.com/a/1190000004165173]]
+- Emacs IPython Notebook, [[https://tkf.github.io/emacs-ipython-notebook/]]
+- elpy,  https://elpy.readthedocs.io/en/latest/introduction.html
+- eio,  https://tkf.github.io/emacs-ipython-notebook/
+- Master Emacs in 21 Days, zilongshanren, http://book.emacs-china.org/#orgheadline1
 
