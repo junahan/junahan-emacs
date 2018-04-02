@@ -9,6 +9,9 @@
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
 
+;; using ein
+(require 'ein)
+
 ;; using flycheck replace flymake
 (when (require 'flychck nil t)
   (setq elpy-models (delq 'elpy-module-flymake elpy-modules))
@@ -18,10 +21,33 @@
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
-;; using ein
-(require 'ein)
+;; disable aggressive-indent-mode
+(aggressive-indent-mode nil)
 
-;;(aggressive-indent-mode nil)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends) '(elpy-company-backend
+                                                           company-ycmd
+                                                           (company-keywords
+                                                            company-files
+                                                            company-gtags
+                                                            company-etags
+                                                            company-yasnippet
+                                                            company-abbrev
+                                                            company-dabbrev
+                                                            )
+                                                           company-bbdb
+                                                           company-nxml
+                                                           company-css
+                                                           company-files
+                                                           (company-dabbrev-code
+                                                            company-gtags
+                                                            company-etags
+                                                            company-keywords
+                                                            )
+                                                           company-oddmuse
+                                                           company-dabbrev))))
+
 ;;(setq company-backends '(elpy-company-backend
 ;;company-ycmd
 ;;(company-keywords

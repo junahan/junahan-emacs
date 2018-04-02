@@ -168,7 +168,7 @@
           (lambda ()
             (setq flycheck-clang-language-standard "c++11")))
 
-;;(global-aggressive-indent-mode 1)
+(global-aggressive-indent-mode 1)
 (add-hook 'prog-mode-hook 'ycmd-mode)
 ;;(add-to-list 'aggressive-indent-excluded-modes 'python-mode)
 
