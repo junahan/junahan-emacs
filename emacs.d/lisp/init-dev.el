@@ -1,4 +1,4 @@
-;;; package --- init-dev
+;;; package --- init-common-dev
 ;;; Commentary:
 ;;; Code:
 
@@ -82,11 +82,11 @@
 ;;                (expand-file-name "~/dev/ycmd/ycmd")))
 ;; (setq-default ycmd-server-command ycmd-bin)
 (setq-default ycmd-server-command
-    `("python3" ,(expand-file-name "~/dev/ycmd/ycmd")))
+              `("python" ,(expand-file-name "~/github/ycmd/ycmd")))
 
 (setq-default ycmd-global-config
-    (expand-file-name
-        "~/dev/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+              (expand-file-name
+               "~/github/ycmd/cpp/ycm/.ycm_extra_conf.py"))
 
 (setq-default ycmd-min-num-chars-for-completion 1)
 (setq-default ycmd-seed-identifiers-with-keywords t)
@@ -108,12 +108,6 @@
   :config
   (add-hook 'go-mode-hook
             (add-to-list 'company-backends 'company-go)))
-
-;;(require 'cedet)
-;;(load-file "/usr/share/emacs/24.3/lisp/cedet/cedet.elc")
-;;(require 'ecb)
-;;(require 'eassist)
-;;(require 'auto-complete)
 
 ;;(setq auto-mode-alist
 ;;      (append
@@ -144,22 +138,21 @@
 ;;      (global-set-key (kbd "C-c p") 'markdown-preview)))
 ;;
 
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (interactive "")
-            (require 'google-c-style)
-            (require 'flycheck-google-cpplint)
-            (ycmd-mode t)
-            (flycheck-add-next-checker 'c/c++-clang
-                                       'c/c++-googlelint '(append ))
-            (google-set-c-style)
-            (google-make-newline-indent)
-            (setq c-default-style "K&R")
-            (setq c-basic-offset 4)
-            (add-to-list 'company-backends '(company-clang
-                                             company-c-headers
-                                             company-cmake))))
+;;(add-hook 'c-mode-common-hook
+;;(lambda ()
+;;(interactive "")
+;;(require 'google-c-style)
+;;(require 'flycheck-google-cpplint)
+;;(ycmd-mode t)
+;;(flycheck-add-next-checker 'c/c++-clang
+;;'c/c++-googlelint '(append ))
+;;(google-set-c-style)
+;;(google-make-newline-indent)
+;;(setq c-default-style "K&R")
+;;(setq c-basic-offset 4)
+;;(add-to-list 'company-backends '(company-clang
+;;company-c-headers
+;;company-cmake))))
 
 (add-hook 'c-mode-hook
           'c++-mode)
@@ -174,4 +167,4 @@
 
 (provide 'init-dev)
 
-;;; init-dev.el ends here
+;;; init-common-dev.el ends here

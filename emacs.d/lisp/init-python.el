@@ -48,25 +48,5 @@
                                                            company-oddmuse
                                                            company-dabbrev))))
 
-;;(setq company-backends '(elpy-company-backend
-;;company-ycmd
-;;(company-keywords
-;;company-files
-;;company-gtags
-;;company-etags
-;;company-yasnippet
-;;company-abbrev
-;;company-dabbrev)
-;;company-bbdb
-;;company-nxml
-;;company-css
-;;company-files
-;;(company-dabbrev-code
-;;company-gtags
-;;company-etags
-;;company-keywords)
-;;company-oddmuse
-;;company-dabbrev)))
-
 (provide 'init-python)
 ;;; init-python.el ends here

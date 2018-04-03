@@ -1,13 +1,14 @@
 #+AUTHOR: Junahan
 #+EMAIL: junahan@outlook
 #+DATE: 2018-3-27
+#+LICENSE: CC BY 4.0
 
 * Junahan的Emacs配置
 我的Emacs配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅了很多朋友开放的Emacs配置，详情请看参考文献小节。
 
 我的主要需求是使用Org-mode，Python，C/C++以及 Java 开发环境。
 
-/特别提醒，本Emacs配置仅在如下环境测试/
+/特别提醒，本Emacs配置仅在如下环境进行过测试/
 #+BEGIN_EXAMPLE
  OS: Darwin ... Darwin Kernel Version 17.4.0
  Emacs: GNU Emacs 25.3.1
@@ -17,13 +18,13 @@
 1. 包管理 - init-cask.el，使用Cask + pallet 管理Emacs包
 2. Org-mode - init-org.el， 
 3. Python 开发环境 -  init-python.el，使用elpy + ein (Emacs IPython Notebook)
-4. Auto-company - 使用 Company 和 ycmd 进行自动补全，对于python，则使用 elpy
+4. Company - 使用 Company 和 ycmd 进行自动补全，对于python，则使用 elpy
 7. Theme - 
 9. Dashboard - 
 
 /TODO .../
 
-** Auto-company
+** Company
 - company-dabbrev: 将当前打开的所有 buffer 中的关键字作为补全显示(默认不使用 scratch buffer)。
 - company-files: 补全路径。
 - company-ispell: 英文输入提示。
@@ -33,7 +34,31 @@
 
 /如果在补全过程中取消了补全, 也可以使用命令再次开启补全。例如 company-files 补全方式就可以使用 company-files 函数开启。/
 
+** YCMD in Mac
+1) 安装依赖
+#+BEGIN_SRC 
+brew install cmake
+#+END_SRC
+2) 下载 ycmd 源代码
+#+BEGIN_SRC 
+git clone https://github.com/Valloric/ycmd
+#+END_SRC
+3) build ycmd package
+#+BEGIN_SRC 
+./build.py --clang-completer
+#+END_SRC
+
 ** ORG mode
+- 使用 Capture 快速添加 TODO 和 NOTE。
+- 指定org-agenda-dir，Emacs会从指定目录下的所有 .org 文件抽取日程安排。
+#+BEGIN_SRC elisp
+;; define the refile targets
+(defvar org-agenda-dir "")
+(setq-default org-agenda-dir "~/org")
+(setq org-default-notes-file "~/org/refile.org")
+(setq org-agenda-files (list org-agenda-dir))
+#+END_SRC
+
 /TODO .../
 
 * 使用方法
@@ -65,6 +90,8 @@ cask install
 #+END_SRC
 
 ** TODO 定制
+
+
 /未完待续.../
 
 * 参考文献
@@ -75,4 +102,8 @@ cask install
 - elpy,  https://elpy.readthedocs.io/en/latest/introduction.html
 - eio,  https://tkf.github.io/emacs-ipython-notebook/
 - Master Emacs in 21 Days, zilongshanren, http://book.emacs-china.org/#orgheadline1
+
+#+BEGIN_QUOTE
+本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
+#+END_QUOTE
 
