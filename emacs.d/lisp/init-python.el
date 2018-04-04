@@ -9,9 +9,6 @@
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
 
-;; using ein
-(require 'ein)
-
 ;; using flycheck replace flymake
 (when (require 'flychck nil t)
   (setq elpy-models (delq 'elpy-module-flymake elpy-modules))
@@ -47,6 +44,7 @@
                                                             )
                                                            company-oddmuse
                                                            company-dabbrev))))
+
 
 (provide 'init-python)
 ;;; init-python.el ends here

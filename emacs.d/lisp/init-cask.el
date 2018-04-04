@@ -16,5 +16,5 @@
   (pallet-mode t))
 
 (provide 'init-cask)
-;;; init-cask ends here
+;;; init-cask.el ends here
 

@@ -59,6 +59,8 @@ git clone https://github.com/Valloric/ycmd
 (setq org-agenda-files (list org-agenda-dir))
 #+END_SRC
 
+** IPython Notebook with EIN
+
 /TODO .../
 
 * 使用方法
@@ -100,8 +102,9 @@ cask install
 - Emacs: 最好的Python编辑器, [[https://segmentfault.com/a/1190000004165173]]
 - Emacs IPython Notebook, [[https://tkf.github.io/emacs-ipython-notebook/]]
 - elpy,  https://elpy.readthedocs.io/en/latest/introduction.html
-- eio,  https://tkf.github.io/emacs-ipython-notebook/
+- ein,  https://millejoh.github.io/emacs-ipython-notebook/
 - Master Emacs in 21 Days, zilongshanren, http://book.emacs-china.org/#orgheadline1
+- IPython Notebook, https://ipython.readthedocs.io/en/stable/
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
