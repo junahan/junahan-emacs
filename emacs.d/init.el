@@ -1,6 +1,6 @@
 ;;; package -- init
-;;; Commentary:
-;;; Code:
+;;; commentary:
+;;; code:
 
 ;; Most config copy from https://github.com/purcell/emacs.d project.
 
@@ -39,10 +39,11 @@
 (require 'init-utils)
 (require 'init-env)
 (require 'init-common-dev)
+(require 'init-git)
 (require 'init-company)
 (require 'init-flycheck)
-;;(require 'init-ycmd)
-;;(require 'init-dev)
+(require 'init-ivy-counsel)
+(require 'init-ggtags)
 (require 'init-python)
 (require 'init-ein)
 (require 'init-theme)

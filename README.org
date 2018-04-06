@@ -61,9 +61,45 @@ git clone https://github.com/Valloric/ycmd
 
 ** IPython Notebook with EIN
 
+** Using Magit
+[[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
+
 /TODO .../
 
-* 使用方法
+* 开发环境
+
+** C/C++ 开发环境
+
+*** Features
++ Source Code Reader - 把 Emacs 作为一个好用的代码阅读器
+  - Find file
+  - Find definition
+  - Find reference
+  - Find symbol
+  - Find function
++ Code Company - 
+ - 
++ Code DEBUG - 
++ Project Management - 
+
+*** 快速安装和配置
+- 安装 GNU Global - 一个优秀的源代码标签索引（tagging）系统。
+#+BEGIN_SRC 
+brew install global
+#+END_SRC
+- 运行 gtags 建立源代码标签索引
+#+BEGIN_SRC 
+$ cd {source dir}
+$ gtags
+#+END_SRC
+- 配置 Emacs - 
+
+*** 配置 Emacs 
+- ggtags - GGTAGS 是 GNU Global 源代码标签索引系统的 Emacs 前端。
+- ivy-mode - ivy + counsel + swiper
+- 
+
+* 使用方法 #<<usage>>
 ** 安装
 #+BEGIN_SRC 
 # Clone 项目
@@ -76,7 +112,7 @@ cask install
 # 也可以运行测试脚本 - test-startup.sh来安装依赖包
 ./test-startup.sh
 #+END_SRC
-
+   
 ** 测试
 通过运行项目目录中的脚本test-startup.sh运行测试，测试使用项目目录作为HOME目录运行测试脚本，测试脚本会自动运行cask安装必要的依赖包。
 #+BEGIN_SRC 
@@ -97,14 +133,19 @@ cask install
 /未完待续.../
 
 * 参考文献
-- crossemacs, [[https://github.com/cnsworder/crossemacs]]
-- purcell, [[https://github.com/purcell/emacs.d]]
-- Emacs: 最好的Python编辑器, [[https://segmentfault.com/a/1190000004165173]]
-- Emacs IPython Notebook, [[https://tkf.github.io/emacs-ipython-notebook/]]
-- elpy,  https://elpy.readthedocs.io/en/latest/introduction.html
-- ein,  https://millejoh.github.io/emacs-ipython-notebook/
-- Master Emacs in 21 Days, zilongshanren, http://book.emacs-china.org/#orgheadline1
-- IPython Notebook, https://ipython.readthedocs.io/en/stable/
+- crossemacs, [[https://github.com/cnsworder/crossemacs]].
+- purcell, [[https://github.com/purcell/emacs.d]].
+- Emacs: 最好的Python编辑器, [[https://segmentfault.com/a/1190000004165173]].
+- Emacs IPython Notebook, [[https://tkf.github.io/emacs-ipython-notebook/]].
+- elpy,  https://elpy.readthedocs.io/en/latest/introduction.html.
+- ein,  https://millejoh.github.io/emacs-ipython-notebook/.
+- Master Emacs in 21 Days, zilongshanren, http://book.emacs-china.org/#orgheadline1.
+- IPython Notebook, https://ipython.readthedocs.io/en/stable/.
+- C/C++Development Environment for Emacs - https://tuhdo.github.io/c-ide.html.
+- ggtags - https://github.com/leoliu/ggtags.
+- Ivy User Manual - https://oremacs.com/swiper/.
+- Ivy swiper - https://github.com/abo-abo/swiper
+
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。

@@ -1,6 +1,6 @@
 ;;; package --- init-common-dev
-;;; Commentary:
-;;; Code:
+;;; commentary:
+;;; code:
 
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
@@ -9,21 +9,21 @@
   :config
   (yas-global-mode t))
 
-(use-package dumb-jump
-  :bind
-  (("M-g o" . dumb-jump-go-other-window)
-   ("M-g j" . dumb-jump-go)
-   ("M-g i" . dumb-jump-go-prompt)
-   ("M-g x" . dumb-jump-go-prefer-external)
-   ("M-g z" . dumb-jump-go-prefer-external-other-window))
-  :config
-  (dumb-jump-mode)
-  (setq dumb-jump-selector 'ivy))
+;;(use-package dumb-jump
+;;:bind
+;;(("M-g o" . dumb-jump-go-other-window)
+;;("M-g j" . dumb-jump-go)
+;;("M-g i" . dumb-jump-go-prompt)
+;;("M-g x" . dumb-jump-go-prefer-external)
+;;("M-g z" . dumb-jump-go-prefer-external-other-window))
+;;:config
+;;(dumb-jump-mode)
+;;(setq dumb-jump-selector 'ivy))
 
 ;; editorconfig
 (use-package editorconfig
-    :config
-    (editorconfig-mode t))
+  :config
+  (editorconfig-mode t))
 
 ;; $PATH
 (use-package exec-path-from-shell
@@ -32,21 +32,12 @@
 
 ;; 缩进线
 (use-package indent-guide
-    :config
-    (indent-guide-global-mode))
-
-(use-package git-gutter
-    :config
-    (global-git-gutter-mode t)
-    (git-gutter:linum-setup))
+  :config
+  (indent-guide-global-mode))
 
 (use-package xcscope
   :config
   (cscope-minor-mode t))
-
-(use-package ggtags
-  :config
-  (ggtags-mode t))
 
 (use-package emmet-mode
   :bind

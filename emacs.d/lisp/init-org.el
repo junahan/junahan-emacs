@@ -56,6 +56,14 @@
     (define-key org-mode-map (kbd "M-h") nil)
     ))
 
+;; ipython code block in org.
+;; (require 'ob-ipython)
+;;; display/update images in the buffer after evaluate
+;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
+;; don't prompt to confirm everytime
+(setq org-confirm-babel-evaluate nil)
+
 (after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -76,6 +84,7 @@
      (,(if (locate-library "ob-sh") 'sh 'shell) . t)
      (sql . nil)
      (sqlite . t)
+     (ipython . t)
      (ein . t))))
 
 (provide 'init-org)
