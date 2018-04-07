@@ -3,10 +3,10 @@
 #+DATE: 2018-3-27
 #+LICENSE: CC BY 4.0
 
-* Junahan的Emacs配置
-我的Emacs配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅了很多朋友开放的Emacs配置，详情请看参考文献小节。
+* Junahan 的 Emacs 配置
+我的 Emacs 配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅 [[https://github.com/purcell/emacs.d][purcell Emacs]] 以及其他人的 Emacs 配置 ，详情请看参考文献小节。
 
-我的主要需求是使用Org-mode，Python，C/C++以及 Java 开发环境。
+我的主要需求是使用 Org-mode，Python，C/C++ 以及  Java 开发环境。
 
 /特别提醒，本Emacs配置仅在如下环境进行过测试/
 #+BEGIN_EXAMPLE
@@ -15,16 +15,30 @@
 #+END_EXAMPLE
 
 * TODO 支持列表
-1. 包管理 - init-cask.el，使用Cask + pallet 管理Emacs包
-2. Org-mode - init-org.el， 
-3. Python 开发环境 -  init-python.el，使用elpy + ein (Emacs IPython Notebook)
-4. Company - 使用 Company 和 ycmd 进行自动补全，对于python，则使用 elpy
-7. Theme - 
-9. Dashboard - 
+1. init.el - 位于 .emacs.d 目录下的 Emacs 配置文件入口，在这里加载 lisp 目录下的配置子模块。
+3. init-cask.el - 使用 Cask + pallet 管理Emacs包
+5. init-utils.el - 一些用于配置文件的工具函数定义。
+6. init-env.el - 有关环境（如 shell path）的配置项。
+7. init-common-dev.el - 通用开发环境相关配置。
+ - Speedbar
+ - Projectile 
+ - yasnippet
+8. init-git.el - 使用 Magit 作为 Git Emacs 前端。
+10. init-company.el - 使用 Company 做通用补全，对于不同的语言，可以配置不同的补全后端。
+11. init-flycheck.el - 配置 Flycheck 作为代码飞行检查。
+12. init-ivy-counsel.el - 使用 Ivy + Counsel + Swiper。
+15. init-ggtags.el - 使用 Ggtags 配置标签索引。
+17. init-cpp.el - C/C++ 
+18. init-cedet.el - 
+20. init-python.el - 使用elpy + ein (Emacs IPython Notebook) 配置 Python IDE。
+22. init-ein.el - 配置 EIN (Emacs IPython Notebook) 作为 Jupter Notebook Emacs 客户端。
+24. init-org.el - 配置 Org 模块。
+25. init-theme - 
+28. init-keyset.el - 配置通用快捷键。
 
 /TODO .../
 
-** Company
+** Company 和 =company-backend=
 - company-dabbrev: 将当前打开的所有 buffer 中的关键字作为补全显示(默认不使用 scratch buffer)。
 - company-files: 补全路径。
 - company-ispell: 英文输入提示。
@@ -35,20 +49,35 @@
 /如果在补全过程中取消了补全, 也可以使用命令再次开启补全。例如 company-files 补全方式就可以使用 company-files 函数开启。/
 
 ** YCMD in Mac
-1) 安装依赖
+
+- 安装依赖
 #+BEGIN_SRC 
 brew install cmake
 #+END_SRC
-2) 下载 ycmd 源代码
+- 下载 ycmd 源代码
 #+BEGIN_SRC 
 git clone https://github.com/Valloric/ycmd
 #+END_SRC
-3) build ycmd package
+- build ycmd package
 #+BEGIN_SRC 
 ./build.py --clang-completer
 #+END_SRC
 
-** ORG mode
+** Flycheck
+/TODO .../
+
+** IPython Notebook with EIN
+/TODO .../
+
+** Magit
+[[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
+
+/TODO .../
+
+** Projectile
+/TODO .../
+
+** ORG
 - 使用 Capture 快速添加 TODO 和 NOTE。
 - 指定org-agenda-dir，Emacs会从指定目录下的所有 .org 文件抽取日程安排。
 #+BEGIN_SRC elisp
@@ -59,30 +88,32 @@ git clone https://github.com/Valloric/ycmd
 (setq org-agenda-files (list org-agenda-dir))
 #+END_SRC
 
-** IPython Notebook with EIN
-
-** Using Magit
-[[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
-
-/TODO .../
 
 * 开发环境
+** Python 开发环境
+/TODO .../
 
 ** C/C++ 开发环境
+本节内容大多翻译自 [[https://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]，同时根据自己的需要做了部分调整。
 
-*** Features
-+ Source Code Reader - 把 Emacs 作为一个好用的代码阅读器
-  - Find file
-  - Find definition
-  - Find reference
-  - Find symbol
-  - Find function
-+ Code Company - 
- - 
-+ Code DEBUG - 
-+ Project Management - 
+*** 特性列表
++ 源代码浏览导航 - 把 Emacs 作为一个好用的代码阅读器
+ - Ggtags - 使用 GNU Global 制作静态索引，该索引数据库可用于代码导航和补全。
+ - Semantic - 使用 Semantic 创建代码动态索引数据库，可用于代码导航和补全。
+ - Senator - 使用 Semantic 索引数据做代码导航。
++ 代码补全 - 
+ - Company model - 通用代码补全框架。
+ - Company-c-headers - 用于针对 C 头文件补全。
+ - Company-semantic - 使用 semantic 补全代码。
+ - Company-gtags - 使用 gtags 索引补全代码。
++ 代码编辑和重构
++ 代码调试 - 
++ 项目管理 - 
 
-*** 快速安装和配置
+*** GNU Global + Ggtags 组合
+使用 GNU Global 产生 Gtags 静态索引，Ggtags 是 GNU Global 的 Emacs 前端。使用 Gnu Global + Gtags 组合为项目建立静态索引，便于代码导航和跳转。
+
+**** 快速安装
 - 安装 GNU Global - 一个优秀的源代码标签索引（tagging）系统。
 #+BEGIN_SRC 
 brew install global
@@ -93,11 +124,118 @@ $ cd {source dir}
 $ gtags
 #+END_SRC
 - 配置 Emacs - 
+/TODO .../
 
-*** 配置 Emacs 
-- ggtags - GGTAGS 是 GNU Global 源代码标签索引系统的 Emacs 前端。
-- ivy-mode - ivy + counsel + swiper
-- 
+**** 使用 GNU Global 索引系统头文件
+为了让 GNU Global 能够看到并使用系统头文件，可以按如下步骤操作：
+
+- 在 Shell 初始化文件中（如 .bashrc）Export 如下环境变量：
+#+BEGIN_SRC sh
+export GTAGSLIBPATH=$HOME/.gtags/
+#+END_SRC
+
+- 在终端执行如下命令：
+#+BEGIN_SRC sh
+# Create a directory for holding database, since
+# you cannot create a database in your system paths
+mkdir ~/.gtags
+
+# Create symbolic links to your external libraries
+ln -s /usr/include usr-include
+ln -s /usr/local/include/ usr-local-include
+
+# Generate GNU Global database
+gtags -c
+#+END_SRC
+
+*** 代码补全
+**** 使用 Company 框架
+Company 代码补全框架通过可插拔前后端获取和显示补全候选列表。可选的后端包括 Elisp, Clang, Ispell, CMake, Yasnippet, etags, gtags, files, keywrods, semantics 等等。通过配置 company-backends 变量支持后端列表。
+#+BEGIN_SRC lisp
+(require 'company)
+;; enable global-company-mode
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; c/c++ comapny backend
+(add-hook 'c++-mode-hook
+          (lambda()
+            (setq (make-local-variable 'company-backends)
+                  '(company-semantic
+                    company-gtags
+                    company-yasnippet
+                    company-keywords
+                    company-files
+                    company-eclim
+                    company-abbrev
+                    company-dabbrev))))
+#+END_SRC
+
+**** 使用 company-c-headers 完成头文件补全
+#+BEGIN_SRC lisp
+;; add company-c-header to company-backends
+(add-to-list 'company-backends 'company-c-headers)
+
+;; for C++ headers
+(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
+#+END_SRC
+
+*** 使用 CEDET
+CEDET 是 Emace 内置的开发环境工具套件。CEDET 支持通用功能，如智能代码补全、源代码浏览导航、项目管理、代码产生模版等。它也提供了一个支持多编程语言的框架。
+
+**** 使用 =Semantic minor mode=
++ 配置 Semantic
+#+BEGIN_SRC lisp
+(require 'semantic)
+
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+
+(semantic-mode 1)
+#+END_SRC
+
++ =semantic-mode= 命令
+执行 =M-x semantic-mode= 命令可激活 =semantic-mode= ，在该模式下，Emacs 解析你访问的缓冲区以产生 =semantic= 上下文索引数据，在激活 =global-semanticdb-minor-mode= 的情况下，缓存数据至 =~/.emacs.d/semanticdb= 以备随后使用。
+
++ 添加更多系统 =include path= 
+默认情形下， =Semantic= 自动包含默认系统 =include path= ，如 =\/usr\/include=, =\/usr\/local\/include= 。可以通过 =semantic-dependency-system-include-path= 添加更多系统 include path。
+#+BEGIN_SRC lisp
+(semantic-add-system-include "/usr/include/boost" 'c++-mode)
+(semantic-add-system-include "~/linux/kernel")
+(semantic-add-system-include "~/linux/include")
+#+END_SRC
+
++ 使用 =company-semantic= 代码补全后端
+=company-semantic= 可以使用 =SemanticDB= 获取代码补全候补列表并显示在 =minibuffer= 窗口。优点是基于上下文语义补全，但对于大型经常修改的项目， =company-semantic= 可能有性能的问题。
+
+**** 使用 Sentor 浏览源代码
+Senator 是 CEDET 的一部分，Senator 使用 SemanticDB 并提供有用的命令操作 =semantic tags= 。
+- 导航
+- 复制/粘贴
+
+**** 项目管理
+CEDET 内置 EDE 用于项目管理。
+#+BEGIN_SRC lisp
+(require 'ede)
+(global-ede-mode)
+#+END_SRC
+
+/作为替代，可以使用 Projectile/
+
+*** 代码编辑
+/TODO .../
+
+*** 代码重构
+/TODO .../
+
+*** 源代码文档
+/TODO .../
+
+*** 代码调试
+/TODO .../
+
+*** 项目管理
+/TODO .../
+
 
 * 使用方法 #<<usage>>
 ** 安装
@@ -127,12 +265,10 @@ cask install
 ./deploy.sh
 #+END_SRC
 
-** TODO 定制
-
-
-/未完待续.../
+* TODO 其他
 
 * 参考文献
+- Emacs manual, 
 - crossemacs, [[https://github.com/cnsworder/crossemacs]].
 - purcell, [[https://github.com/purcell/emacs.d]].
 - Emacs: 最好的Python编辑器, [[https://segmentfault.com/a/1190000004165173]].
@@ -144,10 +280,8 @@ cask install
 - C/C++Development Environment for Emacs - https://tuhdo.github.io/c-ide.html.
 - ggtags - https://github.com/leoliu/ggtags.
 - Ivy User Manual - https://oremacs.com/swiper/.
-- Ivy swiper - https://github.com/abo-abo/swiper
-
+- Ivy swiper - https://github.com/abo-abo/swiper.
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
 #+END_QUOTE
-
