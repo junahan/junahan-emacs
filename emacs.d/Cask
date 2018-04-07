@@ -1,6 +1,6 @@
-(source "gnu" "http://elpa.emacs-china.org/gnu/")
-(source "melpa" "http://elpa.emacs-china.org/melpa/")
-(source "org" "http://epla.emacs-china.org/org/")
+(source "gnu" "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+(source "melpa" "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+(source "org" "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
 
 (depends-on "ace-jump-mode")
 (depends-on "add-node-modules-path")
