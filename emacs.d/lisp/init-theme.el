@@ -1,15 +1,6 @@
 ;;; package --- init-theme
-;;; Commentary:
-;;; Code:
-
-;; 不要tab页了没用
-;;(require 'tabbar)
-;;(setq tabbar-buffer-groups-function nil)
-;;(tabbar-mode t)
-
-;;(require 'sr-speedbar)
-;;(setq speedbar-show-unknown-files t)
-;;(setq speedbar-use-images nil)
+;;; commentary:
+;;; code:
 
 (use-package highlight-parentheses
   :config
@@ -23,13 +14,14 @@
   :config
   (popwin-mode t))
 
+;; use gruvbox theme
 (use-package gruvbox-theme)
 
 ;; 暗色主题下光标颜色设置一下
 (set-cursor-color "White")
 (setq-default cursor-type 'bar)
 
-;; 去掉工具栏
+;; disable toolbar
 (if window-system
     (tool-bar-mode 0))
 
@@ -56,7 +48,7 @@
 
 ;; set the default frame size
 (setq default-frame-alist
-      '((height . 40)
+      '((height . 60)
         (width . 180)
         )
       )
@@ -64,5 +56,4 @@
 ;; (setq neo-theme (if window-system 'icons 'arrow))
 
 (provide 'init-theme)
-
 ;;; init-theme.el ends here

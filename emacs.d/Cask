@@ -82,6 +82,8 @@
 (depends-on "smartparens")
 (depends-on "smex")
 (depends-on "super-save")
+(depends-on "speedbar")
+(depends-on "sr-speedbar")
 (depends-on "swiper")
 (depends-on "symbol-overlay")
 (depends-on "tabbar")
@@ -97,3 +99,4 @@
 (depends-on "yasnippet")
 (depends-on "ycmd")
 (depends-on "zeal-at-point")
+(depends-on "zygospore")

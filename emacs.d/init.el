@@ -24,16 +24,19 @@
 (defconst *is-a-mac* (eq system-type 'darwin))
 
 ;; Adjust garbage collection thresholds during startup, and thereafter
-;;(let ((normal-gc-cons-threshold (* 20 1024 1024))
-;;      (init-gc-cons-threshold (* 128 1024 1024)))
-;;  (setq gc-cons-threshold init-gc-cons-threshold)
-;;  (add-hook 'after-init-hook
-;;            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(let ((init-gc-cons-threshold (* 128 1024 1024)))
+  (setq gc-cons-threshold init-gc-cons-threshold))
+(add-hook 'after-init-hook
+          (lambda () (setq gc-cons-threshold (* 20 1024 1024))))
 
-;; Bootstrap config
+;; Bootstrap confign
 (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 ;; (load-file custom-file)
 ;; (package-initialize)
+
+;;(setq gc-cons-threshold 100000000)
+(setq inhibit-startup-message t)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (require 'init-cask)
 (require 'init-utils)
@@ -44,10 +47,12 @@
 (require 'init-flycheck)
 (require 'init-ivy-counsel)
 (require 'init-ggtags)
+(require 'init-cpp)
+(require 'init-cedet)
 (require 'init-python)
 (require 'init-ein)
-(require 'init-theme)
 (require 'init-org)
+(require 'init-theme)
 (require 'init-keyset)
 (require 'init-misc)
 
