@@ -3,20 +3,20 @@
 # Make it look like this is ~/.emacs.d (needed for Emacs 24.3, at least)
 export HOME=$PWD
 if [ ! -d .emacs.d ]; then
-    ln -s emacs.d .emacs.d    
+    ln -s emacs.d .emacs.d
 fi
 
 # install cask
 if ! which cask &> /dev/null; then
     if which brew &> /dev/null; then
-        brew install cask    
-    fi 
+        brew install cask
+    fi
 fi
 
 # run cask
 cd emacs.d
-cask install
 echo "Cask installed package..."
+cask install
 
 echo "Attempting startup..."
 ${EMACS:=emacs} -nw --batch \

@@ -8,8 +8,8 @@ fi
 # install cask
 if ! which cask &> /dev/null; then
     if which brew &> /dev/null; then
-        brew install cask    
-    fi 
+        brew install cask
+    fi
 fi
 
 # create the .emacs.d link
@@ -28,6 +28,6 @@ fi
 
 cd ~/.emacs.d
 # run cask
-cask install
 echo "Cask installed package..."
-
+cask install
+echo "Deploy Successful!"
