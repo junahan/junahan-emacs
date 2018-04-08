@@ -10,6 +10,17 @@
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
 
+;; virtual env with conda.
+(require 'conda)
+;; interactive shell support
+(conda-env-initialize-interactive-shells)
+;; eshell support
+(conda-env-initialize-eshell)
+;; enable auto-activation
+(conda-env-autoactivate-mode t)
+;; anaconda home
+(custom-set-variables  '(conda-anaconda-home "~/anaconda3"))
+
 ;; using flycheck replace flymake
 (when (require 'flychck nil t)
   (setq elpy-models (delq 'elpy-module-flymake elpy-modules))
