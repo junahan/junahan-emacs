@@ -18,30 +18,16 @@
 ;; “user”: When you want to define your own style
 (setq c-default-style "linux") ;; set style to "linux"
 
-(add-hook 'c-mode-hook 'c++-mode)
-
 (add-hook 'c++-mode-hook
           (lambda ()
             (setq flycheck-clang-language-standard "c++11")))
 
-;; c/c++ comapny backend
-;; consider the performance reason, remove company-semantic
-;; from company-backends.
-(add-hook 'c++-mode-hook
-          (lambda()
-            (setq (make-local-variable 'company-backends)
-                  '(company-gtags
-                    company-yasnippet
-                    company-keywords
-                    company-files
-                    company-eclim
-                    company-abbrev
-                    company-dabbrev))))
-
-;; company-c-headers
-(use-package company-c-headers
-  :init
-  (add-to-list 'company-backends 'company-c-headers))
+(require 'company-c-headers)
+(after-load 'company
+  (add-hook 'c-mode-common-hook
+            (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
+;;  (add-hook 'c++-mode-hook
+;;  (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
 
 (provide 'init-cpp)
 ;;; init-cpp.el ends here

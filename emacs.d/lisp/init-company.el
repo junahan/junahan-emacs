@@ -6,10 +6,10 @@
 (add-to-list 'completion-styles 'initials t)
 
 (require 'company)
-
 (add-hook 'after-init-hook 'global-company-mode)
+
 (after-load 'company
-  (define-key company-mode-map (kbd "M-/") 'company-complete)
+  (define-key company-mode-map (kbd "M-/") 'comwalletpany-compl)
   (define-key company-active-map (kbd "M-/") 'company-other-backend)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
@@ -17,45 +17,31 @@
                 company-tooltip-align-annotations t))
 (global-set-key (kbd "M-C-/") 'company-complete)
 
-(global-company-mode t)
-(setq company-idle-delay 0.08)
-(setq company-minimum-prefix-length 1)
-(setq company-show-numbers t)
-(setq company-require-match nil)
-(setq company-dabbrev-downcase nil)
-
-;;(add-hook 'after-init-hook 'global-company-mode)
-(add-to-list 'company-backends '(company-keywords
-                                 company-files
-                                 company-abbrev
-                                 company-yasnippet
-                                 company-dabbrev
-                                 company-gtags
-                                 company-etags
-                                 company-eclim
-                                 company-elisp))
-
-;; for emacs lisp
-(add-hook 'emacs-lisp-hook
-          (lambda()
-            (setq (make-local-variable 'company-backends)
-                  '(company-elisp
-                    company-yasnippet
-                    company-eclim
-                    company-abbrev
-                    company-dabbrev))))
-
-;; for company-go
-(use-package company-go
-  :config
-  (add-hook 'go-mode-hook
-            (add-to-list 'company-backends 'company-go)))
+;; (global-company-mode t)
+(after-load 'company
+  (setq company-idle-delay 0.08)
+  (setq company-minimum-prefix-length 1)
+  (setq company-show-numbers t)
+  (setq company-require-match nil)
+  (setq company-dabbrev-downcase nil))
 
 ;; function to push company backend to local variable - company-backends.
 (defun sanityinc/local-push-company-backend (backend)
   "Add BACKEND to a buffer-local version of `company-backends'."
   (make-local-variable 'company-backends)
   (push backend company-backends))
+
+;; (require 'company-elisp)
+;; ;; for company-elisp
+;; (after-load 'company
+;;   (add-hook 'emacs-lisp-hook
+;;             (lambda () (sanityinc/local-push-company-backend 'company-elisp))))
+
+;; (require 'company-go)
+;; ;; for company-go
+;; (after-load 'company
+;;   (add-hook 'go-mode-hook
+;;             (lambda () (sanityinc/local-push-company-backend 'company-go))))
 
 ;; (use-package 'company-quickhelp)
 (require 'company-quickhelp)

@@ -1,6 +1,6 @@
 ;;; package -- init-utils
-;;; Commentary:
-;;; Code:
+;;; commentary:
+;;; code:
 
 (if (fboundp 'with-eval-after-load)
     (defalias 'after-load 'with-eval-after-load)

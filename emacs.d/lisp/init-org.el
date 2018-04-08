@@ -1,6 +1,6 @@
 ;;; package --- init-org
-;;; Commentary:
-;;; Code:
+;;; commentary:
+;;; code:
 
 ;; Lots of stuff from - https://github.com/purcell/emacs.d/blob/master/lisp/init-org.el
 (when *is-a-mac*
@@ -79,12 +79,12 @@
      (octave . t)
      (plantuml . t)
      (python . t)
+     (ipython . t)
      (ruby . t)
      (screen . nil)
      (,(if (locate-library "ob-sh") 'sh 'shell) . t)
      (sql . nil)
      (sqlite . t)
-     (ipython . t)
      (ein . t))))
 
 (provide 'init-org)
