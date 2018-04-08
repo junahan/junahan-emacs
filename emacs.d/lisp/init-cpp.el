@@ -22,6 +22,7 @@
           (lambda ()
             (setq flycheck-clang-language-standard "c++11")))
 
+;; add company-c-header to company-backends
 (require 'company-c-headers)
 (after-load 'company
   (add-hook 'c-mode-common-hook
