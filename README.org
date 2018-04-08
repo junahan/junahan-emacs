@@ -1,10 +1,11 @@
+#+TITLE: Junhan 的 Emacs 配置
 #+AUTHOR: Junahan
 #+EMAIL: junahan@outlook
 #+DATE: 2018-3-27
 #+LICENSE: CC BY 4.0
 
-* Junahan 的 Emacs 配置
-我的 Emacs 配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅 [[https://github.com/purcell/emacs.d][purcell Emacs]] 以及其他人的 Emacs 配置 ，详情请看参考文献小节。
+* 摘要
+我的 Emacs 配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅 [[https://github.com/purcell/emacs.d][purcell Emacs]] 以及其他人的 Emacs 配置 ，详情请看[[references][参考文献]]小节。
 
 我的主要需求是使用 Org-mode，Python，C/C++ 以及  Java 开发环境。
 
@@ -14,36 +15,32 @@
  Emacs: GNU Emacs 25.3.1
 #+END_EXAMPLE
 
-* TODO 支持列表
+* TODO 支持列表 #<<features>>
 1. init.el - 位于 .emacs.d 目录下的 Emacs 配置文件入口，在这里加载 lisp 目录下的配置子模块。
 3. init-cask.el - 使用 Cask + pallet 管理Emacs包
 5. init-utils.el - 一些用于配置文件的工具函数定义。
-6. init-env.el - 有关环境（如 shell path）的配置项。
-7. init-common-dev.el - 通用开发环境相关配置。
- - Speedbar
- - Projectile 
- - yasnippet
+7. init-common.el - 通用配置。例如 Speedbar, Projectile, yasnippet 等。
 8. init-git.el - 使用 Magit 作为 Git Emacs 前端。
 10. init-company.el - 使用 Company 做通用补全，对于不同的语言，可以配置不同的补全后端。
 11. init-flycheck.el - 配置 Flycheck 作为代码飞行检查。
 12. init-ivy-counsel.el - 使用 Ivy + Counsel + Swiper。
-15. init-ggtags.el - 使用 Ggtags 配置标签索引。
-17. init-cpp.el - C/C++ 
-18. init-cedet.el - 
-20. init-python.el - 使用elpy + ein (Emacs IPython Notebook) 配置 Python IDE。
+14. init-helm.el - 使用 Helm 作为增量补全和缩减选择的工具，并使用 Helm Projectile 管理项目。
+15. init-helm-gtags.el - 使用 helm-gtags 配置标签索引。
+17. init-cpp.el - c/c++ 语言相关配置
+18. init-cedet.el - CEDET 工具配置，包括 Semantic, Senator 等。
+20. init-python.el - 配置 Python 开发环境，使用 elpa mode 。
 22. init-ein.el - 配置 EIN (Emacs IPython Notebook) 作为 Jupter Notebook Emacs 客户端。
 24. init-org.el - 配置 Org 模块。
-25. init-theme - 
-28. init-keyset.el - 配置通用快捷键。
-
-/TODO .../
+25. init-theme - 配置使用 gruvbox 主题，配置其他主题相关，如字体，highligh-parentheses, popwin, frame size 等。
+28. init-dashboard.el - 配置 Dashboard 相关。
+30. init-keyset.el - 配置通用快捷键。
 
 ** Company 和 =company-backend=
+Company 代码补全框架通过可插拔前后端获取和显示补全候选列表。可选的后端包括 Elisp, Clang, Ispell, CMake, Yasnippet, etags, gtags, files, keywrods, semantics 等等。通过配置 company-backends 变量支持后端列表。
 - company-dabbrev: 将当前打开的所有 buffer 中的关键字作为补全显示(默认不使用 scratch buffer)。
-- company-files: 补全路径。
+- company-files: 补全文件路径。
 - company-ispell: 英文输入提示。
 - company-ycmd: c/c++ 代码补全。
-# - company-anaconda: python代码补全。
 - elpy-company-backend: python代码补全后端。
 
 /如果在补全过程中取消了补全, 也可以使用命令再次开启补全。例如 company-files 补全方式就可以使用 company-files 函数开启。/
@@ -88,8 +85,42 @@ git clone https://github.com/Valloric/ycmd
 (setq org-agenda-files (list org-agenda-dir))
 #+END_SRC
 
+** Helm
+Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员提供非常容易使用的 API 以开发基于 Helm 的 Emacs 应用，同时提供了强大的搜索工具以及许多内建支持几乎所有常用的补全命令。
 
-* 开发环境
+*** 安装和配置
+*** Usage
+*** 使用 Helm Projectile 管理项目
+
+* 使用方法 #<<usage>>
+** 安装
+#+BEGIN_SRC 
+# Clone 项目
+git clone https://github.com/junahan/junahan-emacs.git
+
+# 使用cask安装依赖包
+cd junahan-emacs
+cask install
+
+# 也可以运行测试脚本 - test-startup.sh来安装依赖包
+./test-startup.sh
+#+END_SRC
+   
+** 测试
+通过运行项目目录中的脚本test-startup.sh运行测试，测试使用项目目录作为HOME目录运行测试脚本，测试脚本会自动运行cask安装必要的依赖包。
+#+BEGIN_SRC 
+# Emacs debug-init模式运行测试
+./test-startup.sh
+#+END_SRC
+
+** 部署
+通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。为了确保Emacs能够正确的从 ~/.emacs.d 目录启动，该脚本备份你的 ~/.emacs 文件为 ~/.emacs.backup
+#+BEGIN_SRC 
+# 使用stow安装至 ～/.emacs.d 目录
+./deploy.sh
+#+END_SRC
+
+* 开发环境 #<<dev-environment>>
 ** Python 开发环境
 /TODO .../
 
@@ -110,8 +141,8 @@ git clone https://github.com/Valloric/ycmd
 + 代码调试 - 
 + 项目管理 - 
 
-*** GNU Global + Ggtags 组合
-使用 GNU Global 产生 Gtags 静态索引，Ggtags 是 GNU Global 的 Emacs 前端。使用 Gnu Global + Gtags 组合为项目建立静态索引，便于代码导航和跳转。
+*** GNU Global + Helm-gtags 组合
+使用 GNU Global 产生 Gtags 静态索引，Helm-gtags 是 GNU Global Emacs 前端，该组合为项目建立静态索引，便于代码导航和跳转。
 
 **** 快速安装
 - 安装 GNU Global - 一个优秀的源代码标签索引（tagging）系统。
@@ -155,25 +186,17 @@ Company 代码补全框架通过可插拔前后端获取和显示补全候选列
 (require 'company)
 ;; enable global-company-mode
 (add-hook 'after-init-hook 'global-company-mode)
-
-;; c/c++ comapny backend
-(add-hook 'c++-mode-hook
-          (lambda()
-            (setq (make-local-variable 'company-backends)
-                  '(company-semantic
-                    company-gtags
-                    company-yasnippet
-                    company-keywords
-                    company-files
-                    company-eclim
-                    company-abbrev
-                    company-dabbrev))))
 #+END_SRC
+
+ /对于c/c++ mode，company-backends 默认包含 company-semantics 后端。/
 
 **** 使用 company-c-headers 完成头文件补全
 #+BEGIN_SRC lisp
 ;; add company-c-header to company-backends
-(add-to-list 'company-backends 'company-c-headers)
+(require 'company-c-headers)
+(after-load 'company
+  (add-hook 'c-mode-common-hook
+            (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
 
 ;; for C++ headers
 (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
@@ -190,7 +213,7 @@ CEDET 是 Emace 内置的开发环境工具套件。CEDET 支持通用功能，�
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
 
-(semantic-mode 1)
+(semantic-mode t)
 #+END_SRC
 
 + =semantic-mode= 命令
@@ -205,12 +228,25 @@ CEDET 是 Emace 内置的开发环境工具套件。CEDET 支持通用功能，�
 #+END_SRC
 
 + 使用 =company-semantic= 代码补全后端
-=company-semantic= 可以使用 =SemanticDB= 获取代码补全候补列表并显示在 =minibuffer= 窗口。优点是基于上下文语义补全，但对于大型经常修改的项目， =company-semantic= 可能有性能的问题。
+=company-semantic= 可以使用 =SemanticDB= 获取代码补全候补列表并显示在 =minibuffer= 窗口。优点是基于上下文语义补全，但对于大型项目， =company-semantic= 可能有性能的问题。要从 =comapny-backends= 列表去掉 =company-semantic= ，添加下面的配置。
+#+BEGIN_SRC lisp
+(delete 'company-semantic company-backends)
+#+END_SRC
 
 **** 使用 Sentor 浏览源代码
 Senator 是 CEDET 的一部分，Senator 使用 SemanticDB 并提供有用的命令操作 =semantic tags= 。
 - 导航
+| 快捷键 | 命令                       | 说明                         |
+| C-c , n | senator-next-tag           | 导航到下一个 Semantic 标签   |
+| C-c , p | senator-previous-tag       | 导航到上一个 Semantic 标签   |
+| C-c , u | senator-go-to-up-reference | 从当前标签移动至向上一层引用 |
+
 - 复制/粘贴
+| 快捷键  | 命令                         | 说明                 |
+| C-c , M-w | senator-copy-tag             | 复制当前标签         |
+| C-c , C-w | senator-kill-tag             | 剪切当前标签         |
+| C-c , C-y | senator-yank-tag             | 召回标签             |
+| C-c , r | senator-copy-tag-to-register | 复制当前标签到注册表 |
 
 **** 项目管理
 CEDET 内置 EDE 用于项目管理。
@@ -219,7 +255,7 @@ CEDET 内置 EDE 用于项目管理。
 (global-ede-mode)
 #+END_SRC
 
-/作为替代，可以使用 Projectile/
+/作为替代，可以使用 Projectile，详情，请参阅[[projectile][项目管理]]。/
 
 *** 代码编辑
 /TODO .../
@@ -233,41 +269,11 @@ CEDET 内置 EDE 用于项目管理。
 *** 代码调试
 /TODO .../
 
-*** 项目管理
+*** 项目管理 <<projectile>>
 /TODO .../
 
-
-* 使用方法 #<<usage>>
-** 安装
-#+BEGIN_SRC 
-# Clone 项目
-git clone https://github.com/junahan/junahan-emacs.git
-
-# 使用cask安装依赖包
-cd junahan-emacs
-cask install
-
-# 也可以运行测试脚本 - test-startup.sh来安装依赖包
-./test-startup.sh
-#+END_SRC
-   
-** 测试
-通过运行项目目录中的脚本test-startup.sh运行测试，测试使用项目目录作为HOME目录运行测试脚本，测试脚本会自动运行cask安装必要的依赖包。
-#+BEGIN_SRC 
-# Emacs debug-init模式运行测试
-./test-startup.sh
-#+END_SRC
-
-** 部署
-通过运行项目目录中的脚本 deploy.sh部署，部署脚本会根据需要安装必要的依赖包。为了确保Emacs能够正确的从 ~/.emacs.d 目录启动，该脚本备份你的 ~/.emacs 文件为 ~/.emacs.backup
-#+BEGIN_SRC 
-# 使用stow安装至 ～/.emacs.d 目录
-./deploy.sh
-#+END_SRC
-
 * TODO 其他
-
-* 参考文献
+* 参考文献 #<<references>>
 - Emacs manual, 
 - crossemacs, [[https://github.com/cnsworder/crossemacs]].
 - purcell, [[https://github.com/purcell/emacs.d]].
@@ -281,6 +287,9 @@ cask install
 - ggtags - https://github.com/leoliu/ggtags.
 - Ivy User Manual - https://oremacs.com/swiper/.
 - Ivy swiper - https://github.com/abo-abo/swiper.
+- A Package in a league of its own: Helm - https://tuhdo.github.io/helm-intro.htm.
+- Exploring large projects with Projectile and Helm Projectile - https://tuhdo.github.io/helm-projectile.html.
+- Helm Github - https://github.com/emacs-helm/helm.
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
