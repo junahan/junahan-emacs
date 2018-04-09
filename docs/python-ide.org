@@ -1,0 +1,61 @@
+#+TITLE: Python IDE
+#+AUTHOR: Junahan
+#+EMAIL: junahan@outlook
+#+DATE: 2018-04-05
+
+#+BEGIN_QUOTE
+本文所述 Python IDE 仅在 MAC OS (Darwin Kernel Version 17.4.0) 测试通过。
+#+END_QUOTE
+
+* 摘要
+使用 Emacs 及 Python 相关插件模块，可以自己动手，构建一个完善的 Python IDE 开发环境，除了支持基本的代码编辑、自动补全、代码调试以外，还支持 Python 虚拟环境、Jupyter Notebook 集成、Org 模块集成等。
+
+* 使用 Conda 管理 Python 虚拟环境
+
+** 下载和安装 Anaconda
+国内下载 Anaconda 相当缓慢，建议使用国内镜像 - https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/
+
+** 更换使用国内 Conda 源
+如国内 TUNA 源，提供了 Conda 仓库，也提供了其他第三方源镜像 - https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/。
+
+#+BEGIN_SRC bash 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --set show_channel_urls yes
+#+END_SRC
+
+完成配置后，就可以使用 conda  install 指令安装需要的 Python 软件包并创建相应的环境。
+
+** TODO 创建不同的环境
+
+* TODO 使用 Jupyter Notebook
+* TODO 配置 Emacs IDE
+
+** 特性列表
+- Virtual Envs - 使用 conda 支持 Python 虚拟环境。
+- 代码补全 - 使用 elpy 模块。
+- 代码检查 - 使用 flycheck。
+- PEP8 支持 - 使用 py-autopep8。
+- Juypter Notebook - 使用 EIN。
+- Org-Babel 支持 - 使用 ob-python 和 ob-ipython。
+
+** TODO 使用 elpy
+
+** TODO 配置 EIN
+
+** TODO 集成 Org-mode
+
+* 参考文献
+1. 清华大学 Anaconda 镜像，https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
+2. Jupyter Document, https://jupyter.readthedocs.io/en/latest/
+3. Emacs: 最好的 Python 编辑器, [[https://segmentfault.com/a/1190000004165173]].
+4. Emacs IPython Notebook, [[https://tkf.github.io/emacs-ipython-notebook/]].
+5. elpy,  https://elpy.readthedocs.io/en/latest/introduction.html.
+6. ein,  https://millejoh.github.io/emacs-ipython-notebook/.
+7. Python Progromming In Emacs - https://www.emacswiki.org/emacs?action=browse;oldid=PythonMode;id=PythonProgrammingInEmacs.
+
+#+BEGIN_QUOTE
+本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
+#+END_QUOTE
+

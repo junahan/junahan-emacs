@@ -5,6 +5,7 @@
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
 
+;; Enable global-company-mode.
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -27,7 +28,7 @@
 
 ;; function to push company backend to local variable - company-backends.
 (defun sanityinc/local-push-company-backend (backend)
-  "Add BACKEND to a buffer-local version of `company-backends'."
+  "Add BACKEND to a buffer-local version of 'company-backends'."
   (make-local-variable 'company-backends)
   (push backend company-backends))
 

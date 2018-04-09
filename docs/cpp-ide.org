@@ -1,0 +1,173 @@
+#+TITLE: C/C++ IDE
+#+AUTHOR: Junahan
+#+EMAIL: junahan@outlook
+#+DATE: 2018-04-08
+#+KEYWORDS: Emacs, C, C++, IDE
+
+#+BEGIN_QUOTE
+本文所述 C/C++ 开发环境仅在 MAC OS (Darwin Kernel Version 17.4.0) 测试通过。
+#+END_QUOTE
+
+* 摘要 <<abstract>>
+使用 Emacs 可以构建一个完整的 C/C++ IDE 开发环境，从代码编辑、自动补全、代码调试、编译、运行测试到重构，甚至是项目管理均有良好的支持。
+
+本文内容大多翻译自 [[https://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]，同时根据自己的需要做了部分调整。有关 Emacs 配置，可以参阅 [[https://github.com/tuhdo/emacs-c-ide-demo][tuhdo/emacs-c-ide-demo]]（关注 C/C++ 支持），也可以参阅 [[https://github.com/junahan/junahan-emacs][Junahan Emacs]]（我的 Emacs 配置）。
+
+* 特性列表 <<features>>
++ 源代码浏览导航 - 把 Emacs 作为一个好用的代码阅读器
+ - Ggtags - 使用 GNU Global 制作静态索引，该索引数据库可用于代码导航和补全。
+ - Semantic - 使用 Semantic 创建代码动态索引数据库，可用于代码导航和补全。
+ - Senator - 使用 Semantic 索引数据做代码导航。
++ 代码补全 - 
+ - Company model - 通用代码补全框架。
+ - Company-c-headers - 用于针对 C 头文件补全。
+ - Company-semantic - 使用 semantic 补全代码。
+ - Company-gtags - 使用 gtags 索引补全代码。
++ 代码编辑和重构
++ 代码调试 - 
++ 项目管理 - 
+
+* TODO 快速启动 <<quick-guide>>
+* GNU Global + Helm-gtags 组合
+使用 GNU Global 产生 Gtags 静态索引，Helm-gtags 是 GNU Global Emacs 前端，该组合为项目建立静态索引，便于代码导航和跳转。
+
+** 安装 GNU Global
+- 安装 GNU Global - 一个优秀的源代码标签索引（tagging）系统。
+#+BEGIN_SRC 
+brew install global
+#+END_SRC
+- 运行 gtags 建立源代码标签索引
+#+BEGIN_SRC 
+$ cd {source dir}
+$ gtags
+#+END_SRC
+- 配置 Emacs - 
+/TODO .../
+
+** 使用 GNU Global 索引系统头文件
+为了让 GNU Global 能够看到并使用系统头文件，可以按如下步骤操作：
+
+- 在 Shell 初始化文件中（如 .bashrc）Export 如下环境变量：
+#+BEGIN_SRC sh
+export GTAGSLIBPATH=$HOME/.gtags/
+#+END_SRC
+
+- 在终端执行如下命令：
+#+BEGIN_SRC sh
+# Create a directory for holding database, since
+# you cannot create a database in your system paths
+mkdir ~/.gtags
+
+# Create symbolic links to your external libraries
+ln -s /usr/include usr-include
+ln -s /usr/local/include/ usr-local-include
+
+# Generate GNU Global database
+gtags -c
+#+END_SRC
+
+* 代码补全
+** 使用 Company 框架
+Company 文本补全框架通过可插拔前后端获取和显示补全候选列表。可选的后端包括 Elisp, Clang, Ispell, CMake, Yasnippet, etags, gtags, files, keywrods, semantics 等等。通过配置 company-backends 变量支持后端列表。
+
+#+BEGIN_SRC lisp
+(require 'company)
+;; enable global-company-mode
+(add-hook 'after-init-hook 'global-company-mode)
+#+END_SRC
+
+ /对于c/c++ mode，company-backends 默认包含 company-semantics 后端。/
+
+** 使用 company-c-headers 完成头文件补全
+#+BEGIN_SRC lisp
+;; add company-c-header to company-backends
+(require 'company-c-headers)
+(after-load 'company
+  (add-hook 'c-mode-common-hook
+            (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
+
+;; for C++ headers
+(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
+#+END_SRC
+
+* 使用 CEDET
+CEDET 是 Emace 内置的开发环境工具套件。CEDET 支持通用功能，如智能代码补全、源代码浏览导航、项目管理、代码产生模版等。它也提供了一个支持多编程语言的框架。
+
+** 使用 =Semantic minor mode=
++ 配置 Semantic
+#+BEGIN_SRC lisp
+(require 'semantic)
+
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+
+(semantic-mode t)
+#+END_SRC
+
++ =semantic-mode= 命令
+执行 =M-x semantic-mode= 命令可激活 =semantic-mode= ，在该模式下，Emacs 解析你访问的缓冲区以产生 =semantic= 上下文索引数据，在激活 =global-semanticdb-minor-mode= 的情况下，缓存数据至 =~/.emacs.d/semanticdb= 以备随后使用。
+
++ 添加更多系统 =include path= 
+默认情形下， =Semantic= 自动包含默认系统 =include path= ，如 =\/usr\/include=, =\/usr\/local\/include= 。可以通过 =semantic-dependency-system-include-path= 添加更多系统 include path。
+#+BEGIN_SRC lisp
+(semantic-add-system-include "/usr/include/boost" 'c++-mode)
+(semantic-add-system-include "~/linux/kernel")
+(semantic-add-system-include "~/linux/include")
+#+END_SRC
+
++ 使用 =company-semantic= 代码补全后端
+=company-semantic= 可以使用 =SemanticDB= 获取代码补全候补列表并显示在 =minibuffer= 窗口。优点是基于上下文语义补全，但对于大型项目， =company-semantic= 可能有性能的问题。要从 =comapny-backends= 列表去掉 =company-semantic= ，添加下面的配置。
+#+BEGIN_SRC lisp
+(delete 'company-semantic company-backends)
+#+END_SRC
+
+** 使用 Sentor 浏览源代码
+Senator 是 CEDET 的一部分，Senator 使用 SemanticDB 并提供有用的命令操作 =semantic tags= 。
+- 导航
+| 快捷键 | 命令                       | 说明                         |
+| C-c , n | senator-next-tag           | 导航到下一个 Semantic 标签   |
+| C-c , p | senator-previous-tag       | 导航到上一个 Semantic 标签   |
+| C-c , u | senator-go-to-up-reference | 从当前标签移动至向上一层引用 |
+
+- 复制/粘贴
+| 快捷键  | 命令                         | 说明                 |
+| C-c , M-w | senator-copy-tag             | 复制当前标签         |
+| C-c , C-w | senator-kill-tag             | 剪切当前标签         |
+| C-c , C-y | senator-yank-tag             | 召回标签             |
+| C-c , r | senator-copy-tag-to-register | 复制当前标签到注册表 |
+
+** 项目管理
+CEDET 内置 EDE 用于项目管理。
+#+BEGIN_SRC lisp
+(require 'ede)
+(global-ede-mode)
+#+END_SRC
+
+/作为替代，可以使用 Projectile，详情，请参阅[[projectile][项目管理]]。/
+
+* TODO 代码编辑
+/TODO .../
+
+* TODO 代码重构
+/TODO .../
+
+* TODO 源代码文档
+/TODO .../
+
+* TODO 代码调试
+/TODO .../
+
+* TODO 项目管理 <<projectile>>
+/TODO .../
+
+* 参考文献 <<references>>
+1. C/C++Development Environment for Emacs - https://tuhdo.github.io/c-ide.html.
+2. Ivy User Manual - https://oremacs.com/swiper/.
+3. Ivy swiper - https://github.com/abo-abo/swiper.
+4. A Package in a league of its own: Helm - https://tuhdo.github.io/helm-intro.htm.
+5. Exploring large projects with Projectile and Helm Projectile - https://tuhdo.github.io/helm-projectile.html.
+6. Helm Github - https://github.com/emacs-helm/helm.
+
+#+BEGIN_QUOTE
+本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
+#+END_QUOTE

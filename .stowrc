@@ -8,4 +8,6 @@
 --ignore=emacs.d
 --ignore=.bash_history
 --ignore=.bash_sessions
+--ignore=docs
+
 
