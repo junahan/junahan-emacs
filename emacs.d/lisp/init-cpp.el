@@ -27,6 +27,7 @@
 (after-load 'company
   (add-hook 'c-mode-common-hook
             (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
+
 ;;  (add-hook 'c++-mode-hook
 ;;  (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
 

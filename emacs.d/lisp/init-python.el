@@ -17,7 +17,7 @@
 ;; eshell support
 (conda-env-initialize-eshell)
 ;; enable auto-activation
-(conda-env-autoactivate-mode t)
+;; (conda-env-autoactivate-mode t)
 ;; anaconda home
 (custom-set-variables  '(conda-anaconda-home "~/anaconda3"))
 

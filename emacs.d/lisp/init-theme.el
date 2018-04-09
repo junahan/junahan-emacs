@@ -6,54 +6,45 @@
   :config
   (global-highlight-parentheses-mode t))
 
-;; (use-package all-the-icons
-;;   :config
-;;   (mode-icons-mode t))
-
+;; enable popwin mode
 (use-package popwin
   :config
   (popwin-mode t))
 
-;; use gruvbox theme
-(use-package gruvbox-theme)
+;; define theme
+(if (display-graphic-p)
+    (progn     ;; for graphic system
+      (use-package gruvbox-theme
+        :config
+        (tool-bar-mode 0)
+        (scroll-bar-mode 0)
+        (set-cursor-color "White")
+        (load-theme 'gruvbox-dark-soft t)
+        (setq-default cursor-type 'bar)))
+  (progn   ;; for text only terminal system
+    (use-package gruvbox-theme
+      :config
+      ;; (load-theme 'gruvbox-dark-soft t)
+      (set-cursor-color "White")
+      (setq-default cursor-type 'bar))))
 
-;; 暗色主题下光标颜色设置一下
-(set-cursor-color "White")
-(setq-default cursor-type 'bar)
-
-;; disable toolbar
-(if window-system
-    (tool-bar-mode 0))
-
-;; Disabled scroll bar
-(if window-system
-    (scroll-bar-mode 0))
-
-;; 开启折叠
-;; (hs-minor-mode t)
-;; 显示行号
+;; display line number
 (global-linum-mode t)
 (column-number-mode t)
 
-;;(require 'spaceline-config)
-;;(spaceline-spacemacs-theme)
+;; (setq inhibit-startup-message t)
 
-(setq inhibit-startup-message t)
-
-;; 字体配置
+;; font setting
 ;; (set-default-font "SauceCodePro Nerd Font 16")
 ;; (set-default-font "Inziu Iosevka Slab SC 16")
-(set-default-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
 ;; (set-frame-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
+(if (display-graphic-p)
+    (set-default-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1"))
 
 ;; set the default frame size
 (setq default-frame-alist
       '((height . 60)
-        (width . 180)
-        )
-      )
-
-;; (setq neo-theme (if window-system 'icons 'arrow))
+        (width . 180)))
 
 (provide 'init-theme)
 ;;; init-theme.el ends here
