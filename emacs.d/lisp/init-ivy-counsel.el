@@ -31,13 +31,13 @@
    ("C-h v" . counsel-describe-variable)
    ("C-h l" . counsel-load-library)))
 
-(use-package counsel-projectile
-  :init
-  (counsel-projectile-mode)
-  :bind
-  (("C-c p f" . counsel-projectile-find-file)
-   ("C-c p a" . projectile-ag)
-   ("C-c p l" . projectile-switch-project)))
+;; (use-package counsel-projectile
+;;   :init
+;;   (counsel-projectile-mode)
+;;   :bind
+;;   (("C-c p f" . counsel-projectile-find-file)
+;;    ("C-c p a" . projectile-ag)
+;;    ("C-c p l" . projectile-switch-project)))
 
 (provide 'init-ivy-counsel)
 ;;; init-ivy-counsel.el ends here

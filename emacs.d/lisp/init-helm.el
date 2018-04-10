@@ -1,8 +1,11 @@
 ;;; package --- init-helm
-;;; commentary:
-;;; code:
+;;; Commentary:
+;; Helm configuration with helm-swoop, helm-projectil support.
+;; Lots of stuff is copy from -
+;; https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el
+;;
+;;; Code:
 
-;; copy from - https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el
 (use-package helm
   :init
   (progn
@@ -30,9 +33,9 @@
     (global-set-key (kbd "C-c h") 'helm-command-prefix)
     (global-unset-key (kbd "C-x c"))
 
-    (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
-    (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-    (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+    (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ;; rebihnd tab to do persistent action
+    (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ;; make TAB works in terminal
+    (define-key helm-map (kbd "C-z")  'helm-select-action) ;; list actions using C-z
 
     (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
     (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
@@ -42,9 +45,9 @@
       (setq helm-google-suggest-use-curl-p t))
 
     (setq helm-google-suggest-use-curl-p t
-          helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
+          helm-scroll-amount 4 ;; scroll 4 lines other window using M-<next>/M-<prior>
           ;; helm-quick-update t ; do not display invisible candidates
-          helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+          helm-ff-search-library-in-sexp t ;; search for library in `require' and `declare-function' sexp.
 
           ;; you can customize helm-do-grep to execute ack-grep
           ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
@@ -53,24 +56,26 @@
 
           helm-echo-input-in-header-line t
 
-          ;; helm-candidate-number-limit 500 ; limit the number of displayed canidates
+          ;; helm-candidate-number-limit 500
+          ;; limit the number of displayed canidates
           helm-ff-file-name-history-use-recentf t
-          helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
+          ;; move to end or beginning of source when reaching top or bottom of source.
+          helm-move-to-line-cycle-in-source t
           helm-buffer-skip-remote-checking t
 
           helm-mode-fuzzy-match t
-
-          helm-buffers-fuzzy-matching t ; fuzzy matching buffer names when non-nil
-                                        ; useful in helm-mini that lists buffers
+          ;; fuzzy matching buffer names when non-nil
+          helm-buffers-fuzzy-matching t
+          ;; useful in helm-mini that lists buffers
           helm-org-headings-fontify t
           ;; helm-find-files-sort-directories t
           ;; ido-use-virtual-buffers t
           helm-semantic-fuzzy-match t
           helm-M-x-fuzzy-match t
           helm-imenu-fuzzy-match t
+          ;; enable lisp CAPF
           helm-lisp-fuzzy-completion t
           ;; helm-apropos-fuzzy-match t
-          helm-buffer-skip-remote-checking t
           helm-locate-fuzzy-match t
           helm-display-header-line nil)
 
@@ -101,7 +106,7 @@
               #'(lambda ()
                   (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
 
-;;; Save current position to mark ring
+    ;;Save current position to mark ring
     (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
     ;; show minibuffer history with Helm
@@ -112,9 +117,9 @@
 
     (define-key global-map [remap list-buffers] 'helm-buffers-list)
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; PACKAGE: helm-swoop                ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; ------------------------------------------------------------
+    ;; PACKAGE: helm-swoop
+    ;; ------------------------------------------------------------
     ;; Locate the helm-swoop folder to your path
     (use-package helm-swoop
       :bind (("C-c h o" . helm-swoop)
@@ -138,16 +143,25 @@
       ;; If nil, you can slightly boost invoke speed in exchange for text color
       (setq helm-swoop-speed-or-color t))
 
-    (helm-mode 1)
+    ;; ------------------------------------------------------------
+    ;; PACKAGE: helm-projectile
+    ;; ------------------------------------------------------------
+    (after-load 'projectile
+      (use-package helm-projectile
+        :init
+        (setq projectile-completion-system 'helm)
+        (setq projectile-switch-project-action 'helm-projectile)
+        (helm-projectile-on)))
 
-    (use-package helm-projectile
+    ;; ------------------------------------------------------------
+    ;; PACKAGE: helm-descbinds
+    ;; ------------------------------------------------------------
+    (use-package helm-descbinds
       :init
-      (helm-projectile-on)
-      (setq projectile-completion-system 'helm)
-      (setq projectile-switch-project-action 'helm-projectile)
-      (setq projectile-find-file 'helm-projectile-find-file)
-      (setq projectile-find-dir 'helm-projectile-find-dir)
-      (setq projectile-indexing-method 'alien))))
+      (helm-descbinds-mode))
+
+    ;; enable the helm mode
+    (helm-mode 1)))
 
 (provide 'init-helm)
 ;;; init-helm.el ends here

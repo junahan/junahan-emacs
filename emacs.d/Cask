@@ -58,6 +58,7 @@
 (depends-on "helm")
 (depends-on "helm-gtags")
 (depends-on "helm-projectile")
+(depends-on "helm-descbinds")
 (depends-on "highlight-indentation")
 (depends-on "highlight-parentheses")
 (depends-on "iedit")

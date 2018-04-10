@@ -1,8 +1,8 @@
 ;;; package -- init
-;;; commentary:
-;;; code:
-
-;; Most config copy from https://github.com/purcell/emacs.d project.
+;;; Commentary:
+;; Losts of stuff copy from https://github.com/purcell/emacs.d project.
+;;
+;;; Code:
 
 ;; -*- lexical-binding: t -*-
 
