@@ -5,6 +5,9 @@
 ;; simplify the yes-or-no-p
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; clos the ring bell
+(setq ring-bell-function 'ignore)
+
 ;;(require 'direnv)
 (use-package exec-path-from-shell
   :config
