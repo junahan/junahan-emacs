@@ -45,7 +45,7 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
-         "* TODO %?\n SCHEDULE: %U\n" :clock-resume t)
+         "* TODO %?\n SCHEDULED: %U\n" :clock-resume t)
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
         ))
