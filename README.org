@@ -12,6 +12,7 @@
 /特别提醒，本 Emacs 配置仅在如下环境进行过测试:/
 #+BEGIN_QUOTE
  OS: Darwin ... Darwin Kernel Version 17.4.0
+
  Emacs: GNU Emacs 25.3.1
 #+END_QUOTE
 
@@ -23,7 +24,7 @@
 8. init-git.el - 使用 Magit 作为 Git Emacs 前端。
 10. init-company.el - 使用 Company 做通用补全，对于不同的语言，可以配置不同的补全后端。
 11. init-flycheck.el - 配置 Flycheck 作为代码飞行检查。
-12. init-ivy-counsel.el - 使用 Ivy + Counsel + Swiper。
+12. init-ivy-counsel.el - 使用 Swiper + Counsel 。
 14. init-helm.el - 使用 Helm 作为增量补全和缩减选择的工具，并使用 Helm Projectile 管理项目。
 15. init-helm-gtags.el - 使用 helm-gtags 配置标签索引。
 17. init-cpp.el - c/c++ 语言相关配置
@@ -69,6 +70,15 @@ git clone https://github.com/junahan/junahan-emacs.git
 
 * 常用 Emacs Mode 介绍 <<emacs-mode-intro>>
 本节简单介绍一些常用的 Emacs Mode，也是 junahan-emacs 项目使用到的 Emacs 模块。通过这些介绍，你可以大致了解到这些模块的功能、配置和使用。
+
+** 安装 Emacs 模块包
+在[[quick-guide][快速启动]]一章已经介绍了如何使用 =junahan-emacs= 项目安装所需要的环境，本章所需要的常用模块包都已经准备就绪。如果你需要尝试安装不同的包，你可以通过如下另种方法来安装新的模块包。
+
++ 使用 =cask= 安装依赖包 - 打开 =emacs.d= 目录下的 Cask 文件，并添加依赖包，例如，安装 =helm-company= ，添加 =(depends-on "helm-company")= 到 Cask 文件，然后运行 =-cask install= 命令以安装该依赖包。
++ 使用 Emacs 安装包管理工具直接安装：
+#+BEGIN_SRC 
+M-x package-install RET helm-company RET
+#+END_SRC
 
 ** Company 和 =company-backends= 变量
 Company 是一个文本补全框架，该命名意思是“完成任何事情”，文本补全框架通过可插拔前后端获取和显示补全候选列表。可选的后端包括 Elisp, Clang, Ispell, CMake, Yasnippet, etags, gtags, files, keywrods, semantics 等等。通过配置 company-backends 变量支持后端列表。
@@ -188,12 +198,29 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 *** Helm-projectile
 Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。详情，请参阅[[helm-projectile][使用 Helm + Projectile 管理项目]]。
 
-** TODO Magit
+** Magit
 [[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
 
-/TODO .../
+*** 安装和配置
+可以通过 MELPA 或者 cask 安装 Magit 包，通过如下代码配置和激活 =magit= : 
+#+BEGIN_SRC lisp
+(use-package magit
+  :bind
+  (("C-x g" . magit-status)
+   ("C-x M-g" . magit-dispatch-popup)))
+#+END_SRC
 
-** TODO Projectile <<helm-projectile>>
+/以上配置绑定 =C-x g= 快捷键至 =magit-status= 命令，这个命令是使用最为频繁的命令，基本日常的 Git 操作均可以通过该命令界面完成。/
+
+*** 使用总结
+运行 =C-x g= 打开 =mgit-status= 界面，该界面显示如下图。
+#+CAPTION: Magit-status 操作界面
+#+ATTR_HTML: :width 80%
+[[file:docs/images/emacs-mgit-status.png]]
+
+有关 Mgit 使用的更多介绍，请参阅 [[http://jixiuf.github.io/blog/000100-emacs-magit.html/][Emacs下的 git 工具 magit 简介]]。
+
+** Projectile <<helm-projectile>>
 Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的操作提供一组易用的特性。Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。
 
 - 同时选择和打开多个文件
@@ -212,21 +239,36 @@ Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的�
       (setq projectile-completion-system 'helm))
 #+END_SRC
 
-*** TODO 功能和特性
-*** TODO 快捷键绑定总结
-    
-所有 =Projectile= 命令均以 =C-c p= 为前缀。
+*** 快捷键绑定总结
+所有 =Projectile= 命令均以 =C-c p= 为前缀。以下是有关快捷键绑定的总结。
+
+#+CAPTION: Helm-projectile 快捷键绑定总结
+| 快捷键    | 命令                                        | 说明                                   |
+| C-c p h   | helm-projectile                             | Helm projectile 界面                   |
+| C-c p p   | helm-projectile-switch-project              | 切换至另外的项目                       |
+| C-c p f   | helm-projectile-find-file                   | 列出当前项目所有文件                   |
+| C-c p F   | helm-projectile-find-file-in-known-projects | 在所有已知项目中查找文件               |
+| C-c p g   | helm-projectile-find-file-dwim              | 基于上下文查找文件                     |
+| C-c p d   | helm-projectile-find-dir                    | 列出当前项目所有目录                   |
+| C-c p e   | helm-projectile-recentf                     | 列出当前项目最近打开的文件             |
+| C-c p a   | helm-projectile-find-other-file             | 在具有文件名但不同扩展名之间的文件切换 |
+| C-c p i   | projectile-invalidate-cache                 | 作废缓存                               |
+| C-c p z   | projectile-cache-current-file               | 添加当前选中缓冲区文件至缓存           |
+| C-c p b   | helm-projectile-swith-to-buffer             | 列出所有当前项目中打开的缓冲区         |
+| C-c p s g | helm-projectile-grep                        | 从项目根目录开始搜索符号               |
+| C-c p s a | helm-projectile-ack                         | 同上，但使用 ack                       |
+| C-c p s s | helm-projectile-ag                          | 同上，但使用 ag                        |
 
 ** TODO ORG
-- 使用 Capture 快速添加 TODO 和 NOTE。
-- 指定org-agenda-dir，Emacs会从指定目录下的所有 .org 文件抽取日程安排。
-#+BEGIN_SRC elisp
-;; define the refile targets
-(defvar org-agenda-dir "")
-(setq-default org-agenda-dir "~/org")
-(setq org-default-notes-file "~/org/refile.org")
-(setq org-agenda-files (list org-agenda-dir))
-#+END_SRC
+# - 使用 Capture 快速添加 TODO 和 NOTE。
+# - 指定org-agenda-dir，Emacs会从指定目录下的所有 .org 文件抽取日程安排。
+# #+BEGIN_SRC elisp
+# ;; define the refile targets
+# (defvar org-agenda-dir "")
+# (setq-default org-agenda-dir "~/org")
+# (setq org-default-notes-file "~/org/refile.org")
+# (setq org-agenda-files (list org-agenda-dir))
+# #+END_SRC
 
 * 开发环境 <<ide>>
 ** Python IDE
@@ -244,6 +286,7 @@ Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的�
 2. crossemacs, [[https://github.com/cnsworder/crossemacs]].
 3. purcell, [[https://github.com/purcell/emacs.d]].
 4. compay, https://company-mode.github.io.
+5. Emacs 下的 git 工具 magit 简介 - http://jixiuf.github.io/blog/000100-emacs-magit.html/.
 6. Emacs: 最好的 Python 编辑器, [[https://segmentfault.com/a/1190000004165173]].
 7. Emacs IPython Notebook, [[https://tkf.github.io/emacs-ipython-notebook/]].
 9. elpy,  https://elpy.readthedocs.io/en/latest/introduction.html.

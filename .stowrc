@@ -1,3 +1,4 @@
+
 --ignore=deploy.sh
 --ignore=test-startup.sh
 --ignore=README.md
@@ -9,5 +10,6 @@
 --ignore=.bash_history
 --ignore=.bash_sessions
 --ignore=docs
+--ignore=images
 
 
