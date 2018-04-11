@@ -7,9 +7,9 @@
 * 摘要
 我的 Emacs 配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅 [[https://github.com/purcell/emacs.d][purcell Emacs]] 以及其他人的 Emacs 配置 ，详情请看[[references][参考文献]]小节。
 
-主要需求是使用 Org-mode，Python，C/C++ 以及  Java 开发环境。
+主要需求是使用 Org-mode，Python，C/C++ 以及 Java 开发环境。
 
-/特别提醒，本Emacs配置仅在如下环境进行过测试:/
+/特别提醒，本 Emacs 配置仅在如下环境进行过测试:/
 #+BEGIN_QUOTE
  OS: Darwin ... Darwin Kernel Version 17.4.0
  Emacs: GNU Emacs 25.3.1
@@ -36,7 +36,6 @@
 30. init-keyset.el - 配置通用快捷键。
 
 * 快速启用 <<quick-guide>>
-
 ** 安装 Emacs 和 Cask
 使用 Homebrew 安装 Emacs 和 Cask（Emacs 包管理工具）：
 
@@ -68,7 +67,7 @@ git clone https://github.com/junahan/junahan-emacs.git
 ./deploy.sh
 #+END_SRC
 
-* 常用 Emacs Mode 介绍
+* 常用 Emacs Mode 介绍 <<emacs-mode-intro>>
 本节简单介绍一些常用的 Emacs Mode，也是 junahan-emacs 项目使用到的 Emacs 模块。通过这些介绍，你可以大致了解到这些模块的功能、配置和使用。
 
 ** Company 和 =company-backends= 变量
@@ -125,6 +124,8 @@ Company Global Mode 默认后端配置大多数情况下工作良好，并能够
             (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))
 #+END_SRC
 
+/为了确认当前缓冲区 =company-backends= 内容，可以运行 =C-h v= 命令查看该变量的值。/
+
 ** Flycheck
 Flycheck 是一个飞行句法检查和提示工具，它使用多种语法检查和提示工具在你输入的时候自动检查缓冲区内容，并在缓冲区直接提示和报告警告和错误。Fly check 支持超过 40 多种不同编程语言和 80 多种语法检查工具，并有许多第三方扩展可供选择。
 
@@ -137,20 +138,84 @@ Flycheck 是一个飞行句法检查和提示工具，它使用多种语法检�
   (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
 #+END_SRC
 
-** TODO Helm
+** Helm
 Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员提供非常容易使用的 API 以开发基于 Helm 的 Emacs 应用，同时提供了强大的搜索工具以及许多内建支持几乎所有常用的补全命令。
 
 *** 安装和配置
+可以通过运行 =M-x list-packages= 命令选择并安装 =*Helm*= 包，或者打开 =.emacs.d/Cask= 文件，添加 =（depends-on "helm")= ，然后运行 =cask install= 命令安装 =*Helm*= 。完成安装后，最简单的配置如下，即可启动 =*Helm*= ：
+
+#+BEGIN_SRC lisp
+(require 'helm-config)
+(helm-mode 1)
+#+END_SRC
+
+更完整的配置，请参阅[[file:emacs.d/lisp/init-helm.el][Helm 完整配置]]。
+
 *** Usage
-*** 使用 Helm Projectile 管理项目
+通过适当的配置， =Helm= 会接管你大部分日常使用的 =Emacs= 操作界面，你可以借助其强大的增量式补全，逐步缩减候选列表范围直到找到你需要的项为止，例如，它可以接管 =M-x= 界面，允许你以 =Helm= 的方式选择要运行的命令，这通常会提升你的效率。它还有非常好用的正则表达式匹配和搜索界面。
+
+#+CAPTION: 快捷键绑定总结
+| Key 绑定    | 命令                            | 说明                                                     |
+| M-x         | helm-M-x                        | 命令列表                                                 |
+| M-y         | helm-show-kill-ring             | 显示剪切环内容                                           |
+| C-x b       | helm-mini                       | 显示打开的缓冲区和最近打开的文件                         |
+| C-x C-f     | helm-find-files                 | Find-file 的 Helm 版本                                   |
+| C-s         | helm-ff-run-grep                | 正则表达式版本的 helm-find-files                         |
+| C-c h i     | helm-semantic-or-imenu          | Semantic/imenu 的 Helm 界面                              |
+| C-c h m     | helm-man-woman                  | 跳转到任意 man 文档入口                                  |
+| C-c h /     | helm-find                       | Find 的 Helm 界面                                        |
+| C-c h l     | helm-locate                     | Locate 的 Helm 界面                                      |
+| C-c h o     | helm-occur                      | Occure 的 Helm 界面                                      |
+| C-c h a     | helm-apropos                    | 命令、函数、变量描述                                     |
+| C-c h h g   | helm-info-gnus                  |                                                          |
+| C-c h h i   | helm-info-at-point              |                                                          |
+| C-c h h r   | helm-info-emacs                 |                                                          |
+| C-c h <tab> | helm-lisp-completion-at-point   | 提供一个可用函数列表                                     |
+| C-c h b     | helm-resume                     | 恢复前面一个 helm 会话                                   |
+| C-h SPC     | helm-all-mark-rings             | 查看本地和全局标记环内容                                 |
+| C-c h r     | helm-regrex                     | 可视化正则表达式匹配                                     |
+| C-c h x     | helm-register                   | 显示 Emacs 注册表内容                                    |
+| C-c h t     | helm-top                        | Top 系统命令的 Helm 界面                                 |
+| C-c h s     | helm-surfraw                    | 很多 Web 搜索引擎的命令行界面                            |
+| C-c h g     | helm-google-suggest             | 在 Helm 缓冲区内支持交互式输入搜索项和从 Google 获取结果 |
+| C-c h c     | helm-color                      | 列出所有可用的 Faces                                     |
+| C-c h M- :  | helm-eval-expression-with-eldoc | 在 Helm 缓冲区获取 Emacs lisp 表达式实时结果             |
+| C-c h C- ,  | helm-calcul-expression          | Helm 计算器界面                                          |
+| C-c C-l     | helm-eshell-history             | Eshell 历史界面                                          |
+| C-c C-l     | helm-comit-input-ring           | Shell 历史界面                                           |
+| C-c C-l     | helm-mini-buffer-history        | Mini-buffer 历史界面                                 |
+
+*** Helm-projectile
+Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。详情，请参阅[[helm-projectile][使用 Helm + Projectile 管理项目]]。
 
 ** TODO Magit
 [[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
 
 /TODO .../
 
-** TODO Projectile
-/TODO .../
+** TODO Projectile <<helm-projectile>>
+Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的操作提供一组易用的特性。Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。
+
+- 同时选择和打开多个文件
+- 任意位置位置打开文件
+- 任意位置标记和复制多个文件
+- 任意位置标记和删除文件
+- 任意切换当前和其他同名文件
+
+*** 安装和配置
+可以通过 MELPA 安装 Projectile，使用如下代码配置和激活 =helm-projectile= ：
+#+BEGIN_SRC lisp
+(use-package helm-projectile
+      :init
+      (helm-projectile-on)
+      :config
+      (setq projectile-completion-system 'helm))
+#+END_SRC
+
+*** TODO 功能和特性
+*** TODO 快捷键绑定总结
+    
+所有 =Projectile= 命令均以 =C-c p= 为前缀。
 
 ** TODO ORG
 - 使用 Capture 快速添加 TODO 和 NOTE。
