@@ -13,7 +13,6 @@
   :bind
   (("C-x g" . magit-status)
    ("C-x M-g" . magit-dispatch-popup)))
-
 ;; (global-set-key (kbd "C-c g c") 'magit-commit)
 ;; (global-set-key (kbd "C-c g p") 'magit-push)
 ;; (global-set-key (kbd "C-c g f") 'magit-pull)

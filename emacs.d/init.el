@@ -54,6 +54,7 @@
 (require 'init-python)
 (require 'init-ein)
 (require 'init-org)
+(require 'init-jdee)
 (require 'init-theme)
 (require 'init-dashboard)
 (require 'init-keyset)
