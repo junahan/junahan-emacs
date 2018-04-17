@@ -26,7 +26,9 @@
 (setq-default tab-width 4)
 
 ;; enable aggressive indent
-(global-aggressive-indent-mode t)
+(use-package aggressive-indent
+	:init
+	(global-aggressive-indent-mode t))
 
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
@@ -36,26 +38,10 @@
   :config
   (yas-global-mode t))
 
-;;(use-package dumb-jump
-;;:bind
-;;(("M-g o" . dumb-jump-go-other-window)
-;;("M-g j" . dumb-jump-go)
-;;("M-g i" . dumb-jump-go-prompt)
-;;("M-g x" . dumb-jump-go-prefer-external)
-;;("M-g z" . dumb-jump-go-prefer-external-other-window))
-;;:config
-;;(dumb-jump-mode)
-;;(setq dumb-jump-selector 'ivy))
-
 ;; editorconfig
 (use-package editorconfig
   :config
   (editorconfig-mode t))
-
-;; $PATH
-(use-package exec-path-from-shell
-  :config
-  (exec-path-from-shell-initialize))
 
 ;; indent global mode
 (use-package indent-guide
@@ -102,32 +88,33 @@
 (setq-default make-backup-files nil)
 
 ;; enable undo tree mode
-(global-undo-tree-mode t)
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode t))
+
+;; enable auto revert mode
 (global-auto-revert-mode t)
 
 ;; open super save mode
-(super-save-mode t)
-(setq super-save-auto-save-when-idle t)
-(setq auto-save-default nil)
+;; open super save mode
+(use-package super-save
+	:init
+	(super-save-mode t)
+	:config
+	(setq super-save-auto-save-when-idle t)
+	(setq auto-save-default nil))
 
 ;; enable smartparens
-(use-package smartparens-config
+(use-package smartparens
   :config
   (smartparens-global-mode t))
 
 (setq x-select-enable-clipboard t)
 
 ;; enable which key
-(which-key-mode)
-;;(window-numbering-mode t)
-
-;; (setq init-open-recentf-interface 'swiper)
-;; (init-open-recentf)
-;; (require 'expand-region)
-;; search using avy
-;; (require 'avy)
-;; (require 'ace-jump-mode)
-;; (require 'crux)
+(use-package which-key
+  :init
+  (which-key-mode))
 
 (provide 'init-common)
 ;;; init-common.el ends here

@@ -58,3 +58,4 @@ lisp/custom.el
 .bash_history
 .bash_sessions/
 /.emacs.d
+*.~undo-tree

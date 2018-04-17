@@ -59,4 +59,8 @@
 (require 'init-dashboard)
 (require 'init-keyset)
 
+;; load custom file.
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ;;; init.el ends here
