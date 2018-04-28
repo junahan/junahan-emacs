@@ -1,12 +1,14 @@
-;;; package -- init-company
-;;; commentary:
-;;; code:
+;;; Package -- init-company
+;;; Commentary:
+;;; Code:
+
+(require-package 'company)
+(require-package 'company-quickhelp)
 
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
 
 ;; Enable global-company-mode.
-(require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
 (after-load 'company
@@ -16,6 +18,8 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (setq-default company-dabbrev-other-buffers 'all
                 company-tooltip-align-annotations t))
+
+;; global key mapping for company-complete
 (global-set-key (kbd "M-C-/") 'company-complete)
 
 ;; (global-company-mode t)
@@ -32,21 +36,14 @@
   (make-local-variable 'company-backends)
   (push backend company-backends))
 
-;; (require 'company-elisp)
-;; ;; for company-elisp
-;; (after-load 'company
-;;   (add-hook 'emacs-lisp-hook
-;;             (lambda () (sanityinc/local-push-company-backend 'company-elisp))))
-
-;; (require 'company-go)
-;; ;; for company-go
-;; (after-load 'company
-;;   (add-hook 'go-mode-hook
-;;             (lambda () (sanityinc/local-push-company-backend 'company-go))))
+;; for company-elisp
+(after-load 'company
+  (add-hook 'emacs-lisp-hook
+            (lambda () (sanityinc/local-push-company-backend 'company-elisp))))
 
 ;; (use-package 'company-quickhelp)
-(require 'company-quickhelp)
-(add-hook 'after-init-hook 'company-quickhelp-mode)
+(after-load 'company-quickhelp
+  (add-hook 'after-init-hook 'company-quickhelp-mode))
 
 ;; Suspend page-break-lines-mode while company menu is active
 ;; (see https://github.com/company-mode/company-mode/issues/416)

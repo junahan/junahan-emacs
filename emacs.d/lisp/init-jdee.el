@@ -4,6 +4,8 @@
 ;;
 ;;; Code:
 
+(require-package 'jdee)
+
 (use-package jdee
   :config
   (custom-set-variables

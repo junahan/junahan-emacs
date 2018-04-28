@@ -2,7 +2,8 @@
 ;;; commentary:
 ;;; code:
 
-(require 'dashboard)
+(require-package 'dashboard)
+
 (dashboard-setup-startup-hook)
 (setq dashboard-setup-startup-banner 1)
 

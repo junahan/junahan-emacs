@@ -2,15 +2,6 @@
 ;;; commentary:
 ;;; code:
 
-(use-package highlight-parentheses
-  :config
-  (global-highlight-parentheses-mode t))
-
-;; enable popwin mode
-(use-package popwin
-  :config
-  (popwin-mode t))
-
 ;; define theme
 (if (display-graphic-p)
     (progn     ;; for graphic system

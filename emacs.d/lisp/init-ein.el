@@ -3,10 +3,7 @@
 ;;; code:
 
 ;; using ein
-(require 'ein)
-(require 'ein-loaddefs)
-(require 'ein-notebook)
-(require 'ein-subpackages)
+(require-package 'ein)
 
 ;;(set-variable 'ein:jupyter-default-server-command "jupyter")
 (set-variable 'ein:jupyter-default-notebook-directory "~/jupyter-notebook")

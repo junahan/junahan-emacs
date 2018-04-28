@@ -2,6 +2,26 @@
 ;;; commentary:
 ;;; code:
 
+;; install require packages.
+(require-package 'use-package)
+(require-package 'exec-path-from-shell)
+(require-package 'aggressive-indent)
+(require-package 'yasnippet)
+(require-package 'indent-guide)
+(require-package 'xcscope)
+(require-package 'projectile)
+(require-package 'zygospore)
+(require-package 'sr-speedbar)
+(require-package 'undo-tree)
+(require-package 'neotree)
+(require-package 'super-save)
+(require-package 'smartparens)
+(require-package 'highlight-parentheses)
+(require-package 'which-key)
+(require-package 'popwin)
+
+(setq use-package-always-ensure t)
+
 ;; simplify the yes-or-no-p
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -37,11 +57,6 @@
 (use-package yasnippet
   :config
   (yas-global-mode t))
-
-;; editorconfig
-(use-package editorconfig
-  :config
-  (editorconfig-mode t))
 
 ;; indent global mode
 (use-package indent-guide
@@ -86,6 +101,7 @@
 
 ;; disable backup file.
 (setq-default make-backup-files nil)
+(setq x-select-enable-clipboard t)
 
 ;; enable undo tree mode
 (use-package undo-tree
@@ -96,25 +112,42 @@
 (global-auto-revert-mode t)
 
 ;; open super save mode
-;; open super save mode
 (use-package super-save
-	:init
-	(super-save-mode t)
-	:config
-	(setq super-save-auto-save-when-idle t)
-	(setq auto-save-default nil))
+  :init
+  (super-save-mode t)
+  :config
+  (setq super-save-auto-save-when-idle t)
+  (setq auto-save-default nil))
 
 ;; enable smartparens
 (use-package smartparens
   :config
   (smartparens-global-mode t))
 
-(setq x-select-enable-clipboard t)
-
 ;; enable which key
 (use-package which-key
   :init
-  (which-key-mode))
+  (which-key-mode t))
+
+;; enable popwin mode
+(use-package popwin
+  :config
+  (popwin-mode t))
+
+(use-package highlight-parentheses
+  :config
+  (global-highlight-parentheses-mode t))
+
+;; define theme
+(if (display-graphic-p)
+    (progn     ;; for graphic system
+      (tool-bar-mode 0)
+      (scroll-bar-mode 0)
+      (setq-default cursor-type 'bar)))
+
+;; display line number
+;; (global-linum-mode t)
+(column-number-mode t)
 
 (provide 'init-common)
 ;;; init-common.el ends here

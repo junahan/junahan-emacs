@@ -1,18 +1,18 @@
 #!/bin/sh -e
 
-# backup the .emacs file
-if [ -d ~/.emacs ]; then
-    mv ~/.emacs ~/.emacs.backup
-fi 
+TIME=$(date "+%Y%m%d-%H%M%S")
 
-# install cask
-if ! which cask &> /dev/null; then
-    if which brew &> /dev/null; then
-        brew install cask
-    fi
+# backup the .emacs file
+if [ -d ~/.eamcs ]; then
+    mv ~/.emacs ~/.emacs-${TIME}
 fi
 
-# create the .emacs.d link
+# backup the .emacs.d dir
+if [ -d ~/.emacs.d ]; then
+    mv ~/.emacs.d ~/.emacs.d-${TIME}
+fi
+
+# create the .emacs.d link to emacs.d dir
 if [ ! -d .emacs.d ]; then
     ln -s emacs.d .emacs.d
 fi
@@ -20,14 +20,13 @@ fi
 # stow the fold or create link to HOME
 if which stow &> /dev/null; then
     stow -t ${HOME} .
+    if [ -d ~/emacs.d  ]; then
+        rm ~/emacs.d
+    fi
 else
     if [ ! -d ~/.emacs.d ]; then
         ln -s `pwd`/emacs.d ~/.emacs.d
     fi
 fi
 
-cd ~/.emacs.d
-# run cask
-echo "Cask installed package..."
-cask install
 echo "Deploy Successful!"

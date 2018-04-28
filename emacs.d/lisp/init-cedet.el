@@ -2,13 +2,13 @@
 ;;; commentary:
 ;;; code:
 
-(require 'semantic)
+(require-package 'semantic)
 
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)
-(global-semantic-stickyfunc-mode 1)
-
-(semantic-mode 1)
+(after-load 'semantic
+  (global-semanticdb-minor-mode 1)
+  (global-semantic-idle-scheduler-mode 1)
+  (global-semantic-stickyfunc-mode 1)
+  (semantic-mode 1))
 
 (defun alexott/cedet-hook ()
   "Config key bind for semantic fast jump."
@@ -29,8 +29,7 @@
  gdb-many-windows t
 
  ;; Non-nil means display source file containing the main routine at startup
- gdb-show-main t
- )
+ gdb-show-main t)
 
 (provide 'init-cedet)
 ;;; init-cedet.el ends here

@@ -6,18 +6,17 @@
 
 ;; -*- lexical-binding: t -*-
 
+;;; This file bootstraps the configuration, which is divided into
+;;; a number of other files.
+
+;; Check Emacs version
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(setq debug-on-error t)
-
-;;; This file bootstraps the configuration, which is divided into
-;;; a number of other files.
-
-;; Check Emacs version
 (let ((minver "24.3"))
   (when (version< emacs-version minver)
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
@@ -40,21 +39,21 @@
 ;; (setq inhibit-startup-message t)
 (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 
-(require 'init-cask)
 (require 'init-utils)
+(require 'init-elpa)
 (require 'init-common)
-(require 'init-git)
 (require 'init-company)
 (require 'init-flycheck)
-(require 'init-ivy-counsel)
+(require 'init-git)
+(require 'init-ivy-swiper)
 (require 'init-helm)
 (require 'init-helm-gtags)
+(require 'init-org)
 (require 'init-cpp)
 (require 'init-cedet)
 (require 'init-python)
 (require 'init-ein)
-(require 'init-org)
-(require 'init-jdee)
+;;(require 'init-jdee)
 (require 'init-theme)
 (require 'init-dashboard)
 (require 'init-keyset)

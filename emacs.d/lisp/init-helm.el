@@ -6,6 +6,11 @@
 ;;
 ;;; Code:
 
+(require-package 'helm)
+(require-package 'helm-swoop)
+(require-package 'helm-projectile)
+(require-package 'helm-descbinds)
+
 (use-package helm
   :init
   (progn

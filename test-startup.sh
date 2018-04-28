@@ -6,17 +6,7 @@ if [ ! -d .emacs.d ]; then
     ln -s emacs.d .emacs.d
 fi
 
-# install cask
-if ! which cask &> /dev/null; then
-    if which brew &> /dev/null; then
-        brew install cask
-    fi
-fi
-
-# run cask
-cd emacs.d
-echo "Cask installed package..."
-cask install
+cd .emacs.d
 
 echo "Attempting startup..."
 ${EMACS:=emacs} -nw --batch \
@@ -29,4 +19,3 @@ ${EMACS:=emacs} -nw --batch \
                            (run-hooks (quote after-init-hook)))'
 
 echo "Test startup successful"
-

@@ -2,6 +2,8 @@
 ;;; commentary:
 ;;; code:
 
+(require-package 'helm-gtags)
+
 ;; copy from - https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm-gtags.el
 ;; this variables must be set before load helm-gtags
 ;; you can change to any prefix key of your choice

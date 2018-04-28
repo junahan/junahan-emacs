@@ -59,3 +59,5 @@ lisp/custom.el
 .bash_sessions/
 /.emacs.d
 *.~undo-tree
+projectile.cache
+*.tex

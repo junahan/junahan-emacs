@@ -2,6 +2,8 @@
 ;;; commentary:
 ;;; code:
 
+(require-package 'company-c-headers)
+
 ;; hs-minor-mode for folding source code
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
@@ -23,7 +25,7 @@
             (setq flycheck-clang-language-standard "c++11")))
 
 ;; add company-c-header to company-backends
-(require 'company-c-headers)
+;; (require 'company-c-headers)
 (after-load 'company
   (add-hook 'c-mode-common-hook
             (lambda () (sanityinc/local-push-company-backend 'company-c-headers))))

@@ -5,15 +5,15 @@
 ;; - refile support.
 ;; - Fast Capturing template for TODO and NOTE.
 ;; - Org babel languages support.
-;; - Ipython babel support with ob-ipython package.
 ;; Lots of stuff from - https://github.com/purcell/emacs.d/blob/master/lisp/init-org.el
 ;;
 ;;; Code:
 
 (when *is-a-mac*
-  (require 'grab-mac-link))
+  (require-package 'grab-mac-link))
 
-(require 'org-cliplink)
+(require-package 'org-cliplink)
+;; (require-package 'image+)
 
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
@@ -51,9 +51,9 @@
         ))
 
 ;; for image-model
-(eval-after-load 'image '(require 'image+))
+;; (eval-after-load 'image '(require 'image+))
 ;; auto adjust the image to fit the frame.
-(eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
+;; (eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
 (eval-after-load 'org '(require 'ox-md nil t))
 (eval-after-load 'org '(require 'org-latex nil t))
 
@@ -62,11 +62,6 @@
   (when *is-a-mac*
     (define-key org-mode-map (kbd "M-h") nil)
     ))
-
-;; ipython code block in org.
-;; (require 'ob-ipython)
-;;; display/update images in the buffer after evaluate
-;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
 ;; don't prompt to confirm everytime
 (setq org-confirm-babel-evaluate nil)
@@ -86,13 +81,11 @@
      (octave . t)
      (plantuml . t)
      (python . t)
-     (ipython . t)
      (ruby . t)
      (screen . nil)
      (,(if (locate-library "ob-sh") 'sh 'shell) . t)
      (sql . nil)
-     (sqlite . t)
-     (ein . t))))
+     (sqlite . t))))
 
 (provide 'init-org)
 ;;; init-org.el ends here
