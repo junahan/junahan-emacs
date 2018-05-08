@@ -7,8 +7,8 @@
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode)
-  :config
+  :init
+  (global-flycheck-mode)
   (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
 
 ;; (require 'flycheck-color-mode-line)

@@ -1,0 +1,46 @@
+# -*- mode: org; coding: utf-8; -*-
+#+TITLE:             Solidity IDE
+#+AUTHOR:        Junahan
+#+EMAIL:            junahan@outlook
+#+DATE:             2018-5-7
+#+LANGUAGE:   CN
+#+OPTIONS:       H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:       TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:  view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:        CC BY 4.0
+
+* 摘要
+本文介绍 Ethereum 智能合约开发语言 Solidity Emacs  IDE 配置。
+
+* 安装依赖环境
+Solidity-mode  需要 =solc= 和 =solium= ：
+- Solc - Solidity 编译器。在 MacOS 上，可以运行 =brew install solc= 命令安装 Solc。
+- Solium - Solidity 风格和安全检查， =flycheck= 依赖该工具执行检查。可以运行 =npm install -g solium= 安装 Solium。
+
+/注意：请确保 =solc= 和 =solium= 包含在你的 PATH 变量路径内。/
+
+* 安装和配置 Solidity-mode
+在 Emacs 下，运行 =M-x install solidity-mode RET= 命令安装该模块。基本配置如下：
+
+#+BEGIN_SRC emacs-lisp
+  (require 'solidity-mode)
+
+  ;; key bind for gas estimation at point.
+  (define-key map (kbd "C-c C-g") 'solidity-estimate-gas-at-point)
+
+  ;; active solc check
+  (setq solidity-flycheck-solc-checker-active t)
+
+  ;; active solium check
+  (setq solidity-flycheck-solium-checker-active t)
+
+  ;; solidity company
+  (add-hook 'solidity-mode-hook
+            (lambda ()
+              (set (make-local-variable 'company-backends)
+                   (append '((company-solidity company-capf company-dabbrev-code))
+                           company-backends))))
+#+END_SRC
+
+* 参考文献
+1. Emacs Solidity，https://github.com/ethereum/emacs-solidity/.

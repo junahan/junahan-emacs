@@ -36,7 +36,7 @@
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
 
 ;; disable aggressive-indent-mode
-(aggressive-indent-mode nil)
+;; (aggressive-indent-mode nil)
 
 ;; ;; company
 ;; (after-load 'company

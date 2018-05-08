@@ -5,10 +5,12 @@
 (require-package 'semantic)
 
 (after-load 'semantic
-  (global-semanticdb-minor-mode 1)
-  (global-semantic-idle-scheduler-mode 1)
-  (global-semantic-stickyfunc-mode 1)
-  (semantic-mode 1))
+  (global-semanticdb-minor-mode t)
+  (global-semantic-idle-scheduler-mode t)
+  (global-semantic-stickyfunc-mode t)
+  (semantic-mode t)
+  (setq-default semantic-idle-scheduler-idle-time 432000)
+  (add-hook 'semantic-init-hooks 'semantic-idle-completions-mode))
 
 (defun alexott/cedet-hook ()
   "Config key bind for semantic fast jump."

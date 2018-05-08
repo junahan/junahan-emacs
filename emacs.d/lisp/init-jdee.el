@@ -7,7 +7,7 @@
 (require-package 'jdee)
 
 (use-package jdee
-  :config
+  :init
   (custom-set-variables
    '(jdee-server-dir "~/java-lib/jdee-server")))
 

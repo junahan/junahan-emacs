@@ -1,19 +1,24 @@
-#+TITLE: C/C++ IDE
-#+AUTHOR: Junahan
-#+EMAIL: junahan@outlook
-#+DATE: 2018-04-08
-#+KEYWORDS: Emacs, C, C++, IDE
+#+TITLE:            C/C++ IDE
+#+AUTHOR:        Junahan
+#+EMAIL:            junahan@outlook
+#+DATE:             2018-04-08
+#+KEYWORDS:   Emacs, C, C++, IDE
+#+LANGUAGE:   CN
+#+OPTIONS:       H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:       TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:  view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:        CC BY 4.0
 
 #+BEGIN_QUOTE
 本文所述 C/C++ 开发环境仅在 MAC OS (Darwin Kernel Version 17.4.0) 测试通过。
 #+END_QUOTE
 
-* 摘要 <<abstract>>
+* 摘要
 使用 Emacs 可以构建一个完整的 C/C++ IDE 开发环境，从代码编辑、自动补全、代码调试、编译、运行测试到重构，甚至是项目管理均有良好的支持。
 
 本文内容大多翻译自 [[https://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]，同时根据自己的需要做了部分调整。有关 Emacs 配置，可以参阅 [[https://github.com/tuhdo/emacs-c-ide-demo][tuhdo/emacs-c-ide-demo]]（关注 C/C++ 支持），也可以参阅 [[https://github.com/junahan/junahan-emacs][Junahan Emacs]]（我的 Emacs 配置）。
 
-* 特性列表 <<features>>
+* 特性列表
 + 源代码浏览导航 - 把 Emacs 作为一个好用的代码阅读器
  - Ggtags - 使用 GNU Global 制作静态索引，该索引数据库可用于代码导航和补全。
  - Semantic - 使用 Semantic 创建代码动态索引数据库，可用于代码导航和补全。
@@ -27,7 +32,9 @@
 + 代码调试 - 
 + 项目管理 - 
 
-* TODO 快速启动 <<quick-guide>>
+* 快速启用
+请参阅 Junahan 的 Emacs - [[https://github.com/junahan/junahan-emacs#quick-guide][快速启用]]。
+
 * GNU Global + Helm-gtags 组合
 使用 GNU Global 产生 Gtags 静态索引，Helm-gtags 是 GNU Global Emacs 前端，该组合为项目建立静态索引，便于代码导航和跳转。
 
@@ -157,10 +164,10 @@ CEDET 内置 EDE 用于项目管理。
 * TODO 代码调试
 /TODO .../
 
-* TODO 项目管理 <<projectile>>
+* TODO 项目管理
 /TODO .../
 
-* 参考文献 <<references>>
+* 参考文献
 1. C/C++Development Environment for Emacs - https://tuhdo.github.io/c-ide.html.
 2. Ivy User Manual - https://oremacs.com/swiper/.
 3. Ivy swiper - https://github.com/abo-abo/swiper.

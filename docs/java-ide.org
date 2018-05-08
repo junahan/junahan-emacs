@@ -1,20 +1,25 @@
-#+TITLE: Java IDE
-#+AUTHOR: Junahan
-#+EMAIL: junahan@outlook
-#+DATE: 2018-04-12
+#+TITLE:             Java IDE
+#+AUTHOR:        Junahan
+#+EMAIL:            junahan@outlook
+#+DATE:             2018-04-12
+#+LANGUAGE:   CN
+#+OPTIONS:       H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:       TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:  view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:        CC BY 4.0
 
 #+BEGIN_QUOTE
 本文所述 Java IDE 仅在 MAC OS (Darwin Kernel Version 17.4.0) 测试通过。
 #+END_QUOTE
 
-* 摘要 <<abstract>>
+* 摘要
 
-* 安装依赖包 <<installation>>
+* 安装依赖包
 ** 安装 JDK
 - 通过 ORACLE 网站下载 [[http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html][JDK8 for Mac]] 版本安装包。
 - 通过双击下载的安装包，按照指引完成安装。
 - 在终端运行 =javac -version= 检查安装结果。
-
+  
 ** 安装构建工具
 可根据需要安装构建工具，这里以 Maven, Gradle, Bst为例。
 
@@ -39,7 +44,7 @@ $ mvn -Dmaven.test.skip=true package
 *** 安装和配置
 - 复制 =target/jdee-bundle-${version}.jar= 到指定的目录，如 =～/.eamcs.d/jdee-server= 。
 - 在 Emacs 中，运行 =M-x= 配置变量 =jdee-server-dir= 的值为 =～/.eamcs.d/jdee-server= 。
-
+  
 * TODO 配置 JDEE 
 #+BEGIN_SRC lisp
 (require 'jdee)
@@ -47,11 +52,10 @@ $ mvn -Dmaven.test.skip=true package
 
 * TODO 使用 JDEE
 
-* 参考文献 <<references>>
+* 参考文献
 1. Java Development Environment for Emacs, https://www.emacswiki.org/emacs/JavaDevelopmentEnvironment
 2. JDEE, https://github.com/jdee-emacs/jdee
 3. JDEE-Server, https://github.com/jdee-emacs/jdee-server
-
 5. 阿里云 Maven 仓库镜像，http://maven.aliyun.com/nexus/#welcome.
 6. 网易 Maven 仓库镜像，http://mirrors.163.com/.help/maven.html.
 

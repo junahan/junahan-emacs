@@ -61,3 +61,5 @@ lisp/custom.el
 *.~undo-tree
 projectile.cache
 *.tex
+*.cache
+emacs.d/abbrev_defs

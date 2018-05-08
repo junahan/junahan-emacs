@@ -54,4 +54,4 @@ locate PACKAGE."
 (require 'cl-lib)
 
 (provide 'init-elpa)
-;;; init-elpa.el ends here.
+;;; init-elpa.el ends here
