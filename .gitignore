@@ -63,3 +63,4 @@ projectile.cache
 *.tex
 *.cache
 emacs.d/abbrev_defs
+workspace

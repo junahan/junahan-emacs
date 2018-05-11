@@ -13,6 +13,7 @@
 #+END_QUOTE
 
 * 摘要
+本文根据作者使用 Emacs 做 Java 开发的经验和对不同 Emacs Java 支持的方案做尝试和对比（包括 JDEE 的尝试），最终选择使用 =lsp-java= 方案。
 
 * 安装依赖包
 ** 安装 JDK
@@ -26,40 +27,37 @@
 - Maven - 运行 =brew install maven@3.5= 安装 Maven 3.5 版本。
 - Gradle - 运行 =brew install gradle= 安装最新版本 Gradle 。
 
+** 安装 Eclipse JDT Language Server
+下载[[http://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz][最新版本 JDT Language Server]] ，解压缩至指定目录（如 .eamcs.server/eclipse.jdt.ls ) 。
+
 ** 安装 Emacs 包
-在 Emacs 中通过 MELPA 安装 JDEE。
+在 Emacs 中运行 =M-x package-install RET lsp-java RET= 安装 =lsp-java= 。
+
+* 配置 LSP-java
 #+BEGIN_SRC lisp
-M-x package-install RET jdee RET
-#+END_SRC
+(require-package 'lsp-java)
+(require-package 'lsp-ui)
 
-** TODO 编译和安装 JDEE Server
-*** 编译 JDEE Server
-在终端运行如下指令，下载和编译 JDEE Server。
-#+BEGIN_SRC shell
-$ git clone https://github.com/jdee-emacs/jdee-server.git
-$ cd jdee-server
-$ mvn -Dmaven.test.skip=true package
-#+END_SRC
+(use-package lsp-ui
+  :init
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
-*** 安装和配置
-- 复制 =target/jdee-bundle-${version}.jar= 到指定的目录，如 =～/.eamcs.d/jdee-server= 。
-- 在 Emacs 中，运行 =M-x= 配置变量 =jdee-server-dir= 的值为 =～/.eamcs.d/jdee-server= 。
-  
-* TODO 配置 JDEE 
-#+BEGIN_SRC lisp
-(require 'jdee)
-#+END_SRC
+(after-load 'lsp-ui
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
-* TODO 使用 JDEE
+(use-package lsp-java
+  :init
+  (add-hook 'java-mode-hook #'lsp-java-enable)
+  (add-hook 'java-mode-hook 'flycheck-mode)
+  (setq lsp-java-server-install-dir "~/.emacs.server/eclipse.jdt.ls"))
+#+END_SRC
 
 * 参考文献
-1. Java Development Environment for Emacs, https://www.emacswiki.org/emacs/JavaDevelopmentEnvironment
-2. JDEE, https://github.com/jdee-emacs/jdee
-3. JDEE-Server, https://github.com/jdee-emacs/jdee-server
+1. LSP-java, https://github.com/emacs-lsp/lsp-java.
 5. 阿里云 Maven 仓库镜像，http://maven.aliyun.com/nexus/#welcome.
 6. 网易 Maven 仓库镜像，http://mirrors.163.com/.help/maven.html.
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
 #+END_QUOTE
-
