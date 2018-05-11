@@ -53,7 +53,6 @@
 (require 'init-cedet)
 (require 'init-python)
 (require 'init-ein)
-;;(require 'init-jdee)
 (require 'init-lsp-java)
 (require 'init-solidity)
 (require 'init-theme)

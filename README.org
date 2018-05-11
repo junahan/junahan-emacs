@@ -30,14 +30,16 @@
 12. init-ivy-swiper.el - 使用 Swiper 替代 isearch。
 14. init-helm.el - 使用 Helm 作为增量补全和缩减选择的工具，并使用 Helm Projectile 管理项目。
 15. init-helm-gtags.el - 使用 helm-gtags 配置标签索引。
+16. init-org.el - 配置 Org 模块。
 17. init-cpp.el - c/c++ 语言相关配置
 18. init-cedet.el - CEDET 工具配置，包括 Semantic, Senator 等。
 20. init-python.el - 配置 Python 开发环境，使用 Elpa 并使用 Conda 管理虚拟环境 。
 22. init-ein.el - 配置 EIN (Emacs IPython Notebook) 作为 Jupter Notebook Emacs 客户端。
-24. init-org.el - 配置 Org 模块。
-25. init-theme - 配置使用 gruvbox 主题，配置其他主题相关，如字体，highligh-parentheses, popwin, frame size 等。
-28. init-dashboard.el - Dashboard 相关配置。
-30. init-keyset.el - 配置通用快捷键。
+28. init-lsp-java.el - 使用 slt-java 构建 Java IDE环境。
+30. init-solidity.el - 支持 Solidity 语言开发。
+32. init-theme - 配置使用 gruvbox 主题，配置其他主题相关，如字体，highligh-parentheses, popwin, frame size 等。
+34. init-dashboard.el - Dashboard 相关配置。
+36. init-keyset.el - 配置通用快捷键。
 
 * 快速启用 <<quick-guide>>
 ** 安装 Emacs
@@ -284,6 +286,9 @@ $ brew cask install mactex
 
 有关详情，请参阅 [[file:docs/cpp-ide.org][C/C++ IDE]] (TODO...)。
 
+** Java IDE
+使用 =lsp-java= 构建完善的 Java IDE  开发环境，支持代码编辑、补全、风格检查、交叉引用索引等现代 IDE 支持。有关详情，请参阅 [[file:docs/java-ide.org][Java IDE]]。
+
 * 参考文献 <<references>>
 1. GNU Emacs, https://www.gnu.org/software/emacs/
 2. crossemacs, [[https://github.com/cnsworder/crossemacs]].
@@ -303,8 +308,9 @@ $ brew cask install mactex
 25. Exploring large projects with Projectile and Helm Projectile - https://tuhdo.github.io/helm-projectile.html.
 27. Helm Github - https://github.com/emacs-helm/helm.
 29. Python Progromming In Emacs - https://www.emacswiki.org/emacs?action=browse;oldid=PythonMode;id=PythonProgrammingInEmacs.
-31. latex - https://www.latex-project.org/get/
-33. mactex - https://www.tug.org/mactex/
+31. latex - https://www.latex-project.org/get/.
+33. mactex - https://www.tug.org/mactex/.
+35. lst-java - https://github.com/emacs-lsp/lsp-java.
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
