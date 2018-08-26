@@ -49,6 +49,7 @@
 (require 'init-helm)
 (require 'init-helm-gtags)
 (require 'init-org)
+(require 'init-md)
 (require 'init-hugo)
 (require 'init-cpp)
 (require 'init-cedet)
