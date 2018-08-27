@@ -20,7 +20,7 @@
       (setq-default cursor-type 'bar))))
 
 ;; display line number
-(global-linum-mode t)
+;; (global-linum-mode t)
 (column-number-mode t)
 
 ;; (setq inhibit-startup-message t)
@@ -30,12 +30,12 @@
 ;; (set-default-font "Inziu Iosevka Slab SC 16")
 ;; (set-frame-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
 (if (display-graphic-p)
-    (set-default-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1"))
+    (set-default-font "-*-STSong-normal-normal-normal-*-16-*-*-*-p-0-iso10646-1"))
 
 ;; set the default frame size
 (setq default-frame-alist
       '((height . 60)
-        (width . 180)))
+        (width . 160)))
 
 (provide 'init-theme)
 ;;; init-theme.el ends here

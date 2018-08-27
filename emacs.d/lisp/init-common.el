@@ -32,13 +32,14 @@
 (setq-default indent-tabs-mode nil)
 
 ;; a tab is represented by 4 spaces
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 
 ;;(require 'direnv)
 (use-package exec-path-from-shell
   :init
   (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-env "GOPATH")))
 
 ;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook
