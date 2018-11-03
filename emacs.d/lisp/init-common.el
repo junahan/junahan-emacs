@@ -146,7 +146,7 @@
       (setq-default cursor-type 'bar)))
 
 ;; display line number
-;; (global-linum-mode t)
+(global-linum-mode t)
 (column-number-mode t)
 
 (provide 'init-common)

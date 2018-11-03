@@ -2,8 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(require-package 'lsp-java)
+(require-package 'lsp-mode)
+(require-package 'company-lsp)
 (require-package 'lsp-ui)
+(require-package 'lsp-java)
 
 ;; (use-package lsp-ui
 ;;   :init
@@ -21,7 +23,7 @@
 
 (use-package lsp-mode
   :ensure t
-  :init (setq lsp-inhibit-message nil ; you may set this to t to hide messages from message area
+  :init (setq lsp-inhibit-message t ; you may set this to t to hide messages from message area
               lsp-eldoc-render-all nil
               lsp-highlight-symbol-at-point nil))
 
@@ -31,8 +33,8 @@
   :config
   (add-hook 'java-mode-hook (lambda () (push 'company-lsp company-backends)))
   (setq company-lsp-enable-snippet t
-        company-lsp-cache-candidates t)
-  (push 'java-mode company-global-modes))
+        company-lsp-cache-candidates t))
+;;  (push 'java-mode company-global-modes))
 
 (use-package lsp-ui
   :ensure t

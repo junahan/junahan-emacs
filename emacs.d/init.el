@@ -56,7 +56,7 @@
 ;;(require 'init-lsp-python)
 (require 'init-python)
 (require 'init-ein)
-;;(require 'init-lsp-java)
+(require 'init-lsp-java)
 (require 'init-go)
 ;;(require 'init-lsp-go)
 (require 'init-solidity)
