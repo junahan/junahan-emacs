@@ -2,22 +2,26 @@
 ;;; commentary:
 ;;; code:
 
+(require-package 'spacemacs-theme)
+
 ;; define theme
 (if (display-graphic-p)
     (progn     ;; for graphic system
-      (use-package gruvbox-theme
-        :config
-        (tool-bar-mode 0)
-        (scroll-bar-mode 0)
-        (set-cursor-color "White")
-        (load-theme 'gruvbox-dark-soft t)
-        (setq-default cursor-type 'bar)))
+      ;;(use-package spacemacs-theme
+      ;;(use-package gruvbox-theme
+      ;;:config
+      ;;(tool-bar-mode 0)
+      ;;(scroll-bar-mode 0)
+      ;;(set-cursor-color "White")
+      (load-theme 'spacemacs-dark t)
+      (setq-default cursor-type 'bar))
   (progn   ;; for text only terminal system
-    (use-package gruvbox-theme
-      :config
-      ;; (load-theme 'gruvbox-dark-soft t)
-      (set-cursor-color "White")
-      (setq-default cursor-type 'bar))))
+    ;;(use-package spacemacs-theme
+    ;;(use-package gruvbox-theme
+    ;;:config
+    (load-theme 'spacemacs-dark t)
+    ;;(set-cursor-color "White")
+    (setq-default cursor-type 'bar)))
 
 ;; display line number
 ;; (global-linum-mode t)
