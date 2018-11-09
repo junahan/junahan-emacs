@@ -31,7 +31,7 @@
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
 
-;; a tab is represented by 4 spaces
+;; a tab is represented by 2 spaces
 (setq-default tab-width 2)
 
 ;;(require 'direnv)
@@ -44,12 +44,12 @@
 ;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook
           (lambda () (interactive)
-            (setq show-trailing-whitespace 1)))
+            (setq show-trailing-whitespace t)))
 
 ;; enable aggressive indent
 (use-package aggressive-indent
 	:init
-	(global-aggressive-indent-mode t))
+	(global-aggressive-indent-mode nil))
 
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
@@ -148,6 +148,9 @@
 ;; display line number
 (global-linum-mode t)
 (column-number-mode t)
+
+;; highlight current line
+(global-hl-line-mode t)
 
 (provide 'init-common)
 ;;; init-common.el ends here

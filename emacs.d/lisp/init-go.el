@@ -16,11 +16,17 @@
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
 
 ;; enable company-go
+;; (add-hook 'go-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'company-backends)
+;;                  (append '((company-go company-capf company-dabbrev-code))
+;;                          company-backends))))
+
+;; enable company-go only
 (add-hook 'go-mode-hook
           (lambda ()
-            (set (make-local-variable 'company-backends)
-                 (append '((company-go company-capf company-dabbrev-code))
-                         company-backends))))
+            (set (make-local-variable 'company-backends) '(company-go))
+            (company-mode)))
 
 ;; enable go-eldoc
 (add-hook 'go-mode-hook 'go-eldoc-setup)

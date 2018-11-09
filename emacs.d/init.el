@@ -59,7 +59,7 @@
 (require 'init-lsp-java)
 (require 'init-go)
 ;;(require 'init-lsp-go)
-(require 'init-solidity)
+;;(require 'init-solidity)
 (require 'init-theme)
 (require 'init-dashboard)
 (require 'init-keyset)
