@@ -5,13 +5,13 @@
 (require-package 'git-gutter)
 (require-package 'magit)
 
-;; for more about magit mode, please refer to
-;; https://github.com/magit/magit/blob/master/Documentation/magit.org.
 (use-package git-gutter
   :init
-  (global-git-gutter-mode t)
-  (git-gutter:linum-setup))
+  (global-git-gutter-mode t))
+  ;;(git-gutter:linum-setup))
 
+;; for more about magit mode, please refer to
+;; https://github.com/magit/magit/blob/master/Documentation/magit.org.
 (use-package magit
   :bind
   (("C-x g" . magit-status)

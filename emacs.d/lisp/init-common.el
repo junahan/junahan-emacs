@@ -146,7 +146,7 @@
       (setq-default cursor-type 'bar)))
 
 ;; display line number
-(global-linum-mode t)
+(global-display-line-numbers-mode t)
 (column-number-mode t)
 
 ;; highlight current line
