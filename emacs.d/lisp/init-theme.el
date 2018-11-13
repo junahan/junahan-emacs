@@ -10,9 +10,9 @@
       ;;(use-package spacemacs-theme
       ;;(use-package gruvbox-theme
       ;;:config
-      ;;(tool-bar-mode 0)
-      ;;(scroll-bar-mode 0)
-      ;;(set-cursor-color "White")
+      (tool-bar-mode 0)
+      (scroll-bar-mode 0)
+      (set-cursor-color "White")
       (load-theme 'spacemacs-dark t)
       (setq-default cursor-type 'bar))
   (progn   ;; for text only terminal system
@@ -25,7 +25,7 @@
 
 ;; display line number
 ;; (global-linum-mode t)
-(column-number-mode t)
+;; (column-number-mode t)
 
 ;; (setq inhibit-startup-message t)
 
@@ -33,8 +33,8 @@
 ;; (set-default-font "SauceCodePro Nerd Font 16")
 ;; (set-default-font "Inziu Iosevka Slab SC 16")
 ;; (set-frame-font "-*-STSong-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1")
-(if (display-graphic-p)
-    (set-default-font "-*-STSong-normal-normal-normal-*-16-*-*-*-p-0-iso10646-1"))
+;;(if (display-graphic-p)
+;;(set-default-font "-*-STSong-normal-normal-normal-*-16-*-*-*-p-0-iso10646-1"))
 
 ;; set the default frame size
 (setq default-frame-alist

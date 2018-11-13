@@ -60,6 +60,7 @@
 (require 'init-go)
 ;;(require 'init-lsp-go)
 ;;(require 'init-solidity)
+(require 'init-tramp)
 (require 'init-theme)
 (require 'init-dashboard)
 (require 'init-keyset)

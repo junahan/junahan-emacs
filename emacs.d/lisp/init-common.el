@@ -92,9 +92,23 @@
   :bind
   ("C-c C-s" . sr-speedbar-toggle))
 
-;; enable neotree
+;; sidebar and dired in one
 (use-package neotree
-  :init
+  ;;  :bind
+  ;;  ("<f8>" . neotree-toggle)
+  :config
+  ;; needs package all-the-icons
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+  ;; Disable line-numbers minor mode for neotree
+  (add-hook 'neo-after-create-hook
+            (lambda (&rest _) (display-line-numbers-mode -1)))
+
+  ;; Every time when the neotree window is opened, let it find current
+  ;; file and jump to node.
+  (setq neo-smart-open t)
+
+  ;; track ‘projectile-switch-project’ (C-c p p),
   (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;; enable recentf-mode
@@ -138,16 +152,10 @@
   :init
   (global-highlight-parentheses-mode t))
 
-;; define theme
-(if (display-graphic-p)
-    (progn     ;; for graphic system
-      (tool-bar-mode 0)
-      (scroll-bar-mode 0)
-      (setq-default cursor-type 'bar)))
-
 ;; display line number
-(global-display-line-numbers-mode t)
-(column-number-mode t)
+;;(global-display-line-numbers-mode t)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(setq display-line-numbers "%4d \u2502 ")
 
 ;; highlight current line
 (global-hl-line-mode t)
