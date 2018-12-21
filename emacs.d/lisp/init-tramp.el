@@ -18,14 +18,14 @@
           (and (normal-backup-enable-predicate name)
                (not (let ((method (file-remote-p name 'method)))
                       (when (stringp method)
-                        (member method '("su" "sudo"))))))))
+                        (member method '("su" "sudo")))))))))
 
-  (use-package tramp-sh
-    :config
-    (add-to-list 'tramp-remote-path "/usr/local/sbin")
-    ;;    (add-to-list 'tramp-remote-path "/opt/java/current/bin")
-    ;;   (add-to-list 'tramp-remote-path "/opt/gradle/current/bin")
-    (add-to-list 'tramp-remote-path "~/bin")))
+  ;; (use-package tramp-sh
+  ;;   :config
+  ;;   (add-to-list 'tramp-remote-path "/usr/local/sbin")
+  ;;   ;;    (add-to-list 'tramp-remote-path "/opt/java/current/bin")
+  ;;   ;;   (add-to-list 'tramp-remote-path "/opt/gradle/current/bin")
+  ;;   (add-to-list 'tramp-remote-path "~/bin")))
 
 (provide 'init-tramp)
 ;;; init-tramp.el ends here
