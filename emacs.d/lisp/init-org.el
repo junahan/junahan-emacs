@@ -13,7 +13,13 @@
   (require-package 'grab-mac-link))
 
 (require-package 'org-cliplink)
+;; for latex.
+(require-package 'cdlatex)
+(require-package 'auctex)
+(require-package 'gnuplot)
+;;(require-package 'gnuplot-mode)
 ;; (require-package 'image+)
+;; (require 'org-tempo)
 
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
@@ -36,6 +42,19 @@
 (setq org-src-fontify-natively t)
 (setq org-support-shift-select t)
 
+;; Enlarge latex Fragment in Org-mode
+;;(plist-put org-format-latex-options :scale 2)
+;;(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+;; for spell check
+;; could be ispell as well, depending on your preferences
+(setq ispell-program-name "aspell")
+;; this can obviously be set to any language your spell-checking program supports
+(setq ispell-dictionary "english")
+
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'flyspell-buffer)
+
 ;; define the refile targets
 (defvar org-agenda-dir "")
 (setq-default org-agenda-dir "~/org")
@@ -56,7 +75,7 @@
 ;; auto adjust the image to fit the frame.
 ;; (eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
 (eval-after-load 'org '(require 'ox-md nil t))
-(eval-after-load 'org '(require 'org-latex nil t))
+;;(eval-after-load 'org '(require 'org-latex nil t))
 
 (after-load 'org
   (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
@@ -76,6 +95,7 @@
      (gnuplot . t)
      (haskell . nil)
      (latex . t)
+     (asymptote . t)
      (ledger . t)
      (ocaml . nil)
      (octave . t)

@@ -1,13 +1,13 @@
 # -*- mode: org; coding: utf-8; -*-
-#+TITLE:             Junhan 的 Emacs 配置
-#+AUTHOR:        Junahan
-#+EMAIL:            junahan@outlook
-#+DATE:             2018-3-27
-#+LANGUAGE:   CN
-#+OPTIONS:       H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:       TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT:  view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+LICENSE:        CC BY 4.0
+#+TITLE:             Junahan 的 Emacs 配置
+#+AUTHOR:            Junahan
+#+EMAIL:             junahan@outlook
+#+DATE:              2018-3-27
+#+LANGUAGE:          CN
+#+OPTIONS:           H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:           TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:        view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:           CC BY 4.0
 
 * 摘要
 我的 Emacs 配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅 [[https://github.com/purcell/emacs.d][purcell Emacs]] 以及其他人的 Emacs 配置 ，详情请看[[references][参考文献]]小节。
@@ -275,7 +275,56 @@ $ brew cask install mactex
 (setq org-agenda-files (list org-agenda-dir))
 #+END_SRC
 
+*** Spell check
+建议使用 aspell + ispell-mode。运行如下命令安装 aspell
+
+#+BEGIN_SRC shell
+$ brew install --with-lang-en aspell
+#+END_SRC
+
+添加如下配置启用拼写检查。
+
+#+BEGIN_SRC elisp
+;; for spell check
+;; could be ispell as well, depending on your preferences
+(setq ispell-program-name "aspell")
+;; this can obviously be set to any language your spell-checking program supports
+(setq ispell-dictionary "english")
+
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'flyspell-buffer)
+#+END_SRC
+
 ** TRAMP Mode
+
+* 科学写作
+使用 Emacs + AUCTeX + LaTeX 可以帮助进行科学写作。
+
+** CDLaTeX
+CDLaTeX[fn:2] 是一个 Minor Model，可以帮助加速输入 LaTeX 公式。在 Org 模式下，建议使用 Org 模式内置的轻量级 =org-cdlatex-mode= 版本。要在当前缓冲区打开该模式，请运行 =M-x org-cdlatex-mode=, 如果要为所有 Org 文件打开该模式，请做如下配置：
+#+BEGIN_SRC lisp
+(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+#+END_SRC
+
+** Gunplot Mode
+
+** 杂项
+*** LaTeX 片段预览配置
+LaTeX 片段预览[fn:1]支持行内预览。该功能需要安装 =dvipng=, =dvisvgm=, 或者 =convert= 以处理 LaTeX 片段产生预览图片。可以通过定制变量 =org-format-latex-options= 和 =org-format-latex-header= 配置预览。特别是 =:scale= (对应 HTML 输出 :html-scale) 属性可以用来调整预览图片的大小。
+
+*** Org Entities Help
+Org Entities 帮助方便搜索和显示所有 Org 实体，包括 LaTeX 数学符号、函数等。输入 M-x 命令，可以查看完整的 entities:
+#+BEGIN_SRC shell
+$ M-x org-entities-help
+#+END_SRC
+
+** 文档
+*** 一份不太简短的 LaTeX2e 介绍
+英文版 by - 
+中文版 by ChinaTEX 论坛 - https://github.com/CTeX-org/lshort-cn/
+
+*** CTAN
+[[https://ctan.org/][CATN]] (The Comprehensive TEX Archive Network) 是一个囊括各种类型 TEX 文档资源的中心站点。
 
 * 开发环境 <<ide>>
 ** Python IDE
@@ -315,6 +364,15 @@ $ brew cask install mactex
 35. lst-java - https://github.com/emacs-lsp/lsp-java.
 36. Emacs Bootstrap - http://emacs-bootstrap.com.
 37. Emacs Tramp - https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html.
+39. EmacsWiiki - AUCTeX - https://www.emacswiki.org/emacs/AUCTeX.
+40. AUCTeX docuement - http://www.gnu.org/software/auctex/documentation.html.
+41. Spacemacs 和 Org-mode 和 LaTeX - https://blog.poi.cat/post/spacemacs-plus-org-mode-plus-latex
+
+* Footnotes
+
+[fn:2] CDLaTeX help, https://orgmode.org/manual/CDLaTeX-mode.html.
+
+[fn:1] LaTeX fragments Previewing, https://www.gnu.org/software/emacs/manual/html_node/org/Previewing-LaTeX-fragments.html.
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。

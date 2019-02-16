@@ -81,5 +81,4 @@
   (find-file "~/.emacs.d/lisp/"))
 
 (provide 'init-utils)
-
 ;;; init-utils.el ends here
