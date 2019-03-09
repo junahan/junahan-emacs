@@ -80,6 +80,9 @@
   (setq projectile-enable-caching t)
   (projectile-global-mode))
 
+;; Define the projectile key map.
+(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+
 ;; Package zygospore
 (use-package zygospore
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
