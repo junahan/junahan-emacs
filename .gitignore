@@ -64,3 +64,6 @@ projectile.cache
 *.cache
 emacs.d/abbrev_defs
 workspace
+emacs.d/transient
+emacs.d/eclipse.jdt.ls
+emacs.d/.lsp-session*

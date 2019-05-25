@@ -28,29 +28,31 @@
 - Gradle - 运行 =brew install gradle= 安装最新版本 Gradle 。
 
 ** 安装 Eclipse JDT Language Server
-下载[[http://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz][最新版本 JDT Language Server]] ，解压缩至指定目录（如 .eamcs.server/eclipse.jdt.ls ) 。
+下载[[http://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz][最新版本 JDT Language Server]]，解压缩至指定目录（如 .eamcs.server/eclipse.jdt.ls ) 。
 
 ** 安装 Emacs 包
 在 Emacs 中运行 =M-x package-install RET lsp-java RET= 安装 =lsp-java= 。
 
 * 配置 LSP-java
 #+BEGIN_SRC lisp
-(require-package 'lsp-java)
-(require-package 'lsp-ui)
+(require 'cc-mode)
 
-(use-package lsp-ui
-  :init
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+(use-package projectile :ensure t)
+(use-package yasnippet :ensure t)
+(use-package lsp-mode :ensure t)
+(use-package hydra :ensure t)
+(use-package company-lsp :ensure t)
+(use-package lsp-ui :ensure t)
+(use-package lsp-java :ensure t :after lsp
+  :config (add-hook 'java-mode-hook 'lsp))
 
-(after-load 'lsp-ui
-  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+(use-package dap-mode
+  :ensure t :after lsp-mode
+  :config
+  (dap-mode t)
+  (dap-ui-mode t))
 
-(use-package lsp-java
-  :init
-  (add-hook 'java-mode-hook #'lsp-java-enable)
-  (add-hook 'java-mode-hook 'flycheck-mode)
-  (setq lsp-java-server-install-dir "~/.emacs.server/eclipse.jdt.ls"))
+(use-package dap-java :after (lsp-java))
 #+END_SRC
 
 * 参考文献
