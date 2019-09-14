@@ -5,6 +5,7 @@
 ;; - refile support.
 ;; - Fast Capturing template for TODO and NOTE.
 ;; - Org babel languages support.
+;;
 ;; Lots of stuff from - https://github.com/purcell/emacs.d/blob/master/lisp/init-org.el
 ;;
 ;;; Code:
@@ -57,11 +58,11 @@
 
 ;; define the refile targets
 (defvar org-agenda-dir "")
-(setq-default org-agenda-dir "~/org")
-(setq org-default-notes-file "~/org/refile.org")
+(setq-default org-agenda-dir "~/junahan-cal")
+(setq org-default-notes-file "~/junahan-cal/refile.org")
 (setq org-agenda-files (list org-agenda-dir))
 
-;;; Capturing
+;; Capturing
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
@@ -85,6 +86,7 @@
 ;; don't prompt to confirm everytime
 (setq org-confirm-babel-evaluate nil)
 
+;; org babel language settings.
 (after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages

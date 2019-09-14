@@ -12,7 +12,7 @@
 * 摘要
 我的 Emacs 配置，初始版本从[[https://github.com/cnsworder/crossemacs][ Crossemacs]] 复制。参阅 [[https://github.com/purcell/emacs.d][purcell Emacs]] 以及其他人的 Emacs 配置 ，详情请看[[references][参考文献]]小节。
 
-主要需求是使用 Org-mode，Python，C/C++ 以及 Java 开发环境。
+主要需求是使用 Org-mode，Python，C/C++ 开发环境。
 
 /特别提醒，本 Emacs 配置仅在如下环境进行过测试:/
 #+BEGIN_QUOTE
@@ -45,14 +45,14 @@
 ** 安装 Emacs
 使用 Homebrew 安装 Emacs：
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC shell
 $ brew cask install emacs
 #+END_SRC
 
 ** 克隆 junanhan-emacs.git 项目
 运行如下命令从 Github Clone junahan-emacs.git 项目：
 
-#+BEGIN_SRC 
+#+BEGIN_SRC shell
 # Clone 项目
 git clone https://github.com/junahan/junahan-emacs.git
 #+END_SRC
@@ -60,21 +60,22 @@ git clone https://github.com/junahan/junahan-emacs.git
 ** 测试
 通过运行项目目录中的脚本 test-startup.sh 运行测试，测试使用项目目录作为 HOME 目录运行测试脚本。
 
-#+BEGIN_SRC 
-# Emacs debug-init模式运行测试
+#+BEGIN_SRC shell
+# Emacs debug-init 模式运行测试
 ./test-startup.sh
 #+END_SRC
 
 ** 部署
-- 开始之前，备份你的 =～/.emacs.d= 目录以确保你能够回去你以前的配置。
-- 运行 =./deploy.sh= 脚本 - 该脚本使用 stow 在 HOME 目录创建 =.emacs.d= 链接。
+- 开始之前，备份 =～/.emacs.d= 目录以确保能够回去以前的配置。
+- 运行 =./deploy.sh= 脚本 - 该脚本使用 =stow= 在 =HOME= 目录创建 =.emacs.d= 链接。
 
 * TODO 常用 Emacs Mode 介绍 <<emacs-mode-intro>>
-本节简单介绍一些常用的 Emacs Mode，也是 junahan-emacs 项目使用到的 Emacs 模块。通过这些介绍，你可以大致了解到这些模块的功能、配置和使用。
+本节简单介绍一些常用的 Emacs Mode，也是 junahan-emacs 项目使用到的 Emacs 模块。通过这些介绍，可以了解到这些模块的功能、配置和使用。
 
 ** 安装 Emacs 模块包
-在[[quick-guide][快速启动]]一章已经介绍了如何使用 =junahan-emacs= 项目安装所需要的环境，本章所需要的常用模块包都已经准备就绪。如果你需要尝试安装不同的包，你可以使用 Emacs 安装包管理工具直接安装：
-#+BEGIN_SRC 
+在[[quick-guide][快速启动]]一章已经介绍了如何使用 =junahan-emacs= 项目安装所需要的环境，本章所需要的常用模块包都已经准备就绪。如果需要尝试安装不同的包，可以使用 Emacs 安装包管理工具直接安装：
+#+BEGIN_SRC shell
+# 安装 Emacs 包的便捷方式
 M-x package-install RET helm-company RET
 #+END_SRC
 
@@ -91,7 +92,7 @@ Company 是一个文本补全框架，该命名意思是“完成任何事情”
 - company-yasnippet: 使用 Yasnippet 模版补全。
 - company-gtags: 使用 GNU Global 源代码静态索引数据库补全。
 - company-etags: 使用 Etags 索引数据库补全。
-- elpy-company-backend: Python代码补全后端。
+- elpy-company-backend: Python 代码补全后端。
 - company-dabbrev: 将当前打开的所有 buffer 中的关键字作为补全显示(默认不使用 scratch buffer)。
 
 /如果在补全过程中取消了补全, 也可以使用命令再次开启补全。例如 company-files 补全方式就可以使用 company-files 函数开启。/
@@ -135,7 +136,7 @@ Company Global Mode 默认后端配置大多数情况下工作良好，并能够
 /为了确认当前缓冲区 =company-backends= 内容，可以运行 =C-h v= 命令查看该变量的值。/
 
 ** Flycheck
-Flycheck 是一个飞行句法检查和提示工具，它使用多种语法检查和提示工具在你输入的时候自动检查缓冲区内容，并在缓冲区直接提示和报告警告和错误。Fly check 支持超过 40 多种不同编程语言和 80 多种语法检查工具，并有许多第三方扩展可供选择。
+Flycheck 是一个飞行句法检查和提示工具，它使用多种语法检查和提示工具在你输入的时候自动检查缓冲区内容，并在缓冲区直接提示和报告警告和错误。Flycheck 支持超过 40 多种不同编程语言和 80 多种语法检查工具，并有许多第三方扩展可供选择。
 
 #+BEGIN_SRC lisp
 ;; enable global flycheck mode
@@ -157,9 +158,9 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 (helm-mode 1)
 #+END_SRC
 
-更完整的配置，请参阅[[file:emacs.d/lisp/init-helm.el][Helm 完整配置]]。
+更完整的配置，请参阅读 [[file:emacs.d/lisp/init-helm.el][Helm 完整配置]]。
 
-*** Usage
+*** 使用 Helm
 通过适当的配置， =Helm= 会接管你大部分日常使用的 =Emacs= 操作界面，你可以借助其强大的增量式补全，逐步缩减候选列表范围直到找到你需要的项为止，例如，它可以接管 =M-x= 界面，允许你以 =Helm= 的方式选择要运行的命令，这通常会提升你的效率。它还有非常好用的正则表达式匹配和搜索界面。
 
 #+CAPTION: 快捷键绑定总结
@@ -194,7 +195,7 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 | C-c C-l     | helm-mini-buffer-history        | Mini-buffer 历史界面                                 |
 
 *** Helm-projectile
-Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。详情，请参阅[[helm-projectile][使用 Helm + Projectile 管理项目]]。
+=Helm-projectile= 是一个 =Projectile= 的 =Helm= 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。详情，请参阅[[helm-projectile][使用 Helm + Projectile 管理项目]]。
 
 ** Magit
 [[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
@@ -216,10 +217,10 @@ Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Pr
 #+ATTR_HTML: :width 80%
 [[file:docs/images/emacs-mgit-status.png]]
 
-有关 Mgit 使用的更多介绍，请参阅 [[http://jixiuf.github.io/blog/000100-emacs-magit.html/][Emacs下的 git 工具 magit 简介]]。
+有关 Mgit 使用的更多介绍，请参阅 [[http://jixiuf.github.io/blog/000100-emacs-magit.html/][Emacs 下的 git 工具 magit 简介]]。
 
 ** Projectile <<helm-projectile>>
-Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的操作提供一组易用的特性。Helm-projectile 是一个 Projectile 的 Helm 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。
+=Projectile= 是一个 =Emacs= 项目管理库，其目标是为项目级别上的操作提供一组易用的特性。 =Helm-projectile= 是一个 =Projectile= 的 =Helm= 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。
 
 - 同时选择和打开多个文件
 - 任意位置位置打开文件
@@ -228,7 +229,7 @@ Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的�
 - 任意切换当前和其他同名文件
 
 *** 安装和配置
-可以通过 MELPA 安装 Projectile，使用如下代码配置和激活 =helm-projectile= ：
+可以通过 MELPA 安装 =Projectile= 并使用如下代码配置和激活 =helm-projectile= ：
 #+BEGIN_SRC lisp
 (use-package helm-projectile
       :init
@@ -258,6 +259,7 @@ Projectile 是一个 Emacs 项目管理库，其目标是为项目级别上的�
 | C-c p s s | helm-projectile-ag                          | 同上，但使用 ag                        |
 
 ** TODO ORG
+
 *** 安装 MacTex
 MacTex 被 ORG Mode 用于到处 PDF 以及 Tex 格式文档，可直接运行如下命令安装 MacTex ：
 #+BEGIN_SRC shell
@@ -295,32 +297,58 @@ $ brew install --with-lang-en aspell
 (add-hook 'org-mode-hook 'flyspell-buffer)
 #+END_SRC
 
-** TODO TRAMP Mode
+** TRAMP Mode
+TRAMP 能够被用于访问远程机器文件，支持 =ssh=, =scp=, =rsync=, =smb=, =adb= 等协议。它工作于 =Emacs= 底层，因此很多包都无感使用 TRAMP。
+- 使用 Emacs 编辑远程文件而无需在远程机器上安装 Emacs
+- 配合 =dired= 模块使用而将 Emacs 变成一个 =ssh= 客户端
+- 配合 =eshell= 模块使用可以将本地输入命令送到远程机器执行
 
-* TODO 科学写作
-使用 Emacs + AUCTeX + LaTeX 可以帮助进行科学写作。
+有关 TRAMP 的使用，请参阅 [[https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html][Emacs TRAMP]]。
 
-** CDLaTeX
-CDLaTeX 是一个 Minor Model，可以帮助加速输入 LaTeX 公式。在 Org 模式下，建议使用 Org 模式内置的轻量级 =org-cdlatex-mode= 版本。要在当前缓冲区打开该模式，请运行 =M-x org-cdlatex-mode=, 如果要为所有 Org 文件打开该模式，请做如下配置：
+* 科学写作
+使用 Emacs + AUCTeX + CDLaTeX mode + LaTeX 可以帮助进行科学写作。
+
+** 配置
+默认配置工作良好。
+
 #+BEGIN_SRC lisp
+;; for cdlatex
+(require 'cdlatex)
+;; for acutex
+(require 'auctex)
+
+;; 在 org mode 下打开 cdlatex
 (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 #+END_SRC
 
-** TODO Gunplot Mode
+** CDLaTeX
+CDLaTeX 是一个 Minor Model，可以帮助加速输入 LaTeX 公式。在 Org 模式下，建议使用 Org 模式内置的轻量级 =org-cdlatex-mode= 版本。要在当前缓冲区打开该模式，请运行 =M-x org-cdlatex-mode=, 如果要为所有 Org 文件打开该模式，请做如下配置：
+
+#+BEGIN_SRC lisp
+;; 在 org mode 下打开 cdlatex
+(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+#+END_SRC
 
 ** 杂项
 *** LaTeX 片段预览配置
 [[https://orgmode.org/manual/Previewing-LaTeX-fragments.html#Previewing-LaTeX-fragments][LaTeX 片段预览]]支持行内预览。该功能需要安装 =dvipng=, =dvisvgm= 或者 =convert= 以处理 LaTeX 片段产生预览图片。可以通过定制变量 =org-format-latex-options= 和 =org-format-latex-header= 配置预览。特别是 =:scale= (对应 HTML 输出 =:html-scale=) 属性可以用来调整预览图片的大小。
 
+#+BEGIN_SRC lisp
+;; 切换预览 LaTeX 片段
+C-c C-x C-l (org-toggle-latex-fragment)
+#+END_SRC
+
 *** Org Entities Help
 Org Entities 帮助方便搜索和显示所有 Org 实体，包括 LaTeX 数学符号、函数等。输入 M-x 命令，可以查看完整的 entities:
-#+BEGIN_SRC shell
-$ M-x org-entities-help
+
+#+BEGIN_SRC lisp
+;; 查看完整的 Org 实体定义
+M-x org-entities-help
 #+END_SRC
 
 ** 进阶学习
 *** 一份不太简短的 LaTeX2e 介绍
-英文版 by - 
+英文版 - https://tobi.oetiker.ch/lshort/lshort.pdf
 中文版 by ChinaTEX 论坛 - https://github.com/CTeX-org/lshort-cn/
 
 *** CTAN
@@ -364,7 +392,7 @@ $ M-x org-entities-help
 35. lst-java - https://github.com/emacs-lsp/lsp-java.
 36. Emacs Bootstrap - http://emacs-bootstrap.com.
 37. Emacs Tramp - https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html.
-39. EmacsWiiki - AUCTeX - https://www.emacswiki.org/emacs/AUCTeX.
+39. EmacsWiki - AUCTeX - https://www.emacswiki.org/emacs/AUCTeX.
 40. AUCTeX docuement - http://www.gnu.org/software/auctex/documentation.html.
 41. Spacemacs 和 Org-mode 和 LaTeX - https://blog.poi.cat/post/spacemacs-plus-org-mode-plus-latex
 43. CDLaTeX help, https://orgmode.org/manual/CDLaTeX-mode.html.
