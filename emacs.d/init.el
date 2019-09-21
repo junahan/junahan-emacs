@@ -35,10 +35,11 @@
 (add-hook 'after-init-hook
           (lambda () (setq gc-cons-threshold (* 20 1024 1024))))
 
-;; Bootstrap confign
+;; Bootstrap config
 ;; (setq inhibit-startup-message t)
 (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 
+;; submode list.
 (require 'init-utils)
 (require 'init-elpa)
 (require 'init-common)
@@ -60,6 +61,8 @@
 (require 'init-go)
 ;;(require 'init-lsp-go)
 ;;(require 'init-solidity)
+(require 'init-sql)
+(require 'init-treemacs)
 (require 'init-tramp)
 (require 'init-theme)
 (require 'init-dashboard)

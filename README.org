@@ -19,6 +19,10 @@
  OS: Darwin ... Darwin Kernel Version 17.4.0 / Emacs: GNU Emacs 25.3.1
 #+END_QUOTE
 
+#+BEGIN_QUOTE
+本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]。
+#+END_QUOTE
+
 * 支持特性 <<features>>
 1. init.el - 位于 .emacs.d 目录下的 Emacs 配置文件入口，在这里加载 lisp 目录下的配置子模块。
 3. init-utils.el - 一些用于配置文件的工具函数定义。
@@ -69,7 +73,7 @@ git clone https://github.com/junahan/junahan-emacs.git
 - 开始之前，备份 =～/.emacs.d= 目录以确保能够回去以前的配置。
 - 运行 =./deploy.sh= 脚本 - 该脚本使用 =stow= 在 =HOME= 目录创建 =.emacs.d= 链接。
 
-* TODO 常用 Emacs Mode 介绍 <<emacs-mode-intro>>
+* 常用 Emacs Mode 介绍 <<emacs-mode-intro>>
 本节简单介绍一些常用的 Emacs Mode，也是 junahan-emacs 项目使用到的 Emacs 模块。通过这些介绍，可以了解到这些模块的功能、配置和使用。
 
 ** 安装 Emacs 模块包
@@ -165,6 +169,7 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 
 #+CAPTION: 快捷键绑定总结
 | Key 绑定    | 命令                            | 说明                                                     |
+|-------------+---------------------------------+----------------------------------------------------------|
 | M-x         | helm-M-x                        | 命令列表                                                 |
 | M-y         | helm-show-kill-ring             | 显示剪切环内容                                           |
 | C-x b       | helm-mini                       | 显示打开的缓冲区和最近打开的文件                         |
@@ -192,7 +197,7 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 | C-c h C- ,  | helm-calcul-expression          | Helm 计算器界面                                          |
 | C-c C-l     | helm-eshell-history             | Eshell 历史界面                                          |
 | C-c C-l     | helm-comit-input-ring           | Shell 历史界面                                           |
-| C-c C-l     | helm-mini-buffer-history        | Mini-buffer 历史界面                                 |
+| C-c C-l     | helm-mini-buffer-history        | Mini-buffer 历史界面                                     |
 
 *** Helm-projectile
 =Helm-projectile= 是一个 =Projectile= 的 =Helm= 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。详情，请参阅[[helm-projectile][使用 Helm + Projectile 管理项目]]。
@@ -215,7 +220,7 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 运行 =C-x g= 打开 =mgit-status= 界面，该界面显示如下图。
 #+CAPTION: Magit-status 操作界面
 #+ATTR_HTML: :width 80%
-[[file:docs/images/emacs-mgit-status.png]]
+[[https://tva1.sinaimg.cn/large/006y8mN6gy1g776q26urpj31mc0u0aol.jpg]]
 
 有关 Mgit 使用的更多介绍，请参阅 [[http://jixiuf.github.io/blog/000100-emacs-magit.html/][Emacs 下的 git 工具 magit 简介]]。
 
@@ -243,6 +248,7 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 
 #+CAPTION: Helm-projectile 快捷键绑定总结
 | 快捷键    | 命令                                        | 说明                                   |
+|-----------+---------------------------------------------+----------------------------------------|
 | C-c p h   | helm-projectile                             | Helm projectile 界面                   |
 | C-c p p   | helm-projectile-switch-project              | 切换至另外的项目                       |
 | C-c p f   | helm-projectile-find-file                   | 列出当前项目所有文件                   |
@@ -258,7 +264,48 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 | C-c p s a | helm-projectile-ack                         | 同上，但使用 ack                       |
 | C-c p s s | helm-projectile-ag                          | 同上，但使用 ag                        |
 
-** TODO ORG
+** ORG
+ORG 是一个快速高效的存文本系统，可用于记日记、维护待办事项列表、计划项目以及撰写和发布文档。ORG 可以说是 Emacs 相当重要的组成部分。本文就是用 Emacs ORG 模块撰写。我也将 ORG 模块用于安排日程和跟踪 OKR。
+- 写作 (Editing) 
+ - ORG 支持大纲结构，可以快速容易的在不同标题之间导航
+ - 支持折叠标题内容
+ - 内置便捷的快捷键绑定和很多高效编辑设施。
+- 计划 (Planning) 
+ - 可以用于管理待办事项 (TODO) 列表和计划
+ - 每个标题可以被当作一个任务
+ - 可配置待办事项关键字及通过 =C-c C-t= 或者 =S-<left/right>= 快捷键切换关键字
+ - 支持计划元数据，如：排期 (scheduled)、截止日期 (deadline)、标签、属性等。
+- 计时 (Clocking)
+ - 启动任务计时 =C-c C-x C-i=
+ - 结束任务计时 =C-c C-x C-o=
+ - 计时日志记录在抽屉里 (drawer)
+ - 支持可定制的格式报告
+- 日程表 (Agendas)
+ - ORG 模块帮助您聚焦于任务，可以轻松管理很大的 =.org= 文件和数千任务
+ - 内置日程表视图按周显示任务排期计划和截止日期、待办事项列表以及停滞的项目
+ - 日程表视图支持根据需要进行定制：支持按天/按周/按月；支持以标签和待办事项列表关键字定制
+ - 日程表是 ORG 的关键模块
+- 捕获 (Capturing)
+ - 将一个代办事项添加到 =.org= 文件的过程称之为 capturing
+ - 您可以从任意地方 capture，既可以在 Emacs 中，也可以通过其他应用程序（如浏览器、PDF 阅读器等）
+ - Capture 模版允许您定义想 capture 的上下文信息
+- 列表 (Tables)
+ - ORG 是一个优秀的纯文本表格编辑器
+ - 可以通过 =.csv= 和 =.tsv= 文件，或者直接从当前缓冲区导入列表
+ - 支持到处多种格式
+ - ORG 也可以被用作一个电子表格 (spreadsheet) 系统
+ - 您可以使用 [[http://www.gnu.org/software/emacs/manual/html_mono/calc.html][Calc Emacs 包]]或者 Emacs lisp 代码为表格添加计算公式
+- 发布 (Exporting)
+ - ORG 是一个出版发布工具
+ - 可以使用直观的标记将 ORG 文档转换为 HTML, LaTeX, ODT 等格式文档
+ - 开发者可以很容易的创建新的后端以支持特定格式
+ - 您可以为一个或者多个 =.org= 文件定义发布项目，并可以定义一个或者多个发布后端
+- 嵌入代码 (Working with source code)
+ - ORG 以便捷和自然的方式支持[[http://en.wikipedia.org/wiki/Literate_programming][文学编程 (literate programming)]]
+ - 支持插入代码片段、在 ORG 缓冲区执行代码片段并输出计算结果；支持从 Org 文件抽取源代码文件
+
+*** ORG 模块配置
+有关 ORG 的详细配置，请参阅 [[file:emacs.d/lisp/init-org.el][init-org.el]]。
 
 *** 安装 MacTex
 MacTex 被 ORG Mode 用于到处 PDF 以及 Tex 格式文档，可直接运行如下命令安装 MacTex ：
@@ -268,6 +315,16 @@ $ brew cask install mactex
 
 *** 使用 Capture
 - 使用 Capture 快速添加 TODO 和 NOTE。
+#+BEGIN_SRC elisp
+;; Capture 模版配置
+(setq org-capture-templates
+      `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
+         "* TODO %?\n SCHEDULED: %U\n" :clock-resume t)
+        ("n" "note" entry (file "")
+         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+        ))
+#+END_SRC
+
 - 指定org-agenda-dir，Emacs会从指定目录下的所有 .org 文件抽取日程安排。
 #+BEGIN_SRC elisp
 ;; define the refile targets
@@ -277,7 +334,7 @@ $ brew cask install mactex
 (setq org-agenda-files (list org-agenda-dir))
 #+END_SRC
 
-*** Spell check
+*** 拼写检查
 建议使用 aspell + ispell-mode。运行如下命令安装 aspell
 
 #+BEGIN_SRC shell
@@ -380,7 +437,7 @@ M-x org-entities-help
 11. ein,  https://millejoh.github.io/emacs-ipython-notebook/.
 13. Master Emacs in 21 Days, zilongshanren, http://book.emacs-china.org/#orgheadline1.
 15. IPython Notebook, https://ipython.readthedocs.io/en/stable/.
-17. C/C++Development Environment for Emacs - https://tuhdo.github.io/c-ide.html.
+17. C/C++ Development Environment for Emacs - https://tuhdo.github.io/c-ide.html.
 19. Ivy User Manual - https://oremacs.com/swiper/.
 21. Ivy swiper - https://github.com/abo-abo/swiper.
 23. A Package in a league of its own: Helm - https://tuhdo.github.io/helm-intro.htm.
@@ -397,7 +454,12 @@ M-x org-entities-help
 41. Spacemacs 和 Org-mode 和 LaTeX - https://blog.poi.cat/post/spacemacs-plus-org-mode-plus-latex
 43. CDLaTeX help, https://orgmode.org/manual/CDLaTeX-mode.html.
 45. LaTeX fragments Previewing, https://www.gnu.org/software/emacs/manual/html_node/org/Previewing-LaTeX-fragments.html.
+46. orgmode, https://orgmode.org, 2019.
+47. orgmode 手册学习笔记, https://emacsist.github.io/emacsist/orgmode/orgmode%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html, 2017.
+48. 文学编程简介, https://github.com/lujun9972/emacs-document/blob/master/org-mode/%E6%96%87%E5%AD%A6%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B.org, 2016.
+49. Literate database, http://howardism.org/Technical/Emacs/literate-database.html, 2015.
+50. EMACS-DOCUMENT ,http://blog.lujun9972.win/emacs-document/, 2019.
 
 #+BEGIN_QUOTE
-本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]进行许可。
+本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]。
 #+END_QUOTE

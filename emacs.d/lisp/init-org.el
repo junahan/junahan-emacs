@@ -18,6 +18,16 @@
 (require-package 'cdlatex)
 (require-package 'auctex)
 (require-package 'gnuplot)
+;; used to export html
+(require-package 'htmlize)
+
+;; for ob-sql-mode
+;;(require-package 'sql)
+;;(require-package 'ob-sql-mode)
+
+;; ob-http is used to send http request using curl
+(require-package 'ob-http)
+
 ;;(require-package 'gnuplot-mode)
 ;; (require-package 'image+)
 ;; (require 'org-tempo)
@@ -90,24 +100,26 @@
 (after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
-   `((R . t)
-     (ditaa . t)
-     (dot . t)
-     (emacs-lisp . t)
-     (gnuplot . t)
-     (haskell . nil)
-     (latex . t)
-     (asymptote . t)
-     (ledger . t)
-     (ocaml . nil)
-     (octave . t)
-     (plantuml . t)
-     (python . t)
-     (ruby . t)
-     (screen . nil)
+   `((R            . t)
+     (ditaa        . t)
+     (dot          . t)
+     (emacs-lisp   . t)
+     (gnuplot      . t)
+     (haskell      . nil)
+     (latex        . t)
+     (asymptote    . t)
+     (ledger       . t)
+     (ocaml        . nil)
+     (octave       . t)
+     (plantuml     . t)
+     (python       . t)
+     (ruby         . t)
+     (screen       . nil)
      (,(if (locate-library "ob-sh") 'sh 'shell) . t)
-     (sql . nil)
-     (sqlite . t))))
+     (sql          . t)
+     ;;(sql-mode     . t)
+     (sqlite       . t)
+     (http          . t))))
 
 (provide 'init-org)
 ;;; init-org.el ends here
