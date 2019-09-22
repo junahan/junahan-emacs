@@ -36,7 +36,8 @@
 (define-key global-map (kbd "C-c a") 'org-agenda)
 
 ;; Various preferences
-(setq org-log-done t
+(setq org-log-done 'time
+      org-log-done 'note
       org-src-tab-acts-natively t
       org-edit-timestamp-down-means-later t
       org-archive-mark-done nil
