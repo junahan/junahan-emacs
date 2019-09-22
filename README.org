@@ -304,6 +304,8 @@ ORG 是一个快速高效的存文本系统，可用于记日记、维护待办�
  - ORG 以便捷和自然的方式支持[[http://en.wikipedia.org/wiki/Literate_programming][文学编程 (literate programming)]]
  - 支持插入代码片段、在 ORG 缓冲区执行代码片段并输出计算结果；支持从 Org 文件抽取源代码文件
 
+更多有关 ORG 模块内容，请参阅 [[https://github.com/junahan/junahan-site/blob/master/org/learning-emacs-org.org][学习 Emacs Org]]。
+
 *** ORG 模块配置
 有关 ORG 的详细配置，请参阅 [[file:emacs.d/lisp/init-org.el][init-org.el]]。
 
@@ -424,6 +426,9 @@ M-x org-entities-help
 
 ** Java IDE
 使用 =lsp-java= 构建完善的 Java IDE  开发环境，支持代码编辑、补全、风格检查、交叉引用索引等现代 IDE 支持。有关详情，请参阅 [[file:docs/java-ide.org][Java IDE]]。
+
+* 杂项
+- 不关闭 Emacs，重新加载配置 - 执行命令 =M-x load-file RET= 来加载变更后的 Emacs 配置。
 
 * 参考文献 <<references>>
 1. GNU Emacs, https://www.gnu.org/software/emacs/
