@@ -38,6 +38,7 @@
 ;; Various preferences
 (setq org-log-done 'time
       org-log-done 'note
+      org-log-into-drawer t
       ;;org-log-note-state t
       mark-holidays-in-calendar t
       org-src-tab-acts-natively t
