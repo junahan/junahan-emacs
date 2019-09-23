@@ -38,6 +38,7 @@
 ;; Various preferences
 (setq org-log-done 'time
       org-log-done 'note
+      ;;org-log-note-state t
       mark-holidays-in-calendar t
       org-src-tab-acts-natively t
       org-edit-timestamp-down-means-later t
@@ -55,26 +56,6 @@
 (setq org-src-fontify-natively t)
 (setq org-support-shift-select t)
 
-(setq my-holidays
-      '(;;公历节日
-        (holiday-fixed 2 14 "情人节")
-        (holiday-fixed 9 10 "教师节")
-        (holiday-float 6 0 3 "父亲节")
-        ;;农历节日
-        (holiday-lunar 1 1 "春节" 0)
-        (holiday-lunar 1 15 "元宵节" 0)
-        (holiday-solar-term "清明" "清明节")
-        (holiday-lunar 5 5 "端午节" 0)
-        (holiday-lunar 7 7 "七夕情人节" 0)
-        (holiday-lunar 8 15 "中秋节" 0)
-        ;;纪念日
-        (holiday-fixed 9 7 "儿子生日")
-        (holiday-lunar 6 24 "老婆生日"  0)
-        (holiday-lunar 4 6 "我的生日" 0)
-        ))
-;;只显示我定制的节假日
-(setq calendar-holidays my-holidays)
-
 ;; Enlarge latex Fragment in Org-mode
 ;;(plist-put org-format-latex-options :scale 2)
 ;;(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
@@ -91,7 +72,7 @@
 ;; define the refile targets
 (defvar org-agenda-dir "")
 (setq-default org-agenda-dir "~/junahan-cal")
-(setq org-default-notes-file "~/junahan-cal/refile.org")
+(setq org-default-notes-file "~/junahan-cal/notes.org")
 (setq org-agenda-files (list org-agenda-dir))
 
 ;; Capturing
@@ -101,6 +82,11 @@
          "* TODO %?\n SCHEDULED: %U\n" :clock-resume t)
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+        ))
+
+;; task keyworks.
+(setq org-todo-keywords
+      '((sequence "TODO(t!)" "DRAFT(s)" "|" "DONE(d!)" "CANCELED(c @/!)")
         ))
 
 ;; for image-model
