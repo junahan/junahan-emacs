@@ -20,7 +20,8 @@
 (require-package 'gnuplot)
 ;; used to export html
 (require-package 'htmlize)
-
+;; using the pomodoro technique
+(require-package 'org-pomodoro)
 ;; for ob-sql-mode
 ;;(require-package 'sql)
 ;;(require-package 'ob-sql-mode)
