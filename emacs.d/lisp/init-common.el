@@ -19,6 +19,12 @@
 (require-package 'highlight-parentheses)
 (require-package 'which-key)
 (require-package 'popwin)
+;; key frequence tool
+(require-package 'keyfreq)
+
+;; enable keyfreq mode and save the data
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
 
 (setq use-package-always-ensure t)
 
