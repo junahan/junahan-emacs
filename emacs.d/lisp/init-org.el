@@ -22,6 +22,8 @@
 (require-package 'htmlize)
 ;; using the pomodoro technique
 (require-package 'org-pomodoro)
+;; using play
+(require-package 'sound-wav)
 ;; for ob-sql-mode
 ;;(require-package 'sql)
 ;;(require-package 'ob-sql-mode)
@@ -53,7 +55,10 @@
       org-export-kill-product-buffer-when-displayed t
       org-tags-column 80)
 
-(global-visual-line-mode 1)
+;; set the play sounds notification
+(setq org-pomodoro-play-sounds t)
+
+(global-visual-line-mode t)
 
 (setq org-src-fontify-natively t)
 (setq org-support-shift-select t)
