@@ -27,27 +27,5 @@
 (setq ejc-result-table-impl 'orgtbl-mode
       ejc-org-mode-babel-wrapper t)
 
-;; MySQL connection
-;; (ejc-create-connection
-;;  "MySQL-ces-debian-3306"
-;;  :classpath (concat "~/.m2/repository/mysql/mysql-connector-java/5.1.47/"
-;;                     "mysql-connector-java-5.1.47.jar")
-;;  :subprotocol "mysql"
-;;  :subname "//10.250.214.134:3306/mysql"
-;;  :user "test"
-;;  :password "test")
-
-;; MySQL connections
-;; (ejc-create-connection
-;;  "Mysql-ces-debian-test"
-;;  :classname "com.mysql.jdbc.Driver"
-;;  :classpath "/Users/junahan/.m2/repository/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar"
-;;  :password "test"
-;;  :user "test"
-;;  :port "3306"
-;;  :host "10.250.214.134"
-;;  :dbname "mysql"
-;;  :dbtype "mysql")
-
 (provide 'init-sql)
 ;;; init-sql.el ends here
