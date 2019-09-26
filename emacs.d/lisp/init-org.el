@@ -79,7 +79,13 @@
 ;; define the refile targets
 (defvar org-agenda-dir "")
 (setq-default org-agenda-dir "~/junahan-cal")
-(setq org-default-notes-file "~/junahan-cal/notes.org")
+;; default notes file
+;; (setq org-default-notes-file "~/junahan-cal/parking.org")
+(setq org-default-notes-file (expand-file-name "notes.org" org-agenda-dir))
+;; define org files
+(setq org-agenda-file-history (expand-file-name "history.org" org-agenda-dir))
+(setq org-agenda-file-parking (expand-file-name "parking.org" org-agenda-dir))
+;; define agenda files loaded by agendas by default
 (setq org-agenda-files (list org-agenda-dir))
 
 ;; Capturing
@@ -95,6 +101,11 @@
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "DRAFT(s)" "|" "DONE(d!)" "CANCELED(c @/!)")
         ))
+
+;; refile taergets
+(setq org-refile-targets  '((org-agenda-file-history :maxlevel . 1)
+                            (org-agenda-file-parking :maxlevel . 1)
+                            ))
 
 ;; for image-model
 ;; (eval-after-load 'image '(require 'image+))
