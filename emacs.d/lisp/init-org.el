@@ -20,8 +20,6 @@
 (require-package 'gnuplot)
 ;; used to export html
 (require-package 'htmlize)
-;; using the pomodoro technique
-(require-package 'org-pomodoro)
 ;; using play
 (require-package 'sound-wav)
 ;; for ob-sql-mode
@@ -37,6 +35,15 @@
 
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
+
+(defvar sanityinc/org-global-prefix-map (make-sparse-keymap)
+  "A keymap for handy global access to org helpers, particularly clocking.")
+
+(define-key sanityinc/org-global-prefix-map (kbd "j") 'org-clock-jump-to-current-clock)
+(define-key sanityinc/org-global-prefix-map (kbd "l") 'org-clock-in-last)
+(define-key sanityinc/org-global-prefix-map (kbd "i") 'org-clock-in)
+(define-key sanityinc/org-global-prefix-map (kbd "o") 'org-clock-out)
+(define-key global-map (kbd "C-c o") sanityinc/org-global-prefix-map)
 
 ;; Various preferences
 (setq org-log-done 'time
@@ -54,6 +61,46 @@
       org-html-validation-link nil
       org-export-kill-product-buffer-when-displayed t
       org-tags-column 80)
+
+;; Lots of stuff from http://doc.norang.ca/org-mode.html
+
+;; TODO: fail gracefully
+(defun sanityinc/grab-ditaa (url jar-name)
+  "Download URL and extract JAR-NAME as `org-ditaa-jar-path'."
+  ;; TODO: handle errors
+  (message "Grabbing %s for org." jar-name)
+  (let ((zip-temp (make-temp-name "emacs-ditaa")))
+    (unwind-protect
+        (progn
+          (when (executable-find "unzip")
+            (url-copy-file url zip-temp)
+            (shell-command (concat "unzip -p " (shell-quote-argument zip-temp)
+                                   " " (shell-quote-argument jar-name) " > "
+                                   (shell-quote-argument org-ditaa-jar-path)))))
+      (when (file-exists-p zip-temp)
+        (delete-file zip-temp)))))
+
+(after-load 'ob-ditaa
+  (unless (and (boundp 'org-ditaa-jar-path)
+               (file-exists-p org-ditaa-jar-path))
+    (let ((jar-name "ditaa0_9.jar")
+          (url "http://jaist.dl.sourceforge.net/project/ditaa/ditaa/0.9/ditaa0_9.zip"))
+      (setq org-ditaa-jar-path (expand-file-name jar-name (file-name-directory user-init-file)))
+      (unless (file-exists-p org-ditaa-jar-path)
+        (sanityinc/grab-ditaa url jar-name)))))
+
+(after-load 'ob-plantuml
+  (let ((jar-name "plantuml.jar")
+        (url "http://jaist.dl.sourceforge.net/project/plantuml/plantuml.jar"))
+    (setq org-plantuml-jar-path (expand-file-name jar-name (file-name-directory user-init-file)))
+    (unless (file-exists-p org-plantuml-jar-path)
+      (url-copy-file url org-plantuml-jar-path))))
+
+
+;; Re-align tags when window shape changes
+(after-load 'org-agenda
+  (add-hook 'org-agenda-mode-hook
+            (lambda () (add-hook 'window-configuration-change-hook 'org-agenda-align-tags nil t))))
 
 ;; set the play sounds notification
 (setq org-pomodoro-play-sounds t)
@@ -102,25 +149,108 @@
       '((sequence "TODO(t!)" "DRAFT(s)" "|" "DONE(d!)" "CANCELED(c @/!)")
         ))
 
-;; refile taergets
-(setq org-refile-targets  '((org-agenda-file-history :maxlevel . 1)
-                            (org-agenda-file-parking :maxlevel . 1)
-                            ))
+;;; Refiling
+(setq org-refile-use-cache nil)
 
-;; for image-model
-;; (eval-after-load 'image '(require 'image+))
-;; auto adjust the image to fit the frame.
-;; (eval-after-load 'image+ '(imagex-auto-adjust-mode 1))
+;; Targets include this file and any file contributing to the agenda - up to 3 levels deep
+(setq org-refile-targets '((nil :maxlevel . 3) (org-agenda-files :maxlevel . 3)))
+
+(after-load 'org-agenda
+  (add-to-list 'org-agenda-after-show-hook 'org-show-entry))
+
+(advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
+
+;; Exclude DONE state tasks from refile targets
+(defun sanityinc/verify-refile-target ()
+  "Exclude todo keywords with a done state from refile targets."
+  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+(setq org-refile-target-verify-function 'sanityinc/verify-refile-target)
+
+(defun sanityinc/org-refile-anywhere (&optional goto default-buffer rfloc msg)
+  "A version of `org-refile' which allows refiling to any subtree."
+  (interactive "P")
+  (let ((org-refile-target-verify-function))
+    (org-refile goto default-buffer rfloc msg)))
+
+(defun sanityinc/org-agenda-refile-anywhere (&optional goto rfloc no-update)
+  "A version of `org-agenda-refile' which allows refiling to any subtree."
+  (interactive "P")
+  (let ((org-refile-target-verify-function))
+    (org-agenda-refile goto rfloc no-update)))
+
+;; Targets start with the file name - allows creating level 1 tasks
+;;(setq org-refile-use-outline-path (quote file))
+(setq org-refile-use-outline-path t)
+(setq org-outline-path-complete-in-steps nil)
+
+;; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+
 (eval-after-load 'org '(require 'ox-md nil t))
 ;;(eval-after-load 'org '(require 'org-latex nil t))
+
+(add-hook 'org-agenda-mode-hook 'hl-line-mode)
+
+;;; Org clock
+
+;; Save the running clock and all clock history when exiting Emacs, load it on startup
+(after-load 'org
+  (org-clock-persistence-insinuate))
+(setq org-clock-persist t)
+(setq org-clock-in-resume t)
+
+;; Save clock data and notes in the LOGBOOK drawer
+(setq org-clock-into-drawer t)
+;; Save state changes in the LOGBOOK drawer
+(setq org-log-into-drawer t)
+;; Removes clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t)
+
+;; Show clock sums as hours and minutes, not "n days" etc.
+(setq org-time-clocksum-format
+      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+
+;;; Show the clocked-in task - if any - in the header line
+(defun sanityinc/show-org-clock-in-header-line ()
+  (setq-default header-line-format '((" " org-mode-line-string " "))))
+
+(defun sanityinc/hide-org-clock-from-header-line ()
+  (setq-default header-line-format nil))
+
+(add-hook 'org-clock-in-hook 'sanityinc/show-org-clock-in-header-line)
+(add-hook 'org-clock-out-hook 'sanityinc/hide-org-clock-from-header-line)
+(add-hook 'org-clock-cancel-hook 'sanityinc/hide-org-clock-from-header-line)
+
+(after-load 'org-clock
+  (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
+  (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu))
+
+(when (and *is-a-mac* (file-directory-p "/Applications/org-clock-statusbar.app"))
+  (add-hook 'org-clock-in-hook
+            (lambda () (call-process "/usr/bin/osascript" nil 0 nil "-e"
+                                     (concat "tell application \"org-clock-statusbar\" to clock in \"" org-clock-current-task "\""))))
+  (add-hook 'org-clock-out-hook
+            (lambda () (call-process "/usr/bin/osascript" nil 0 nil "-e"
+                                     "tell application \"org-clock-statusbar\" to clock out"))))
+
+;;; Archiving
+(setq org-archive-mark-done nil)
+(setq org-archive-location "%s_archive::* Archive")
+
+;; don't prompt to confirm everytime
+(setq org-confirm-babel-evaluate nil)
+
+;;; org-pomodoro
+(require-package 'org-pomodoro)
+(setq org-pomodoro-keep-killed-pomodoro-time t)
+(after-load 'org-agenda
+  (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
 
 (after-load 'org
   (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
   (when *is-a-mac*
-    (define-key org-mode-map (kbd "M-h") nil)))
-
-;; don't prompt to confirm everytime
-(setq org-confirm-babel-evaluate nil)
+    (define-key org-mode-map (kbd "M-h") nil)
+    (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
 ;; org babel language settings.
 (after-load 'org
