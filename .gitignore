@@ -68,3 +68,4 @@ emacs.d/transient
 emacs.d/eclipse.jdt.ls
 emacs.d/.lsp-session*
 emacs.d/.dap-*
+*.jar

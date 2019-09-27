@@ -96,7 +96,6 @@
     (unless (file-exists-p org-plantuml-jar-path)
       (url-copy-file url org-plantuml-jar-path))))
 
-
 ;; Re-align tags when window shape changes
 (after-load 'org-agenda
   (add-hook 'org-agenda-mode-hook
@@ -225,6 +224,7 @@
   (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
   (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu))
 
+;; notify clock in/out by org-clock-statusbar.app
 (when (and *is-a-mac* (file-directory-p "/Applications/org-clock-statusbar.app"))
   (add-hook 'org-clock-in-hook
             (lambda () (call-process "/usr/bin/osascript" nil 0 nil "-e"
