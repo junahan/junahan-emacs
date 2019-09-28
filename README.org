@@ -266,6 +266,8 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 
 ** ORG
 ORG 是一个快速高效的存文本系统，可用于记日记、维护待办事项列表、计划项目以及撰写和发布文档。ORG 可以说是 Emacs 相当重要的组成部分。本文就是用 Emacs ORG 模块撰写。我也将 ORG 模块用于安排日程和跟踪 OKR。
+*** 概述
+ORG 是一个快速高效的存文本系统，可用于记日记、维护待办事项列表、计划项目以及撰写和发布文档。ORG 可以说是 Emacs 相当重要的组成部分。本文就是用 Emacs ORG 模块撰写。我也将 ORG 模块用于安排日程和跟踪 OKR。
 - 写作 (Editing) 
  - ORG 支持大纲结构，可以快速容易的在不同标题之间导航
  - 支持折叠标题内容
@@ -315,6 +317,26 @@ MacTex 被 ORG Mode 用于到处 PDF 以及 Tex 格式文档，可直接运行�
 $ brew cask install mactex
 #+END_SRC
 
+*** 拼写检查
+建议使用 aspell + ispell-mode。运行如下命令安装 aspell
+
+#+BEGIN_SRC shell
+$ brew install --with-lang-en aspell
+#+END_SRC
+
+添加如下配置启用拼写检查。
+
+#+BEGIN_SRC elisp
+;; for spell check
+;; could be ispell as well, depending on your preferences
+(setq ispell-program-name "aspell")
+;; this can obviously be set to any language your spell-checking program supports
+(setq ispell-dictionary "english")
+
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'flyspell-buffer)
+#+END_SRC
+
 *** 使用 Capture
 - 使用 Capture 快速添加 TODO 和 NOTE。
 #+BEGIN_SRC elisp
@@ -334,26 +356,6 @@ $ brew cask install mactex
 (setq-default org-agenda-dir "~/org")
 (setq org-default-notes-file "~/org/refile.org")
 (setq org-agenda-files (list org-agenda-dir))
-#+END_SRC
-
-*** 拼写检查
-建议使用 aspell + ispell-mode。运行如下命令安装 aspell
-
-#+BEGIN_SRC shell
-$ brew install --with-lang-en aspell
-#+END_SRC
-
-添加如下配置启用拼写检查。
-
-#+BEGIN_SRC elisp
-;; for spell check
-;; could be ispell as well, depending on your preferences
-(setq ispell-program-name "aspell")
-;; this can obviously be set to any language your spell-checking program supports
-(setq ispell-dictionary "english")
-
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'org-mode-hook 'flyspell-buffer)
 #+END_SRC
 
 ** TRAMP Mode

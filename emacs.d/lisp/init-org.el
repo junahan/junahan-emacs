@@ -185,9 +185,6 @@
 ;; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-(eval-after-load 'org '(require 'ox-md nil t))
-;;(eval-after-load 'org '(require 'org-latex nil t))
-
 (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
 ;;; Org clock
@@ -251,6 +248,10 @@
   (when *is-a-mac*
     (define-key org-mode-map (kbd "M-h") nil)
     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
+
+;; support to export to markdown.
+(eval-after-load 'org '(require 'ox-md nil t))
+;;(eval-after-load 'org '(require 'org-latex nil t))
 
 ;; org babel language settings.
 (after-load 'org
