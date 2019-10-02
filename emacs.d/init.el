@@ -61,6 +61,7 @@
 (require 'init-go)
 ;;(require 'init-lsp-go)
 ;;(require 'init-solidity)
+(require 'init-lisp)
 (require 'init-sql)
 (require 'init-treemacs)
 (require 'init-tramp)
