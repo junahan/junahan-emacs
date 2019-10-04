@@ -145,7 +145,7 @@
 
 ;; task keyworks.
 (setq org-todo-keywords
-      '((sequence "TODO(t!)" "DRAFT(s)" "|" "DONE(d!)" "CANCELED(c @/!)")
+      '((sequence "TODO(t!)" "DRAFT(s)" "|" "DONE(d @/!)" "CANCELED(c @/!)")
         ))
 
 ;;; Refiling
