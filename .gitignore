@@ -68,4 +68,9 @@ emacs.d/transient
 emacs.d/eclipse.jdt.ls
 emacs.d/.lsp-session*
 emacs.d/.dap-*
+emacs.d/tutorial
+emacs.d/url
+emacs.d/workspace
+emacs.d/bookmarks
+diary
 *.jar
