@@ -138,9 +138,13 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
-         "* TODO %?\n SCHEDULED: %U\n" :clock-resume t)
+         "* TODO %?\n%T\n%a\n" :clock-in t :clock-resume t)
         ("n" "note" entry (file "")
-         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+         "* %? :NOTE:\n%T\n%a\n" :clock-in t :clock-resume t)
+        ("m" "meeting" entry (file "")
+         "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+        ("p" "Phone call" entry (file "")
+         "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
         ))
 
 ;; task keyworks.

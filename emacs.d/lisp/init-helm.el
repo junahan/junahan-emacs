@@ -20,7 +20,7 @@
     ;; To fix error at compile:
     ;; Error (bytecomp): Forgot to expand macro with-helm-buffer in
     ;; (with-helm-buffer helm-echo-input-in-header-line)
-    (if (version < "26.0.50" emacs-version)
+    (if (version< "26.0.50" emacs-version)
         (eval-when-compile (require 'helm-lib)))
 
     (defun helm-hide-minibuffer-maybe ()

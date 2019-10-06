@@ -202,6 +202,10 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 *** Helm-projectile
 =Helm-projectile= 是一个 =Projectile= 的 =Helm= 界面扩展，支持大多数 =Projectile= 命令甚者更多特性支持。详情，请参阅[[helm-projectile][使用 Helm + Projectile 管理项目]]。
 
+*** 推荐阅读
+- [[http://tuhdo.github.io/helm-intro.htm][A Package in a league of its own: Helm]] - 一个非常棒的 Helm 使用介绍
+- [[http://tuhdo.github.io/helm-projectile.html][Exploring large projects with Projectile and Helm Projectile]] - 详细的有关 Helm + Projectile 的使用 Demo
+
 ** Magit
 [[https://github.com/magit/magit/blob/master/Documentation/magit.org][Magit]] 是优秀的 Emacs Git 前端，实现大多数 Git 命令，足够处理常用的版本管理任务，可以让你不离开 Emacs 使用 Git。
 
@@ -263,6 +267,9 @@ Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员�
 | C-c p s g | helm-projectile-grep                        | 从项目根目录开始搜索符号               |
 | C-c p s a | helm-projectile-ack                         | 同上，但使用 ack                       |
 | C-c p s s | helm-projectile-ag                          | 同上，但使用 ag                        |
+
+*** 推荐阅读
+- [[http://tuhdo.github.io/helm-projectile.html][Exploring large projects with Projectile and Helm Projectile]] - 详细的有关 Helm + Projectile 的使用 Demo
 
 ** ORG
 ORG 是一个快速高效的存文本系统，可用于记日记、维护待办事项列表、计划项目以及撰写和发布文档。ORG 可以说是 Emacs 相当重要的组成部分。本文就是用 Emacs ORG 模块撰写。我也将 ORG 模块用于安排日程和跟踪 OKR。

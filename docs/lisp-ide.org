@@ -1,0 +1,20 @@
+# -*- mode: org; coding: utf-8; -*-
+#+TITLE:             Lisp IDE
+#+AUTHOR:            Junahan
+#+EMAIL:             junahan@outlook
+#+DATE:              2019-10-2
+#+LANGUAGE:          CN
+#+OPTIONS:           H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:           TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:        view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:           CC BY 4.0
+
+* 摘要
+
+
+* 参考文献
+
+10. Slime, https://common-lisp.net/project/slime/.
+11. Slime code, https://github.com/slime/slime.
+
+
