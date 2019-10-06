@@ -154,7 +154,14 @@ Flycheck 是一个飞行句法检查和提示工具，它使用多种语法检�
 ** Helm
 Helm 是一个增量补全和缩减选择的 Emacs 框架。它为开发人员提供非常容易使用的 API 以开发基于 Helm 的 Emacs 应用，同时提供了强大的搜索工具以及许多内建支持几乎所有常用的补全命令。
 
-*** 安装和配置
+*** 安装 Ag
+[[https://github.com/ggreer/the_silver_searcher][Ag]] - 是一个类似于 =ack= 的代码搜索工具，其专注于速度。 =Helm-ag= 等模块需要 =ag= 工具。
+
+#+BEGIN_SRC sh
+brew install the_silver_searcher
+#+END_SRC
+
+*** 最小化配置
 可以通过运行 =M-x list-packages= 命令选择并安装 =*Helm*= 包，或者打开 =.emacs.d/Cask= 文件，添加 =（depends-on "helm")= ，然后运行 =cask install= 命令安装 =*Helm*= 。完成安装后，最简单的配置如下，即可启动 =*Helm*= ：
 
 #+BEGIN_SRC lisp
