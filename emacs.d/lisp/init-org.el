@@ -141,6 +141,8 @@
          "* TODO %?\n%T\n%a\n" :clock-in t :clock-resume t)
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%T\n%a\n" :clock-in t :clock-resume t)
+        ("n" "journal" entry (file "")
+         "* %? :JOURNAL:\n%U\n%a\n" :clock-in t :clock-resume t)
         ("m" "meeting" entry (file "")
          "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
         ("p" "Phone call" entry (file "")
@@ -246,6 +248,20 @@
 (setq org-pomodoro-keep-killed-pomodoro-time t)
 (after-load 'org-agenda
   (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
+
+;; with fast selection keys
+(setq org-tag-alist (quote ((:startgroup)
+                            ("@office" . ?o)
+                            ("@home" . ?H)
+                            (:endgroup)
+                            ("PERSONAL" . ?P)
+                            ("WORK" . ?W)
+                            ("NOTE" . ?n)
+                            ("JOURNAL" . ?j)
+                            ("CES" . ?e)
+                            ("OKR" . ?k)
+                            ("CANCELLED" . ?c)
+                            ("FLAGGED" . ??))))
 
 (after-load 'org
   (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
