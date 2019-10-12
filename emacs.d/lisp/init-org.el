@@ -141,10 +141,10 @@
          "* TODO %?\n%T\n%a\n" :clock-in t :clock-resume t)
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%T\n%a\n" :clock-in t :clock-resume t)
-        ("n" "journal" entry (file "")
+        ("j" "journal" entry (file "")
          "* %? :JOURNAL:\n%U\n%a\n" :clock-in t :clock-resume t)
         ("m" "meeting" entry (file "")
-         "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+         "* %? :MEETING:\n%T" :clock-in t :clock-resume t)
         ("p" "Phone call" entry (file "")
          "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
         ))
@@ -235,6 +235,10 @@
   (add-hook 'org-clock-out-hook
             (lambda () (call-process "/usr/bin/osascript" nil 0 nil "-e"
                                      "tell application \"org-clock-statusbar\" to clock out"))))
+
+;; for headline font
+(after-load 'cnfonts
+  (setq cnfonts-use-face-font-rescale t))
 
 ;;; Archiving
 (setq org-archive-mark-done nil)

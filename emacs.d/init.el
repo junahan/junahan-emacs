@@ -49,6 +49,7 @@
 (require 'init-ivy-swiper)
 (require 'init-helm)
 (require 'init-helm-gtags)
+;;(require 'init-cnfonts)
 (require 'init-org)
 (require 'init-md)
 (require 'init-hugo)
