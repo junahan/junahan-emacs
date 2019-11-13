@@ -1,7 +1,7 @@
 ;;; init-sql.el --- Support for SQL -*- lexical-binding: t -*-
 ;;; Commentary:
 ;; Lots of from - https://github.com/purcell/emacs.d/blob/master/lisp/init-sql.el
-;; Configure ejc-sql mode
+;; Add the configure of ejc-sql mode.
 ;;
 ;;; Code:
 
@@ -48,7 +48,6 @@ Fix for the above hasn't been released as of Emacs 25.2."
   (unless (eq 'oracle sql-product)
     (sql-product-font-lock nil nil)))
 (add-hook 'sql-interactive-mode-hook 'sanityinc/font-lock-everything-in-sql-interactive-mode)
-
 
 (require-package 'sqlformat)
 (after-load 'sql
@@ -115,31 +114,43 @@ This command currently blocks the UI, sorry."
   (after-load 'dash-at-point
     (add-to-list 'dash-at-point-mode-alist '(sql-mode . "psql,mysql,sqlite,postgis"))))
 
-
 (after-load 'page-break-lines
   (push 'sql-mode page-break-lines-modes))
 
-;;; ejc-sql
-(require-package 'ejc-sql)
-
-;; configure auto-complete-mode and ejc-ac
-(add-hook 'ejc-sql-minor-mode-hook
+;; hooks - turncate lines display
+(add-hook 'sql-interactive-mode-hook
           (lambda ()
-            (auto-complete-mode t)
-            (ejc-ac-setup)
-            (ejc-eldoc-setup)))
+            (toggle-truncate-lines t)
+            (setq-local show-trailing-whitespace nil)
+            (auto-complete-mode t)))
 
-;; output customization for performance
-(add-hook 'ejc-sql-connected-hook
+;; hooks - complete
+(add-hook 'sql-mode-hook
           (lambda ()
-            (ejc-set-fetch-size 50)
-            (ejc-set-max-rows 50)
-            (ejc-set-column-width-limit 25)))
+            (setq-local ac-ignore-case t)
+            (auto-complete-mode)))
 
-;; use orgtbl-mode to provide result table.
-;; disable the org mode babel wrapper.
-(setq ejc-result-table-impl 'orgtbl-mode
-      ejc-org-mode-babel-wrapper t)
+;; ;;; ejc-sql
+;; (require-package 'ejc-sql)
+
+;; ;; configure auto-complete-mode and ejc-ac
+;; (add-hook 'ejc-sql-minor-mode-hook
+;;           (lambda ()
+;;             (auto-complete-mode t)
+;;             (ejc-ac-setup)
+;;             (ejc-eldoc-setup)))
+
+;; ;; output customization for performance
+;; (add-hook 'ejc-sql-connected-hook
+;;           (lambda ()
+;;             (ejc-set-fetch-size 50)
+;;             (ejc-set-max-rows 50)
+;;             (ejc-set-column-width-limit 25)))
+
+;; ;; use orgtbl-mode to provide result table.
+;; ;; disable the org mode babel wrapper.
+;; (setq ejc-result-table-impl 'orgtbl-mode
+;;       ejc-org-mode-babel-wrapper t)
 
 (provide 'init-sql)
 ;;; init-sql.el ends here

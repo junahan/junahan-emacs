@@ -138,7 +138,7 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
       `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
-         "* TODO %?\n%T\n%a\n" :clock-in t :clock-resume t)
+         "* TODO [#B] %?\n%T\n%a\n" :clock-in t :clock-resume t)
         ("n" "note" entry (file "")
          "* %? :NOTE:\n%T\n%a\n" :clock-in t :clock-resume t)
         ("j" "journal" entry (file "")

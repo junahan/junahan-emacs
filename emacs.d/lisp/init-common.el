@@ -21,10 +21,15 @@
 (require-package 'popwin)
 ;; key frequence tool
 (require-package 'keyfreq)
+;; golden ratio
+(require-package 'golden-ratio)
 
 ;; enable keyfreq mode and save the data
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
+
+;; eanble golden ratio
+(golden-ratio-mode 1)
 
 (setq use-package-always-ensure t)
 
@@ -39,6 +44,9 @@
 
 ;; a tab is represented by 2 spaces
 (setq-default tab-width 2)
+
+;; a tab is represented in current buffer is 2 spaces
+(setq tab-width 2)
 
 ;;(require 'direnv)
 (use-package exec-path-from-shell

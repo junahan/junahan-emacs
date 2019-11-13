@@ -445,6 +445,7 @@ M-x org-entities-help
 
 * 杂项
 - 不关闭 Emacs，重新加载配置 - 执行命令 =M-x load-file RET= 来加载变更后的 Emacs 配置。
+- Gloden Ratio - Automatic resizing of Emacs windows to the golden ratio.
 
 * 参考文献 <<references>>
 1. GNU Emacs, https://www.gnu.org/software/emacs/
@@ -479,7 +480,9 @@ M-x org-entities-help
 47. orgmode 手册学习笔记, https://emacsist.github.io/emacsist/orgmode/orgmode%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html, 2017.
 48. 文学编程简介, https://github.com/lujun9972/emacs-document/blob/master/org-mode/%E6%96%87%E5%AD%A6%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B.org, 2016.
 49. Literate database, http://howardism.org/Technical/Emacs/literate-database.html, 2015.
-50. EMACS-DOCUMENT ,http://blog.lujun9972.win/emacs-document/, 2019.
+50. EMACS-DOCUMENT, http://blog.lujun9972.win/emacs-document/, 2019.
+53. [[https://github.com/roman/golden-ratio.el][gloden ratio 模块]] - Automatic resizing of Emacs windows to the golden ratio.
+55. [[https://github.com/redguardtoo/emacs.d][Fast and robust Emacs setup]] - by [[http://blog.binchen.org][Chenbin]].
 
 #+BEGIN_QUOTE
 本作品采用[[http://creativecommons.org/licenses/by/4.0/][知识共享署名 4.0 国际许可协议]]。

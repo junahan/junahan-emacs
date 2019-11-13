@@ -49,7 +49,7 @@
 ;;----------------------------------------------------------------------------
 (defun rename-this-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
+  (interactive "New name: ")
   (let ((name (buffer-name))
         (filename (buffer-file-name)))
     (unless filename
