@@ -1,6 +1,6 @@
-;;; package -- init-utils
-;;; commentary:
-;;; code:
+;;; init-utils.el --- Elisp helper functions and commands -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 
 (if (fboundp 'with-eval-after-load)
     (defalias 'after-load 'with-eval-after-load)
@@ -10,6 +10,7 @@
     `(eval-after-load ,feature
        '(progn ,@body))))
 
+
 ;;----------------------------------------------------------------------------
 ;; Handier way to add modes to auto-mode-alist
 ;;----------------------------------------------------------------------------
@@ -17,6 +18,7 @@
   "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
   (dolist (pattern patterns)
     (add-to-list 'auto-mode-alist (cons pattern mode))))
+
 
 ;;----------------------------------------------------------------------------
 ;; String utilities missing from core emacs
@@ -31,6 +33,7 @@
       (setq pos (match-end group)))
     result))
 
+
 ;;----------------------------------------------------------------------------
 ;; Delete the current file
 ;;----------------------------------------------------------------------------
@@ -44,12 +47,13 @@
     (delete-file (buffer-file-name))
     (kill-this-buffer)))
 
+
 ;;----------------------------------------------------------------------------
 ;; Rename the current file
 ;;----------------------------------------------------------------------------
 (defun rename-this-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "New name: ")
+  (interactive "sNew name: ")
   (let ((name (buffer-name))
         (filename (buffer-file-name)))
     (unless filename
@@ -72,13 +76,6 @@
         (error "Cannot open tramp file")
       (browse-url (concat "file://" file-name)))))
 
-;;----------------------------------------------------------------------------
-;; Hack Emacs function
-;;----------------------------------------------------------------------------
-(defun hack-emacs ()
-  "Config Emacs file."
-  (interactive)
-  (find-file "~/.emacs.d/lisp/"))
 
 (provide 'init-utils)
 ;;; init-utils.el ends here

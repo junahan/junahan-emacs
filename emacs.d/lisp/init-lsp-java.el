@@ -16,79 +16,40 @@
 (use-package lsp-java :ensure t :after lsp
   :config (add-hook 'java-mode-hook 'lsp))
 
+;; enable helm-lsp
+(use-package helm-lsp :ensure t :after lsp)
+
 (use-package dap-mode
   :ensure t :after lsp-mode
   :config
   (dap-mode t)
   (dap-ui-mode t))
 
-;;(use-package dap-java :after (lsp-java))
+;;(require 'dap-java :after (lsp-java))
+(after-load 'lsp-java
+  (require 'dap-java))
 
-;; for STS support.
-;;(add-hook 'lsp-mode-hook #'lsp-lens-mode)
-;;(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+;; enable dap-hydra
+(add-hook 'dap-stopped-hook
+          (lambda (arg) (call-interactively #'dap-hydra)))
 
-;; (require-package 'lsp-mode)
-;; (require-package 'company-lsp)
-;; (require-package 'lsp-ui)
-;; (require-package 'lsp-java)
+;; spring boot support
+(require 'lsp-java-boot)
 
-;; (use-package projectile
-;;   :ensure t)
+;; to enable the lenses
+(add-hook 'lsp-mode-hook #'lsp-lens-mode)
+(add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
 
-;; (use-package treemacs
-;;   :ensure t)
+;; 设置 tab-width 以使用 2 个空格代替 TAB。
+;; 需要特别注意设置 c-basic-offset 以防止 java formatter 不起作用。
+;; 相关设置详情，请参阅 https://www.emacswiki.org/emacs/IndentingJava.
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 2
+                                  tab-width 2
+                                  indent-tabs-mode nil)))
 
-;; (use-package yasnippet
-;;   :ensure t
-;;   :config
-;;   (yas-global-mode))
-
-;; (use-package lsp-mode
-;;   :ensure t
-;;   :init (setq lsp-eldoc-render-all nil
-;;               lsp-highlight-symbol-at-point nil))
-
-;; (use-package hydra
-;;   :ensure t)
-
-;; (use-package company-lsp
-;;   :after  company
-;;   :ensure t
-;;   :config
-;;   (setq company-lsp-cache-candidates t
-;;         company-lsp-async t))
-
-;; (use-package lsp-ui
-;;   :ensure t
-;;   :config
-;;   (setq lsp-ui-sideline-update-mode 'point))
-
-;; (use-package lsp-java
-;;   :ensure t
-;;   :config
-;;   (add-hook 'java-mode-hook
-;;             (lambda ()
-;;               (setq-local company-backends (list 'company-lsp))))
-
-;;   (add-hook 'java-mode-hook 'lsp-java-enable)
-;;   (add-hook 'java-mode-hook 'flycheck-mode)
-;;   (add-hook 'java-mode-hook 'company-mode)
-;;   (add-hook 'java-mode-hook 'lsp-ui-mode)
-;;   (setq lsp-inhibit-message t))
-
-;; (use-package dap-mode
-;;   :ensure t
-;;   :after lsp-mode
-;;   :config
-;;   (dap-mode t)
-;;   (dap-ui-mode t))
-
-;;(use-package dap-java
-;;:after (lsp-java))
-
-;;(use-package lsp-java-treemacs
-;;:after (treemacs))
+;;(setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
+;;(setq lsp-java-format-settings-profile "GoogleStyle")
 
 (provide 'init-lsp-java)
 ;;; init-lsp-java.el ends here
