@@ -1,0 +1,41 @@
+# Set the article class
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [11pt]
+
+# No need for a table of contents, unless your paper is quite long.
+#+OPTIONS: toc:nil
+
+# for cite
+#+LATEX_HEADER: \usepackage{cite}
+
+# Use fancy looking fonts. If you don't have MinionPro installed,
+# a good alternative is the Palatino-style pxfonts.
+# See: [[http://www.tug.dk/FontCatalogue/pxfonts/][http://www.tug.dk/FontCatalogue/pxfonts/]]
+# #+LATEX_HEADER: \usepackage[mathlf]{MinionPro}
+# #+LATEX_HEADER: \usepackage[scaled=.875]{inconsolata}
+
+# Set the spacing to double, as required in most papers.
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \doublespacing
+
+# Fix the margins
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+
+# This line makes lists work better:
+# It eliminates whitespace before/within a list and pushes it tt the left margin
+#+LATEX_HEADER: \usepackage{enumitem}
+#+LATEX_HEADER: \setlist[enumerate,itemize]{noitemsep,nolistsep,leftmargin=*}
+
+# I always include this for my bibliographies
+# #+LATEX_HEADER: \usepackage[notes,isbn=false,backend=biber]{biblatex-chicago}
+# #+LATEX_HEADER: \usepackage[backend=bibtex, style=numeric]{biblatex}
+# #+LATEX_HEADER: \usepackage[citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true] {biblatex}
+# #+LATEX_HEADER: \addbibresource{/Users/junahan/bibliography/references.bib}
+
+# better hyper link format.
+#+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,linktocpage,pdfstartview=FitH,anchorcolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue}
+
+# for chinese supports
+# #+LATEX_HEADER:  \usepackage[utf8]{inputenc}
+#+LATEX_HEADER:  \usepackage{ctex}
+#+LATEX_COMPILER:  xelatex

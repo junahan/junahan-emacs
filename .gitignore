@@ -3,6 +3,8 @@ url/cache
 auto-save-list
 network-security.data
 .session
+.extension
+.cache
 session.*
 custom.el
 *.elc
@@ -72,5 +74,6 @@ emacs.d/tutorial
 emacs.d/url
 emacs.d/workspace
 emacs.d/bookmarks
+emacs.d/request
 diary
 *.jar

@@ -1,0 +1,16 @@
+# If you don't want author to be appeared, just leave it empty.
+#+AUTHOR: Junahan
+
+# custom the pdf engine
+#+PANDOC_OPTIONS: standalone:t pdf-engine:xelatex
+# When option value includes whitespace, entire name:value pair must be quoted.
+
+#+PANDOC_OPTIONS: number-sections:nil
+
+# Specifying Multiple values to single options by using colon-sparated lists.
+#+PANDOC_OPTIONS: filter:pandoc-citeproc
+# #+PANDOC_OPTIONS: csl:IEEE.csl
+#+PANDOC_EXTENSIONS: markdown-typography latex+auto_identifiers
+#+PANDOC_VARIABLES: documentclass:IEEEtran
+#+PANDOC_VARIABLES: classoption:10pt,conference
+#+PANDOC_METADATA: page-progression-direction:ltr
