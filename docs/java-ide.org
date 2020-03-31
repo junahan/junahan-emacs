@@ -1,12 +1,12 @@
 #+TITLE:             Java IDE
-#+AUTHOR:        Junahan
-#+EMAIL:            junahan@outlook
-#+DATE:             2018-04-12
-#+LANGUAGE:   CN
-#+OPTIONS:       H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:       TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT:  view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+LICENSE:        CC BY 4.0
+#+AUTHOR:            Junahan
+#+EMAIL:             junahan@outlook
+#+DATE:              2018-04-12
+#+LANGUAGE:          CN
+#+OPTIONS:           H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:           TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:        view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:           CC BY 4.0
 
 #+BEGIN_QUOTE
 本文所述 Java IDE 仅在 MAC OS (Darwin Kernel Version 17.4.0) 测试通过。
@@ -57,6 +57,7 @@
 
 * 参考文献
 1. LSP-java, https://github.com/emacs-lsp/lsp-java.
+2. [[https://github.com/eclipse/eclipse.jdt.ls][Eclipse jdt]] - Java Language server.
 5. 阿里云 Maven 仓库镜像，http://maven.aliyun.com/nexus/#welcome.
 6. 网易 Maven 仓库镜像，http://mirrors.163.com/.help/maven.html.
 

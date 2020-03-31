@@ -29,6 +29,9 @@
 
 ;; (setq inhibit-startup-message t)
 
+;; set default font
+(set-default-font "-*-M+ 1m-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+
 ;; set the default frame size
 ;; (setq default-frame-alist
 ;;       '((height . 60)

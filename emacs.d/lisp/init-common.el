@@ -7,6 +7,7 @@
 (require-package 'exec-path-from-shell)
 (require-package 'aggressive-indent)
 (require-package 'yasnippet)
+(require-package 'yasnippet-snippets)
 ;; (require-package 'indent-guide)
 (require-package 'xcscope)
 (require-package 'projectile)
@@ -21,15 +22,15 @@
 (require-package 'popwin)
 ;; key frequence tool
 (require-package 'keyfreq)
-;; golden ratio
-(require-package 'golden-ratio)
 
 ;; enable keyfreq mode and save the data
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
+;; golden ratio
+;;(require-package 'golden-ratio)
 ;; eanble golden ratio
-(golden-ratio-mode 1)
+;;(golden-ratio-mode 1)
 
 (setq use-package-always-ensure t)
 

@@ -1,24 +1,50 @@
 ;;; package -- init-lsp-go
 ;;; commentary:
 ;;; code:
+;; Most config come from - https://github.com/golang/tools/blob/master/gopls/doc/emacs.md.
+(require 'cc-mode)
+(require 'use-package)
 
-(require-package 'lsp-mode)
-(require-package 'lsp-go)
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
 
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "GOPATH"))
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;; Golang lsp
-(lsp-define-stdio-client
- lsp-go
- "go"
- (lambda () default-directory)
- '("go-langserver" "-mode=stdio" "-gocodecompletion"))
-;; :ignore-regexps
-;; '("^langserver-go: reading on stdin, writing on stdout$"))
+;; Optional - provides fancier overlays.
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 
-(add-hook 'go-mode-hook #'lsp-go-enable)
+;; Company mode is a standard completion package that works well with lsp-mode.
+(use-package company
+  :ensure t
+  :config
+  ;; Optionally enable completion-as-you-type behavior.
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+;; company-lsp integrates company mode completion with lsp-mode.
+;; completion-at-point also works out of the box but doesn't support snippets.
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+
+;; Optional - provides snippet support.
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
+
+;;(use-package dap-go :after (lsp-go))
+(after-load 'lsp-go
+  (require 'dap-go))
 
 (provide 'init-lsp-go)
 ;;; init-lsp-go.el ends here

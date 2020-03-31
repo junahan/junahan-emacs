@@ -4,34 +4,18 @@
 
 (require 'cc-mode)
 (require 'use-package)
-;;(require 'dap-java)
-;;(require 'lsp-java-boot)
 
-(use-package projectile :ensure t)
-(use-package yasnippet :ensure t)
 (use-package lsp-mode :ensure t)
-(use-package hydra :ensure t)
-(use-package company-lsp :ensure t)
-(use-package lsp-ui :ensure t)
 (use-package lsp-java :ensure t :after lsp
   :config (add-hook 'java-mode-hook 'lsp))
-
-;; enable helm-lsp
-(use-package helm-lsp :ensure t :after lsp)
-
-(use-package dap-mode
-  :ensure t :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
 
 ;;(require 'dap-java :after (lsp-java))
 (after-load 'lsp-java
   (require 'dap-java))
 
-;; enable dap-hydra
-(add-hook 'dap-stopped-hook
-          (lambda (arg) (call-interactively #'dap-hydra)))
+;; correct the dap-java-test-runner parameter.
+(setq dap-java-test-runner
+      (concat lsp-java-server-install-dir "test-runner/junit-platform-console-standalone.jar"))
 
 ;; spring boot support
 (require 'lsp-java-boot)

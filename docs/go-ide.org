@@ -1,0 +1,38 @@
+#+TITLE:             GO IDE
+#+AUTHOR:            Junahan
+#+EMAIL:             junahan@outlook
+#+DATE:              <2020-03-29 Sun>
+#+LANGUAGE:          CN
+#+OPTIONS:           H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:           TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT:        view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LICENSE:           CC BY 4.0
+
+* 摘要
+
+* 基本工具
+** gopls
+
+** go-delve on macOS
+[[https://github.com/go-delve/delve/blob/master/Documentation/installation/osx/install.md][go-delve]] 是 Go 语言调试器。Emacs =dap-mode= 使用 delve 支持调试 Go 程序。
+
+- 安装系统工具链
+#+BEGIN_SRC shell
+xcode-select --install
+#+END_SRC
+
+- 使用 =go get= 安装 =delve=
+#+BEGIN_SRC shell
+$ go get -u github.com/go-delve/delve/cmd/dlv
+#+END_SRC
+
+- 激活 XCode Developer Mode
+#+BEGIN_SRC shell
+sudo /usr/sbin/DevToolsSecurity -enable
+#+END_SRC
+
+* 参考文献
+1. [[https://github.com/golang/tools/blob/master/gopls/doc/user.md][gopls]] - Go 语言官方 language server.
+2. [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] - Emacs LSP 客户端模块.
+3. [[https://github.com/go-delve/delve/blob/master/Documentation/installation/osx/install.md][go-delve]] - Go 调试器.
+4. [[https://github.com/emacs-lsp/dap-mode#usage][dap-mode]] - Emacs ❤ Debug Adapter Protocol

@@ -16,7 +16,6 @@
 (require-package 'org-cliplink)
 ;; for latex.
 (require-package 'cdlatex)
-(require-package 'auctex)
 (require-package 'gnuplot)
 ;; used to export html
 (require-package 'htmlize)
@@ -237,8 +236,8 @@
                                      "tell application \"org-clock-statusbar\" to clock out"))))
 
 ;; for headline font
-(after-load 'cnfonts
-  (setq cnfonts-use-face-font-rescale t))
+;;(after-load 'cnfonts
+;; (setq cnfonts-use-face-font-rescale t))
 
 ;;; Archiving
 (setq org-archive-mark-done nil)
@@ -274,8 +273,24 @@
     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
 ;; support to export to markdown.
-(eval-after-load 'org '(require 'ox-md nil t))
-;;(eval-after-load 'org '(require 'org-latex nil t))
+(eval-after-load 'ox '(require 'ox-md nil t))
+
+;; support ox-pandoc
+(with-eval-after-load 'ox  (require 'ox-pandoc))
+
+;; support to latex
+(eval-after-load 'org '(require 'org-latex nil t))
+
+;; support org-ref
+(eval-after-load 'org '(require 'org-ref nil t))
+
+;; Latex export with bibtex
+;;(setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+(setq org-latex-pdf-process
+      '("%latex -interaction nonstopmode -output-directory %o %f"
+        "bibtex %b"
+        "%latex -interaction nonstopmode -output-directory %o %f"
+        "%latex -interaction nonstopmode -output-directory %o %f"))
 
 ;; org babel language settings.
 (after-load 'org
