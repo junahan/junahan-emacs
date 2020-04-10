@@ -76,4 +76,5 @@ emacs.d/workspace
 emacs.d/bookmarks
 emacs.d/request
 diary
+emacs.d/straight
 *.jar
