@@ -26,7 +26,7 @@
 #+LATEX_HEADER: \usepackage{enumitem}
 #+LATEX_HEADER: \setlist[enumerate,itemize]{noitemsep,nolistsep,leftmargin=*}
 
-# I always include this for my bibliographies
+# latex headers for biblatex
 # #+LATEX_HEADER: \usepackage[notes,isbn=false,backend=biber]{biblatex-chicago}
 # #+LATEX_HEADER: \usepackage[backend=bibtex, style=numeric]{biblatex}
 # #+LATEX_HEADER: \usepackage[citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true] {biblatex}

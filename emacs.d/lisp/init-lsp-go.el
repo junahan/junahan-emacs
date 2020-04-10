@@ -3,7 +3,6 @@
 ;;; code:
 ;; Most config come from - https://github.com/golang/tools/blob/master/gopls/doc/emacs.md.
 (require 'cc-mode)
-(require 'use-package)
 
 (use-package lsp-mode
   :ensure t
@@ -17,34 +16,25 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;; Optional - provides fancier overlays.
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
-
-;; Company mode is a standard completion package that works well with lsp-mode.
-(use-package company
-  :ensure t
-  :config
-  ;; Optionally enable completion-as-you-type behavior.
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1))
-
-;; company-lsp integrates company mode completion with lsp-mode.
-;; completion-at-point also works out of the box but doesn't support snippets.
-(use-package company-lsp
-  :ensure t
-  :commands company-lsp)
-
 ;; Optional - provides snippet support.
 (use-package yasnippet
   :ensure t
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
 
-;;(use-package dap-go :after (lsp-go))
-(after-load 'lsp-go
-  (require 'dap-go))
+(require 'lsp-go)
+(require 'dap-go)
+
+;; gotest defines a better set of error regexps for go tests, but it only
+;; enables them when using its own functions. Add them globally for use in
+(require 'compile)
+(require 'gotest)
+(dolist (elt go-test-compilation-error-regexp-alist-alist)
+  (add-to-list 'compilation-error-regexp-alist-alist elt))
+(defun prepend-go-compilation-regexps ()
+  (dolist (elt (reverse go-test-compilation-error-regexp-alist))
+    (add-to-list 'compilation-error-regexp-alist elt t)))
+(add-hook 'go-mode-hook 'prepend-go-compilation-regexps)
 
 (provide 'init-lsp-go)
 ;;; init-lsp-go.el ends here

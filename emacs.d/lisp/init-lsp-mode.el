@@ -1,19 +1,27 @@
 ;;; package -- init-lsp-mode
 ;;; Commentary:
 ;;; Code:
-
-(require 'cc-mode)
 (require 'use-package)
+(require 'cc-mode)
 
 (use-package projectile :ensure t)
 (use-package yasnippet :ensure t)
 (use-package lsp-mode :ensure t)
-(use-package hydra :ensure t)
-(use-package company-lsp :ensure t)
-(use-package lsp-ui :ensure t)
+(use-package hydra  :ensure t)
+(use-package lsp-treemacs
+  :ensure t
+  :commands lsp-treemacs-errors-list)
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
 
 ;; enable helm-lsp
-(use-package helm-lsp :ensure t :after lsp)
+(use-package helm-lsp
+  :ensure t :after lsp
+  :commands helm-lsp-workspace-symbol)
 
 (use-package posframe :ensure t)
 (use-package dap-mode

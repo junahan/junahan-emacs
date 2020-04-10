@@ -14,6 +14,8 @@
 ;;; Using elpa mirrors in China.
 (add-to-list 'package-archives '("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
 (add-to-list 'package-archives '("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))
+;;; org elpa mirrors
+(add-to-list 'package-archives '("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/") t)
 
 ;;; On-demand installation of packages
 (defun require-package (package &optional min-version no-refresh)

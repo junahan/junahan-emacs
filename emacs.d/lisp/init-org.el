@@ -19,6 +19,8 @@
 (require-package 'gnuplot)
 ;; used to export html
 (require-package 'htmlize)
+;; for bib
+(require-package 'ebib)
 ;; using play
 (require-package 'sound-wav)
 ;; for ob-sql-mode
@@ -272,23 +274,26 @@
     (define-key org-mode-map (kbd "M-h") nil)
     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
-;; support to export to markdown.
-(eval-after-load 'ox '(require 'ox-md nil t))
+;; exporter settings.
+;;(require 'ox-md)
+;;(require 'ox-html)
+;;(require 'ox-latex)
+;;(require 'ox-ascii)
 
 ;; support ox-pandoc
-(with-eval-after-load 'ox  (require 'ox-pandoc))
-
+;;(with-eval-after-load 'ox  (require 'ox-pandoc))
 ;; support to latex
-(eval-after-load 'org '(require 'org-latex nil t))
+;;(eval-after-load 'org '(require 'org-latex nil t))
 
 ;; support org-ref
-(eval-after-load 'org '(require 'org-ref nil t))
+(after-load 'org
+  (require 'org-ref nil t))
 
 ;; Latex export with bibtex
-;;(setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 (setq org-latex-pdf-process
       '("%latex -interaction nonstopmode -output-directory %o %f"
         "bibtex %b"
+        ;;"latexmk -shell-escape -bibtex -pdf %f" ;; for biblatex.
         "%latex -interaction nonstopmode -output-directory %o %f"
         "%latex -interaction nonstopmode -output-directory %o %f"))
 
@@ -317,6 +322,12 @@
      ;;(sql-mode     . t)
      (sqlite       . t)
      (http          . t))))
+
+;; support export bibtex
+(after-load 'org
+  (require  'ox-bibtex)
+  (require  'ox-bibtex-chinese)
+  (ox-bibtex-chinese-enable))
 
 (provide 'init-org)
 ;;; init-org.el ends here
